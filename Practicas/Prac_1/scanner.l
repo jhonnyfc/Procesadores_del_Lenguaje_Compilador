@@ -52,22 +52,43 @@ ER_LETRA			[a-z]
 ER_CIFRA  			[0-9]
 ER_DELIM			[ \t\n]
 
+
+ER_LETRA_O_CIFRA 	{ER_LETRA}|{ER_CIFRA}
+ER_ID	    		{ER_LETRA}({ER_LETRA}|{ER_CIFRA})*
+
 ER_LIT_ENTERO		(\+|\-)?{ER_CIFRA}{ER_CIFRA}*((e|E){ER_CIFRA}{ER_CIFRA}*)?
+ER_LIT_REAL			(\+|\-)?{ER_CIFRA}{ER_CIFRA}*(\.{ER_CIFRA}{ER_CIFRA}*)?((e|E){ER_CIFRA}{ER_CIFRA}*)?
 ER_LIT_BOOL			{ER_PR_VERDADERO}|{ER_PR_FALSO}
+
+ER_LIT_CARAC		\".\"
+ER_LIT_CADE			\"({ER_LETRA}|{ER_CIFRA}|{ER_DELIM})*\"
 
 
 %%
 
+{ER_ID}	{
+		printf( "Id: %s \n", yytext );
+}
+
+
 {ER_LIT_ENTERO}		{
 		printf( "$: Entero: %s (%f)\n", yytext, atof( yytext ) );
+}
+
+{ER_LIT_REAL}        {
+        printf( "Real: %s (%f)\n", yytext, atof( yytext ) );
 }
 
 {ER_LIT_BOOL}		{
 		printf( "$: Boleano: %s \n", yytext);
 }
 
-{ER_PR_INOUT}		{
-		printf( "$: Boleano: %s \n", yytext);
+{ER_LIT_CARAC}	{
+		printf( "Literal caracter: %s \n", yytext );
+}
+
+{ER_LIT_CADE}	{
+		printf( "Literal cadena: %s \n", yytext );
 }
 
 
