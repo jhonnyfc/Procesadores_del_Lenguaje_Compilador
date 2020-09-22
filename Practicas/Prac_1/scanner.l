@@ -1,4 +1,4 @@
-	/* scanner for a toy Pascal-like language */
+	/*Scanner para el lenguaje descrito en la practica*/
 
 %option caseless
 %{
@@ -48,7 +48,7 @@ ER_PR_TUPLA			"TUPLA"
 ER_PR_VAR			"VAR"
 ER_PR_Y				"Y"
 
-ER_LETRA			[a-z]
+ER_LETRA			[A-Z]
 ER_CIFRA  			[0-9]
 ER_DELIM			[ \t\n]
 
@@ -63,32 +63,31 @@ ER_LIT_BOOL			{ER_PR_VERDADERO}|{ER_PR_FALSO}
 ER_LIT_CARAC		\".\"
 ER_LIT_CADE			\"({ER_LETRA}|{ER_CIFRA}|{ER_DELIM})*\"
 
-
 %%
 
-{ER_ID}	{
-		printf( "Id: %s \n", yytext );
+{ER_ID} {
+		printf( "$: Id: %s \n", yytext );
 }
 
 
-{ER_LIT_ENTERO}		{
+{ER_LIT_ENTERO} {
 		printf( "$: Entero: %s (%f)\n", yytext, atof( yytext ) );
 }
 
-{ER_LIT_REAL}        {
-        printf( "Real: %s (%f)\n", yytext, atof( yytext ) );
+{ER_LIT_REAL} {
+        printf( "$: Real: %s (%f)\n", yytext, atof( yytext ) );
 }
 
-{ER_LIT_BOOL}		{
+{ER_LIT_BOOL} {
 		printf( "$: Boleano: %s \n", yytext);
 }
 
-{ER_LIT_CARAC}	{
-		printf( "Literal caracter: %s \n", yytext );
+{ER_LIT_CARAC} {
+		printf("$: Literal caracter: %s \n", yytext );
 }
 
-{ER_LIT_CADE}	{
-		printf( "Literal cadena: %s \n", yytext );
+{ER_LIT_CADE} {
+		printf( "$: Literal cadena: %s \n", yytext );
 }
 
 

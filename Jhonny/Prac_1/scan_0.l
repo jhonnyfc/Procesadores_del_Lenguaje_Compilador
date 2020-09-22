@@ -1,5 +1,3 @@
-	/* scanner for a toy Pascal-like language */
-
 %option caseless
 %{
 /* Constantes manisfiestas */
@@ -58,15 +56,15 @@ ER_LIT_BOOL			{ER_PR_VERDADERO}|{ER_PR_FALSO}
 
 %%
 
-{ER_LIT_ENTERO}		{
+{ER_LIT_ENTERO} {
 		printf( "$: Entero: %s (%f)\n", yytext, atof( yytext ) );
 }
 
-{ER_LIT_BOOL}		{
+{ER_LIT_BOOL} {
 		printf( "$: Boleano: %s \n", yytext);
 }
 
-{ER_PR_INOUT}		{
+{ER_PR_INOUT} {
 		printf( "$: Boleano: %s \n", yytext);
 }
 
