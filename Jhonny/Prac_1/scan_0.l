@@ -49,9 +49,22 @@ ER_PR_Y				"Y"
 ER_LETRA			[a-z]
 ER_CIFRA  			[0-9]
 ER_DELIM			[ \t\n]
+ER_ID	    		{ER_LETRA}({ER_LETRA}|{ER_CIFRA})*
 
 ER_LIT_ENTERO		(\+|\-)?{ER_CIFRA}{ER_CIFRA}*((e|E){ER_CIFRA}{ER_CIFRA}*)?
+ER_LIT_REAL			(\+|\-)?{ER_CIFRA}{ER_CIFRA}*(\.{ER_CIFRA}{ER_CIFRA}*)?((e|E){ER_CIFRA}{ER_CIFRA}*)?
 ER_LIT_BOOL			{ER_PR_VERDADERO}|{ER_PR_FALSO}
+ER_LIT_CARAC		\".\"
+ER_LIT_CADE			\"({ER_LETRA}|{ER_CIFRA}|{ER_DELIM})*\"
+ER_COMENTARIO	\{({ER_LETRA}|{ER_CIFRA}|{ER_DELIM})*\}
+
+ER_LITERAL			{ER_LIT_BOOL}|{ER_LIT_ENTERO}|{ER_LIT_REAL}|{ER_LIT_CARAC}|{ER_LIT_CADE}
+
+/* LLEVAN CIERRE ? */
+ER_LIS_D_ID			{ER_ID}\,
+ER_LIS_D_CTE		{ER_ID}={ER_LITERAL}\;
+
+ER_DECL_CTE			{ER_PR_CONST}{ER_LIS_D_CTE}{ER_PR_FCONST}
 
 
 %%
@@ -68,6 +81,13 @@ ER_LIT_BOOL			{ER_PR_VERDADERO}|{ER_PR_FALSO}
 		printf( "$: Boleano: %s \n", yytext);
 }
 
+{ER_LIS_D_ID} {
+		printf( "$: Lista ID: %s \n", yytext);
+}
+
+{ER_LIS_D_CTE} {
+		printf( "$: Lista CTE: %s \n", yytext);
+}
 
 %%
 
