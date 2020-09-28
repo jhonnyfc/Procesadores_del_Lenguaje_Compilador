@@ -55,6 +55,10 @@ ES_PR_ELSE			\[\]
 ES_PR_INIARRA		\[
 ES_PR_FINARRA		\]
 ES_PR_ENTONCES		\-\>
+ES_PR_COMA			","
+ES_PR_SUBRANGO		".."
+ES_PR_DEFVAL		":"
+ES_PR_IGUAL			"="	
 
 ER_CIFRA    		[0-9]
 ER_LETRA    		[A-Za-z]
@@ -118,6 +122,10 @@ ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
 {ES_PR_ELSE} {printf("$: Token: %s \n", yytext );}
 {ES_PR_INIARRA} {printf("$: Token: %s \n", yytext );}
 {ES_PR_ENTONCES} {printf("$: Token: %s \n", yytext );}
+{ES_PR_COMA} {printf("$: Token: %s \n", yytext );}
+{ES_PR_SUBRANGO} {printf("$: Token: %s \n", yytext );}
+{ES_PR_DEFVAL} {printf("$: Token: %s \n", yytext );}
+{ES_PR_IGUAL} {printf("$: Token: %s \n", yytext );}
 
 
 
