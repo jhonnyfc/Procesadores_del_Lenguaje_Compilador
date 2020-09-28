@@ -49,7 +49,12 @@ ER_PR_TIPO			"TIPO"
 ER_PR_TUPLA			"TUPLA"
 ER_PR_VAR			"VAR"
 ER_PR_Y				"Y"
-
+ER_PR_ASIG			\:\=
+ES_PR_SECUEN		";"
+ES_PR_ELSE			\[\]
+ES_PR_INIARRA		\[
+ES_PR_FINARRA		\]
+ES_PR_ENTONCES		\-\>
 
 ER_CIFRA    		[0-9]
 ER_LETRA    		[A-Za-z]
@@ -108,6 +113,11 @@ ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
 {ER_PR_VAR} {printf("$: Palabra reservada 'VAR': %s \n", yytext );}
 {ER_PR_Y} {printf("$: Palabra reservada 'Y': %s \n", yytext );}
 
+{ER_PR_ASIG} {printf("$: Token: %s \n", yytext );}
+{ES_PR_SECUEN} {printf("$: Token: %s \n", yytext );}
+{ES_PR_ELSE} {printf("$: Token: %s \n", yytext );}
+{ES_PR_INIARRA} {printf("$: Token: %s \n", yytext );}
+{ES_PR_ENTONCES} {printf("$: Token: %s \n", yytext );}
 
 
 
