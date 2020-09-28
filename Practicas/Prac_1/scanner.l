@@ -47,6 +47,12 @@ ER_PR_TIPO			"TIPO"
 ER_PR_TUPLA			"TUPLA"
 ER_PR_VAR			"VAR"
 ER_PR_Y				"Y"
+ER_PR_ASIG			\:\=
+ES_PR_SECUEN		";"
+ES_PR_ELSE			\[\]
+ES_PR_INIARRA		\[
+ES_PR_FINARRA		\]
+ES_PR_ENTONCES		\-\>
 
 ER_LETRA			[A-Z]
 ER_CIFRA  			[0-9]
@@ -80,8 +86,6 @@ ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
 {ER_PR_INOUT} 		{printf("$: Palabra reservada 'E/S': %s \n", yytext );}
 {ER_PR_FACCIO} 		{printf("$: Palabra reservada 'FACCION': %s \n", yytext );}
 {ER_PR_FALGORI} 	{printf("$: Palabra reservada 'FALGORITMO': %s \n", yytext );}
-{ER_PR_FALSO} 		{printf("$: Palabra reservada 'FALSO': %s \n", yytext );}
-{ER_PR_VERDADERO} 	{printf("$: Palabra reservada 'VERDADERO': %s \n", yytext );}
 {ER_PR_FCONST} 		{printf("$: Palabra reservada 'FCONST': %s \n", yytext );}
 {ER_PR_FFUNCION} 	{printf("$: Palabra reservada 'FFUNCION': %s \n", yytext );}
 {ER_PR_FMIENTR} 	{printf("$: Palabra reservada 'FMIENTRAS': %s \n", yytext );}
@@ -90,7 +94,7 @@ ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
 {ER_PR_FTIPO} 		{printf("$: Palabra reservada 'FTIPO': %s \n", yytext );}
 {ER_PR_FTUPLA} 		{printf("$: Palabra reservada 'FTUPLA': %s \n", yytext );}
 {ER_PR_FUNCION} 	{printf("$: Palabra reservada 'FUNCION': %s \n", yytext );}
-{ER_PR_FMIENTR} 	{printf("$: Palabra reservada 'FVAR': %s \n", yytext );}
+{ER_PR_FVAR} 		{printf("$: Palabra reservada 'FVAR': %s \n", yytext );}
 {ER_PR_HACER} 		{printf("$: Palabra reservada 'HACER': %s \n", yytext );}
 {ER_PR_HASTA} 		{printf("$: Palabra reservada 'HASTA': %s \n", yytext );}
 {ER_PR_MIENTRAS} 	{printf("$: Palabra reservada 'MIENTRAS': %s \n", yytext );}
@@ -107,17 +111,18 @@ ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
 {ER_PR_TUPLA} 		{printf("$: Palabra reservada 'TUPLA': %s \n", yytext );}
 {ER_PR_VAR} 		{printf("$: Palabra reservada 'VAR': %s \n", yytext );}
 {ER_PR_Y}			{printf("$: Palabra reservada 'Y': %s \n", yytext );}
+{ER_PR_ASIG} 		{printf("$: Token: %s \n", yytext );}
+{ES_PR_SECUEN} 		{printf("$: Token: %s \n", yytext );}
+{ES_PR_ELSE} 		{printf("$: Token: %s \n", yytext );}
+{ES_PR_INIARRA}		{printf("$: Token: %s \n", yytext );}
+{ES_PR_ENTONCES}	{printf("$: Token: %s \n", yytext );}
 
 {ER_ID} {
-		printf( "$: Id: %s \n", yytext );
+		printf("$: Id: %s \n", yytext );
 }
 
 {ER_LIT_ENTERO} {
-		printf( "$: Entero: %s (%f)\n", yytext, atof( yytext ) );
-}
-
-{ER_LIT_REAL} {
-        printf( "$: Real: %s (%f)\n", yytext, atof( yytext ) );
+		printf("$: Entero: %s (%d)\n", yytext, (int)atof( yytext ) );
 }
 
 {ER_LIT_REAL} {
@@ -125,7 +130,7 @@ ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
 }
 
 {ER_LIT_BOOL} {
-		printf( "$: Boleano: %s \n", yytext);
+		printf("$: Boleano: %s \n", yytext);
 }
 
 {ER_LIT_CARAC} {
@@ -133,9 +138,12 @@ ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
 }
 
 {ER_LIT_CADE} {
-		printf( "$: Literal cadena: %s \n", yytext );
+		printf("$: Literal cadena: %s \n", yytext );
 }
 
+{ER_LIT_COMENTARIO} {
+		printf("$: Literal comentario: %s \n", yytext );
+}
 
 %%
 
