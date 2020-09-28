@@ -68,7 +68,7 @@ ER_LITERAL			{ER_LIT_BOOL}|{ER_LIT_ENTERO}|{ER_LIT_REAL}|{ER_LIT_CARAC}|{ER_LIT_
 %%
 
 {ER_LIT_ENTERO} {
-		printf( "$: Entero: %s (%f)\n", yytext, atof( yytext ) );
+		printf( "$: Entero: %s (%d)\n", yytext, (int)atof( yytext ) );
 }
 
 {ER_LIT_BOOL} {
@@ -77,6 +77,10 @@ ER_LITERAL			{ER_LIT_BOOL}|{ER_LIT_ENTERO}|{ER_LIT_REAL}|{ER_LIT_CARAC}|{ER_LIT_
 
 {ER_PR_INOUT} {
 		printf( "$: Boleano: %s \n", yytext);
+}
+
+{ER_LIT_COMENTARIO} {
+		printf("$: Comentario: %s \n", yytext );
 }
 
 {ER_LIT_CADE} {
