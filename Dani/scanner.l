@@ -60,6 +60,21 @@ ES_PR_SUBRANGO		".."
 ES_PR_DEFVAL		":"
 ES_PR_IGUAL			"="	
 
+ES_PR_BARRA 		"/"
+ES_PR_ABRIRPAR		"("
+ES_PR_CERRARPAR		")"
+ES_PR_ABRIRCOR 		"["
+ES_PR_CERRARCOR		"]"
+ES_PR_SUMA			"+"
+ES_PR_MULT			"*"
+ES_PR_RESTA			"-"
+ES_PR_ABRIRLLAVE	"{"
+ES_PR_CERRARLLAVE	"}"
+ES_PR_MAYOR			">"
+ES_PR_MENOR			"<"
+ES_PR_MAYIGU		">="
+ES_PR_MENIGU		"<="
+
 ER_CIFRA    		[0-9]
 ER_LETRA    		[A-Za-z]
 ER_DELIM    		[ \t\n]
@@ -126,6 +141,20 @@ ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
 {ES_PR_SUBRANGO} {printf("$: Token: %s \n", yytext );}
 {ES_PR_DEFVAL} {printf("$: Token: %s \n", yytext );}
 {ES_PR_IGUAL} {printf("$: Token: %s \n", yytext );}
+{ES_PR_BARRA} {printf("$: Token: %s \n", yytext );}
+{ES_PR_ABRIRPAR} {printf("$: Token: %s \n", yytext );}
+{ES_PR_CERRARPAR} {printf("$: Token: %s \n", yytext );}
+{ES_PR_ABRIRCOR} {printf("$: Token: %s \n", yytext );}
+{ES_PR_CERRARCOR} {printf("$: Token: %s \n", yytext );}
+{ES_PR_SUMA} {printf("$: Token: %s \n", yytext );}
+{ES_PR_MULT} {printf("$: Token: %s \n", yytext );}
+{ES_PR_RESTA} {printf("$: Token: %s \n", yytext );}
+{ES_PR_ABRIRLLAVE} {printf("$: Token: %s \n", yytext );}
+{ES_PR_CERRARLLAVE} {printf("$: Token: %s \n", yytext );}
+{ES_PR_MAYOR} {printf("$: Token: %s \n", yytext );}
+{ES_PR_MENOR} {printf("$: Token: %s \n", yytext );}
+{ES_PR_MAYIGU} {printf("$: Token: %s \n", yytext );}
+{ES_PR_MENIGU} {printf("$: Token: %s \n", yytext );}
 
 
 
