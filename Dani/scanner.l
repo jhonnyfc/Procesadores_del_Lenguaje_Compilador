@@ -63,8 +63,6 @@ ES_PR_IGUAL			"="
 ES_PR_BARRA 		"/"
 ES_PR_ABRIRPAR		"("
 ES_PR_CERRARPAR		")"
-ES_PR_ABRIRCOR 		"["
-ES_PR_CERRARCOR		"]"
 ES_PR_SUMA			"+"
 ES_PR_MULT			"*"
 ES_PR_RESTA			"-"
@@ -143,9 +141,7 @@ ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
 {ES_PR_IGUAL} {printf("$: Token: %s \n", yytext );}
 {ES_PR_BARRA} {printf("$: Token: %s \n", yytext );}
 {ES_PR_ABRIRPAR} {printf("$: Token: %s \n", yytext );}
-{ES_PR_CERRARPAR} {printf("$: Token: %s \n", yytext );}
-{ES_PR_ABRIRCOR} {printf("$: Token: %s \n", yytext );}
-{ES_PR_CERRARCOR} {printf("$: Token: %s \n", yytext );}
+{ES_PR_CERRARPAR} {printf("$: Token: %s \n", yytext );}ç
 {ES_PR_SUMA} {printf("$: Token: %s \n", yytext );}
 {ES_PR_MULT} {printf("$: Token: %s \n", yytext );}
 {ES_PR_RESTA} {printf("$: Token: %s \n", yytext );}
