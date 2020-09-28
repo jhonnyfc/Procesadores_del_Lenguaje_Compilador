@@ -20,8 +20,6 @@ ER_PR_ENTERO		"ENTERO"
 ER_PR_INOUT			"E/S"
 ER_PR_FACCIO		"FACCION"
 ER_PR_FALGORI		"FALGORITMO"
-ER_PR_FALSO			"FALSO"
-ER_PR_VERDADERO		"VERDADERO"
 ER_PR_FCONST		"FCONST"
 ER_PR_FFUNCION		"FFUNCION"
 ER_PR_FMIENTR		"FMIENTRAS"
@@ -31,7 +29,7 @@ ER_PR_FTIPO			"FTIPO"
 ER_PR_FTUPLA		"FTUPLA"
 ER_PR_FUNCION		"FUNCION"
 ER_PR_FVAR			"FVAR"
-ER_PR_HACER			"HACER"ls
+ER_PR_HACER			"HACER"
 ER_PR_HASTA			"HASTA"
 ER_PR_MIENTRAS		"MIENTRAS"
 ER_PR_MOD			"MOD"
@@ -53,6 +51,22 @@ ES_PR_ELSE			\[\]
 ES_PR_INIARRA		\[
 ES_PR_FINARRA		\]
 ES_PR_ENTONCES		\-\>
+ES_PR_COMA			","
+ES_PR_SUBRANGO		".."
+ES_PR_DEFVAL		":"
+ES_PR_IGUAL			"="	
+ES_PR_BARRA 		"/"
+ES_PR_ABRIRPAR		"("
+ES_PR_CERRARPAR		")"
+ES_PR_SUMA			"+"
+ES_PR_MULT			"*"
+ES_PR_RESTA			"-"
+ES_PR_ABRIRLLAVE	"{"
+ES_PR_CERRARLLAVE	"}"
+ES_PR_MAYOR			">"
+ES_PR_MENOR			"<"
+ES_PR_MAYIGU		">="
+ES_PR_MENIGU		"<="
 
 ER_LETRA			[A-Z]
 ER_CIFRA  			[0-9]
@@ -64,7 +78,7 @@ ER_ID	    		{ER_LETRA}({ER_LETRA}|{ER_CIFRA})*
 
 ER_LIT_ENTERO		(\+|\-)?{ER_CIFRA}{ER_CIFRA}*((e|E){ER_CIFRA}{ER_CIFRA}*)?
 ER_LIT_REAL			(\+|\-)?{ER_CIFRA}{ER_CIFRA}*(\.{ER_CIFRA}{ER_CIFRA}*)?((e|E){ER_CIFRA}{ER_CIFRA}*)?
-ER_LIT_BOOL			{ER_PR_VERDADERO}|{ER_PR_FALSO}
+ER_LIT_BOOL			"VERDADERO"|"FALSO"
 
 ER_LIT_CARAC		\".\"
 ER_LIT_CADE			\"([^"]|(\/\"[^"])*)*\"*\"
@@ -113,24 +127,40 @@ ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
 {ER_PR_Y}			{printf("$: Palabra reservada 'Y': %s \n", yytext );}
 {ER_PR_ASIG} 		{printf("$: Token: %s \n", yytext );}
 {ES_PR_SECUEN} 		{printf("$: Token: %s \n", yytext );}
-{ES_PR_ELSE} 		{printf("$: Token: %s \n", yytext );}
+{ES_PR_ELSE} 		{printf("$: Token else: %s \n", yytext );}
 {ES_PR_INIARRA}		{printf("$: Token: %s \n", yytext );}
 {ES_PR_ENTONCES}	{printf("$: Token: %s \n", yytext );}
+{ES_PR_COMA} 		{printf("$: Token: %s \n", yytext );}
+{ES_PR_SUBRANGO} 	{printf("$: Token: %s \n", yytext );}
+{ES_PR_DEFVAL} 		{printf("$: Token: %s \n", yytext );}
+{ES_PR_IGUAL} 		{printf("$: Token: %s \n", yytext );}
+{ES_PR_BARRA}		{printf("$: Token: %s \n", yytext );}
+{ES_PR_ABRIRPAR}	{printf("$: Token: %s \n", yytext );}
+{ES_PR_CERRARPAR} 	{printf("$: Token: %s \n", yytext );}
+{ES_PR_SUMA}		{printf("$: Token: %s \n", yytext );}
+{ES_PR_MULT}		{printf("$: Token: %s \n", yytext );}
+{ES_PR_RESTA}		{printf("$: Token: %s \n", yytext );}
+{ES_PR_ABRIRLLAVE} 	{printf("$: Token: %s \n", yytext );}
+{ES_PR_CERRARLLAVE}	{printf("$: Token: %s \n", yytext );}
+{ES_PR_MAYOR}		{printf("$: Token: %s \n", yytext );}
+{ES_PR_MENOR}		{printf("$: Token: %s \n", yytext );}
+{ES_PR_MAYIGU}		{printf("$: Token: %s \n", yytext );}
+{ES_PR_MENIGU}		{printf("$: Token: %s \n", yytext );}
+
+{ER_LIT_BOOL} {
+		printf("$: Boleano: %s \n", yytext);
+}
 
 {ER_ID} {
 		printf("$: Id: %s \n", yytext );
 }
 
 {ER_LIT_ENTERO} {
-		printf("$: Entero: %s (%d)\n", yytext, (int)atof( yytext ) );
+		printf("$: Entero: %d\n", (int)atof( yytext ) );
 }
 
 {ER_LIT_REAL} {
-        printf("$: Real: %s (%f)\n", yytext, atof( yytext ) );
-}
-
-{ER_LIT_BOOL} {
-		printf("$: Boleano: %s \n", yytext);
+        printf("$: Real: %f\n", atof( yytext ) );
 }
 
 {ER_LIT_CARAC} {
@@ -143,6 +173,9 @@ ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
 
 {ER_LIT_COMENTARIO} {
 		printf("$: Literal comentario: %s \n", yytext );
+}
+
+{ER_DELIM} {
 }
 
 %%
