@@ -84,7 +84,10 @@ ER_LIT_CARAC		\".\"
 ER_LIT_CADE			\"([^"]|(\/\"[^"])*)*\"*\"
 ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
 
+ER_CARAC_DESCO		.
+
 %%
+
 {ER_PR_ACCION}		{printf("$: Palabra reservada 'ACCION': %s \n", yytext );}
 {ER_PR_ALGORIT} 	{printf("$: Palabra reservada 'ALGORITMO': %s \n", yytext );}
 {ER_PR_BOOL} 		{printf("$: Palabra reservada 'BOLEANO': %s \n", yytext );}
@@ -147,36 +150,16 @@ ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
 {ES_PR_MAYIGU}		{printf("$: Token: %s \n", yytext );}
 {ES_PR_MENIGU}		{printf("$: Token: %s \n", yytext );}
 
-{ER_LIT_BOOL} {
-		printf("$: Boleano: %s \n", yytext);
-}
+{ER_LIT_BOOL} 		{printf("$: Boleano: %s \n", yytext);}
+{ER_ID} 			{printf("$: Id: %s \n", yytext );}
+{ER_LIT_ENTERO}		{printf("$: Entero: %d\n", (int)atof( yytext ) );}
+{ER_LIT_REAL} 		{printf("$: Real: %f\n", atof( yytext ) );}
+{ER_LIT_CARAC}		{printf("$: Literal caracter: %s \n", yytext );}
+{ER_LIT_CADE} 		{printf("$: Literal cadena: %s \n", yytext );}
+{ER_LIT_COMENTARIO}	{printf("$: Literal comentario: %s \n", yytext );}
 
-{ER_ID} {
-		printf("$: Id: %s \n", yytext );
-}
-
-{ER_LIT_ENTERO} {
-		printf("$: Entero: %d\n", (int)atof( yytext ) );
-}
-
-{ER_LIT_REAL} {
-        printf("$: Real: %f\n", atof( yytext ) );
-}
-
-{ER_LIT_CARAC} {
-		printf("$: Literal caracter: %s \n", yytext );
-}
-
-{ER_LIT_CADE} {
-		printf("$: Literal cadena: %s \n", yytext );
-}
-
-{ER_LIT_COMENTARIO} {
-		printf("$: Literal comentario: %s \n", yytext );
-}
-
-{ER_DELIM} {
-}
+{ER_DELIM}			{}
+{ER_CARAC_DESCO}	{printf("%%: Caracter desconocido: %s \n", yytext );}
 
 %%
 
