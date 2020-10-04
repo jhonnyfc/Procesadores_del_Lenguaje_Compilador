@@ -1,9 +1,8 @@
-Nuestro scanner contiene lo opcion -> %option caseless
-que hemosutlizado para hacer indistinguibles mayusculas
-y minusculas. Puede que en tu version no funcione bien.
 
 Para la ejecucion y prueba hemos utilizado 3 ejemplos.
 	- make all -> el escaner se compila y se ejecuta con entrada por teclado
 	- make all2  |
 	- make all3  |--> con cada uno de estos se prueba el escaner con ficheros de prueba
 	- make all4  |
+	- make del -> elimina archivos inecesarios utlizados para la compilacion
+

@@ -9,6 +9,6 @@ algoritmo intercambio;
     aux:= a;
     a:= b;
     b:= aux;
-    pep:="hola";
+    pe:="hola";
 {Post: b=A AND a = B}
 falgoritmo

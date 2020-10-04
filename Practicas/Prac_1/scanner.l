@@ -1,50 +1,51 @@
 	/*Scanner para el lenguaje descrito en la practica*/
-
-%option caseless
+	
+	/* Flaga para hacer minusculas y mayusculas indistinguibles*/
+	/*%option caseless -> se puede utilizar este en vez de poner -> ?i:*/
 %{
 /* Constantes manisfiestas */
 %}
 /*Exprasiones regulares*/
-ER_PR_ACCION		"ACCION"
-ER_PR_ALGORIT		"ALGORITMO"
-ER_PR_BOOL			"BOLEANO"
-ER_PR_CADENA		"CADENA"
-ER_PR_CHAR			"CARACTER"
-ER_PR_CONST			"CONST"
-ER_PR_CONTINUAR		"CONTINUAR"
-ER_PR_DE			"DE"
-ER_PR_DEV			"DEV"
-ER_PR_DIV			"DIV"
-ER_PR_ENT			"ENT"
-ER_PR_ENTERO		"ENTERO"
-ER_PR_INOUT			"E/S"
-ER_PR_FACCIO		"FACCION"
-ER_PR_FALGORI		"FALGORITMO"
-ER_PR_FCONST		"FCONST"
-ER_PR_FFUNCION		"FFUNCION"
-ER_PR_FMIENTR		"FMIENTRAS"
-ER_PR_FPARA			"FPARA"
-ER_PR_FSI			"FSI"
-ER_PR_FTIPO			"FTIPO"
-ER_PR_FTUPLA		"FTUPLA"
-ER_PR_FUNCION		"FUNCION"
-ER_PR_FVAR			"FVAR"
-ER_PR_HACER			"HACER"
-ER_PR_HASTA			"HASTA"
-ER_PR_MIENTRAS		"MIENTRAS"
-ER_PR_MOD			"MOD"
-ER_PR_NO			"NO"
-ER_PR_O				"O"
-ER_PR_PARA			"PARA"
-ER_PR_REAL			"REAL"
-ER_PR_REF			"REF"
-ER_PR_SAL			"SAL"
-ER_PR_SI			"SI"
-ER_PR_TABLA			"TABLA"
-ER_PR_TIPO			"TIPO"
-ER_PR_TUPLA			"TUPLA"
-ER_PR_VAR			"VAR"
-ER_PR_Y				"Y"
+ER_PR_ACCION		?i:"ACCION"
+ER_PR_ALGORIT		?i:"ALGORITMO"
+ER_PR_BOOL			?i:"BOLEANO"
+ER_PR_CADENA		?i:"CADENA"
+ER_PR_CHAR			?i:"CARACTER"
+ER_PR_CONST			?i:"CONST"
+ER_PR_CONTINUAR		?i:"CONTINUAR"
+ER_PR_DE			?i:"DE"
+ER_PR_DEV			?i:"DEV"
+ER_PR_DIV			?i:"DIV"
+ER_PR_ENT			?i:"ENT"
+ER_PR_ENTERO		?i:"ENTERO"
+ER_PR_INOUT			?i:"E/S"
+ER_PR_FACCIO		?i:"FACCION"
+ER_PR_FALGORI		?i:"FALGORITMO"
+ER_PR_FCONST		?i:"FCONST"
+ER_PR_FFUNCION		?i:"FFUNCION"
+ER_PR_FMIENTR		?i:"FMIENTRAS"
+ER_PR_FPARA			?i:"FPARA"
+ER_PR_FSI			?i:"FSI"
+ER_PR_FTIPO			?i:"FTIPO"
+ER_PR_FTUPLA		?i:"FTUPLA"
+ER_PR_FUNCION		?i:"FUNCION"
+ER_PR_FVAR			?i:"FVAR"
+ER_PR_HACER			?i:"HACER"
+ER_PR_HASTA			?i:"HASTA"
+ER_PR_MIENTRAS		?i:"MIENTRAS"
+ER_PR_MOD			?i:"MOD"
+ER_PR_NO			?i:"NO"
+ER_PR_O				?i:"O"
+ER_PR_PARA			?i:"PARA"
+ER_PR_REAL			?i:"REAL"
+ER_PR_REF			?i:"REF"
+ER_PR_SAL			?i:"SAL"
+ER_PR_SI			?i:"SI"
+ER_PR_TABLA			?i:"TABLA"
+ER_PR_TIPO			?i:"TIPO"
+ER_PR_TUPLA			?i:"TUPLA"
+ER_PR_VAR			?i:"VAR"
+ER_PR_Y				?i:"Y"
 ER_PR_ASIG			\:\=
 ES_PR_SECUEN		";"
 ES_PR_ELSE			\[\]
@@ -68,94 +69,94 @@ ES_PR_MENOR			"<"
 ES_PR_MAYIGU		">="
 ES_PR_MENIGU		"<="
 
-ER_LETRA			[A-Z]
-ER_CIFRA  			[0-9]
-ER_DELIM			[ \t\n]
+ER_LETRA			?i:[A-Z]
+ER_CIFRA			?i:[0-9]
+ER_DELIM			?i:[ \t\n]
 
 
-ER_LETRA_O_CIFRA 	{ER_LETRA}|{ER_CIFRA}
-ER_ID	    		{ER_LETRA}({ER_LETRA}|{ER_CIFRA})*
+ER_LETRA_O_CIFRA	{ER_LETRA}|{ER_CIFRA}
+ER_ID				{ER_LETRA}({ER_LETRA}|{ER_CIFRA})*
 
 ER_LIT_ENTERO		(\+|\-)?{ER_CIFRA}{ER_CIFRA}*((e|E){ER_CIFRA}{ER_CIFRA}*)?
 ER_LIT_REAL			(\+|\-)?{ER_CIFRA}{ER_CIFRA}*(\.{ER_CIFRA}{ER_CIFRA}*)?((e|E){ER_CIFRA}{ER_CIFRA}*)?
-ER_LIT_BOOL			"VERDADERO"|"FALSO"
+ER_LIT_BOOL			?i:("VERDADERO"|"FALSO")
 
-ER_LIT_CARAC		\".\"
-ER_LIT_CADE			\"([^"]|(\/\"[^"])*)*\"*\"
-ER_LIT_COMENTARIO	\{([^}]|(\/\}[^}])*)*\}*\}
+ER_LIT_CARAC		(\".\")
+ER_LIT_CADE			(\"([^"]|(\/\"[^"])*)*\"*\")
+ER_LIT_COMENTARIO	(\{([^}]|(\/\}[^}])*)*\}*\})
 
 ER_CARAC_DESCO		.
 
 %%
 
 {ER_PR_ACCION}		{printf("$: Palabra reservada 'ACCION': %s \n", yytext );}
-{ER_PR_ALGORIT} 	{printf("$: Palabra reservada 'ALGORITMO': %s \n", yytext );}
-{ER_PR_BOOL} 		{printf("$: Palabra reservada 'BOLEANO': %s \n", yytext );}
-{ER_PR_CADENA} 		{printf("$: Palabra reservada 'CADENA': %s \n", yytext );}
-{ER_PR_CHAR} 		{printf("$: Palabra reservada 'CHAR': %s \n", yytext );}
-{ER_PR_CONST} 		{printf("$: Palabra reservada 'CONST': %s \n", yytext );}
-{ER_PR_CONTINUAR} 	{printf("$: Palabra reservada 'CONTINUAR': %s \n", yytext );}
-{ER_PR_DE} 			{printf("$: Palabra reservada 'DE': %s \n", yytext );}
-{ER_PR_DEV} 		{printf("$: Palabra reservada 'DEV': %s \n", yytext );}
-{ER_PR_DIV} 		{printf("$: Palabra reservada 'DIV': %s \n", yytext );}
-{ER_PR_ENT}	 		{printf("$: Palabra reservada 'ENT': %s \n", yytext );}
-{ER_PR_ENTERO} 		{printf("$: Palabra reservada 'ENTERO': %s \n", yytext );}
-{ER_PR_INOUT} 		{printf("$: Palabra reservada 'E/S': %s \n", yytext );}
-{ER_PR_FACCIO} 		{printf("$: Palabra reservada 'FACCION': %s \n", yytext );}
-{ER_PR_FALGORI} 	{printf("$: Palabra reservada 'FALGORITMO': %s \n", yytext );}
-{ER_PR_FCONST} 		{printf("$: Palabra reservada 'FCONST': %s \n", yytext );}
-{ER_PR_FFUNCION} 	{printf("$: Palabra reservada 'FFUNCION': %s \n", yytext );}
-{ER_PR_FMIENTR} 	{printf("$: Palabra reservada 'FMIENTRAS': %s \n", yytext );}
-{ER_PR_FPARA} 		{printf("$: Palabra reservada 'FPARA': %s \n", yytext );}
-{ER_PR_FSI} 		{printf("$: Palabra reservada 'FSI': %s \n", yytext );}
-{ER_PR_FTIPO} 		{printf("$: Palabra reservada 'FTIPO': %s \n", yytext );}
-{ER_PR_FTUPLA} 		{printf("$: Palabra reservada 'FTUPLA': %s \n", yytext );}
-{ER_PR_FUNCION} 	{printf("$: Palabra reservada 'FUNCION': %s \n", yytext );}
-{ER_PR_FVAR} 		{printf("$: Palabra reservada 'FVAR': %s \n", yytext );}
-{ER_PR_HACER} 		{printf("$: Palabra reservada 'HACER': %s \n", yytext );}
-{ER_PR_HASTA} 		{printf("$: Palabra reservada 'HASTA': %s \n", yytext );}
-{ER_PR_MIENTRAS} 	{printf("$: Palabra reservada 'MIENTRAS': %s \n", yytext );}
-{ER_PR_MOD} 		{printf("$: Palabra reservada 'MOD': %s \n", yytext );}
-{ER_PR_NO} 			{printf("$: Palabra reservada 'NO': %s \n", yytext );}
+{ER_PR_ALGORIT}		{printf("$: Palabra reservada 'ALGORITMO': %s \n", yytext );}
+{ER_PR_BOOL}		{printf("$: Palabra reservada 'BOLEANO': %s \n", yytext );}
+{ER_PR_CADENA}		{printf("$: Palabra reservada 'CADENA': %s \n", yytext );}
+{ER_PR_CHAR}		{printf("$: Palabra reservada 'CHAR': %s \n", yytext );}
+{ER_PR_CONST}		{printf("$: Palabra reservada 'CONST': %s \n", yytext );}
+{ER_PR_CONTINUAR}	{printf("$: Palabra reservada 'CONTINUAR': %s \n", yytext );}
+{ER_PR_DE}			{printf("$: Palabra reservada 'DE': %s \n", yytext );}
+{ER_PR_DEV}			{printf("$: Palabra reservada 'DEV': %s \n", yytext );}
+{ER_PR_DIV}			{printf("$: Palabra reservada 'DIV': %s \n", yytext );}
+{ER_PR_ENT}			{printf("$: Palabra reservada 'ENT': %s \n", yytext );}
+{ER_PR_ENTERO}		{printf("$: Palabra reservada 'ENTERO': %s \n", yytext );}
+{ER_PR_INOUT}		{printf("$: Palabra reservada 'E/S': %s \n", yytext );}
+{ER_PR_FACCIO}		{printf("$: Palabra reservada 'FACCION': %s \n", yytext );}
+{ER_PR_FALGORI}		{printf("$: Palabra reservada 'FALGORITMO': %s \n", yytext );}
+{ER_PR_FCONST}		{printf("$: Palabra reservada 'FCONST': %s \n", yytext );}
+{ER_PR_FFUNCION}	{printf("$: Palabra reservada 'FFUNCION': %s \n", yytext );}
+{ER_PR_FMIENTR}		{printf("$: Palabra reservada 'FMIENTRAS': %s \n", yytext );}
+{ER_PR_FPARA}		{printf("$: Palabra reservada 'FPARA': %s \n", yytext );}
+{ER_PR_FSI}			{printf("$: Palabra reservada 'FSI': %s \n", yytext );}
+{ER_PR_FTIPO}		{printf("$: Palabra reservada 'FTIPO': %s \n", yytext );}
+{ER_PR_FTUPLA}		{printf("$: Palabra reservada 'FTUPLA': %s \n", yytext );}
+{ER_PR_FUNCION}		{printf("$: Palabra reservada 'FUNCION': %s \n", yytext );}
+{ER_PR_FVAR}		{printf("$: Palabra reservada 'FVAR': %s \n", yytext );}
+{ER_PR_HACER}		{printf("$: Palabra reservada 'HACER': %s \n", yytext );}
+{ER_PR_HASTA}		{printf("$: Palabra reservada 'HASTA': %s \n", yytext );}
+{ER_PR_MIENTRAS}	{printf("$: Palabra reservada 'MIENTRAS': %s \n", yytext );}
+{ER_PR_MOD}			{printf("$: Palabra reservada 'MOD': %s \n", yytext );}
+{ER_PR_NO}			{printf("$: Palabra reservada 'NO': %s \n", yytext );}
 {ER_PR_O}			{printf("$: Palabra reservada 'O': %s \n", yytext );}
 {ER_PR_PARA}		{printf("$: Palabra reservada 'PARA': %s \n", yytext );}
 {ER_PR_REAL}		{printf("$: Palabra reservada 'REAL': %s \n", yytext );}
 {ER_PR_REF}			{printf("$: Palabra reservada 'REF': %s \n", yytext );}
-{ER_PR_SAL} 		{printf("$: Palabra reservada 'SAL': %s \n", yytext );}
+{ER_PR_SAL}			{printf("$: Palabra reservada 'SAL': %s \n", yytext );}
 {ER_PR_SI}			{printf("$: Palabra reservada 'SI': %s \n", yytext );}
 {ER_PR_TABLA}		{printf("$: Palabra reservada 'TABLA': %s \n", yytext );}
-{ER_PR_TIPO} 		{printf("$: Palabra reservada 'TIPO': %s \n", yytext );}
-{ER_PR_TUPLA} 		{printf("$: Palabra reservada 'TUPLA': %s \n", yytext );}
-{ER_PR_VAR} 		{printf("$: Palabra reservada 'VAR': %s \n", yytext );}
+{ER_PR_TIPO}		{printf("$: Palabra reservada 'TIPO': %s \n", yytext );}
+{ER_PR_TUPLA}		{printf("$: Palabra reservada 'TUPLA': %s \n", yytext );}
+{ER_PR_VAR}			{printf("$: Palabra reservada 'VAR': %s \n", yytext );}
 {ER_PR_Y}			{printf("$: Palabra reservada 'Y': %s \n", yytext );}
-{ER_PR_ASIG} 		{printf("$: Token: %s \n", yytext );}
-{ES_PR_SECUEN} 		{printf("$: Token: %s \n", yytext );}
-{ES_PR_ELSE} 		{printf("$: Token else: %s \n", yytext );}
+{ER_PR_ASIG}		{printf("$: Token: %s \n", yytext );}
+{ES_PR_SECUEN}		{printf("$: Token: %s \n", yytext );}
+{ES_PR_ELSE}		{printf("$: Token else: %s \n", yytext );}
 {ES_PR_INIARRA}		{printf("$: Token: %s \n", yytext );}
 {ES_PR_ENTONCES}	{printf("$: Token: %s \n", yytext );}
-{ES_PR_COMA} 		{printf("$: Token: %s \n", yytext );}
-{ES_PR_SUBRANGO} 	{printf("$: Token: %s \n", yytext );}
-{ES_PR_DEFVAL} 		{printf("$: Token: %s \n", yytext );}
-{ES_PR_IGUAL} 		{printf("$: Token: %s \n", yytext );}
+{ES_PR_COMA}		{printf("$: Token: %s \n", yytext );}
+{ES_PR_SUBRANGO}	{printf("$: Token: %s \n", yytext );}
+{ES_PR_DEFVAL}		{printf("$: Token: %s \n", yytext );}
+{ES_PR_IGUAL}		{printf("$: Token: %s \n", yytext );}
 {ES_PR_BARRA}		{printf("$: Token: %s \n", yytext );}
 {ES_PR_ABRIRPAR}	{printf("$: Token: %s \n", yytext );}
-{ES_PR_CERRARPAR} 	{printf("$: Token: %s \n", yytext );}
+{ES_PR_CERRARPAR}	{printf("$: Token: %s \n", yytext );}
 {ES_PR_SUMA}		{printf("$: Token: %s \n", yytext );}
 {ES_PR_MULT}		{printf("$: Token: %s \n", yytext );}
 {ES_PR_RESTA}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_ABRIRLLAVE} 	{printf("$: Token: %s \n", yytext );}
+{ES_PR_ABRIRLLAVE}	{printf("$: Token: %s \n", yytext );}
 {ES_PR_CERRARLLAVE}	{printf("$: Token: %s \n", yytext );}
 {ES_PR_MAYOR}		{printf("$: Token: %s \n", yytext );}
 {ES_PR_MENOR}		{printf("$: Token: %s \n", yytext );}
 {ES_PR_MAYIGU}		{printf("$: Token: %s \n", yytext );}
 {ES_PR_MENIGU}		{printf("$: Token: %s \n", yytext );}
 
-{ER_LIT_BOOL} 		{printf("$: Boleano: %s \n", yytext);}
-{ER_ID} 			{printf("$: Id: %s \n", yytext );}
+{ER_LIT_BOOL}		{printf("$: Boleano: %s \n", yytext);}
+{ER_ID}				{printf("$: Id: %s \n", yytext );}
 {ER_LIT_ENTERO}		{printf("$: Entero: %d\n", (int)atof( yytext ) );}
-{ER_LIT_REAL} 		{printf("$: Real: %f\n", atof( yytext ) );}
+{ER_LIT_REAL}		{printf("$: Real: %f\n", atof( yytext ) );}
 {ER_LIT_CARAC}		{printf("$: Literal caracter: %s \n", yytext );}
-{ER_LIT_CADE} 		{printf("$: Literal cadena: %s \n", yytext );}
+{ER_LIT_CADE}		{printf("$: Literal cadena: %s \n", yytext );}
 {ER_LIT_COMENTARIO}	{printf("$: Literal comentario: %s \n", yytext );}
 
 {ER_DELIM}			{}
@@ -164,11 +165,18 @@ ER_CARAC_DESCO		.
 %%
 
 int main( int argc, char **argv ){
-	++argv, --argc;  /* skip over pogram name */
-	if ( argc > 0 )
-		yyin = fopen( argv[0], "r" );
-	else
-		yyin = stdin;
+	printf("\nCRERADORES 04-09-2020\n");
+	printf("\t @Daniel del Barrio\n");
+	printf("\t @Jhonny F. Chicaiza\n");
 
+	++argv, --argc;  /* skip over pogram name */
+	if ( argc > 0 ){
+		printf("\n");
+		yyin = fopen( argv[0], "r" );
+	}else{
+		printf("\nInserte por teclado para comprobar\n");
+		printf("Ctr + d para salir\n\n");
+		yyin = stdin;
+	}
 	yylex();
 }

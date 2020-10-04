@@ -27,3 +27,4 @@ del: lex.yy.c a.out
 	clear
 	rm lex.yy.c
 	rm a.out
+
