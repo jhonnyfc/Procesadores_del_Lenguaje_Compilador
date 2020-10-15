@@ -29,6 +29,7 @@ exp:
 	| exp exp '^'   { $$ = pow ($1, $2); }  /* Exponentiation */
 	| exp 'n'       { $$ = -$1;          }  /* Unary minus    */
 	;
+
 %%
 
 #include <stdio.h>
@@ -46,9 +47,7 @@ yyerror (char const *s)
    and tabs, and returns 0 for end-of-input.  */
 
 #include <ctype.h>
-int
-yylex (void)
-{
+int yylex (void){
   int c;
 
   /* Skip white space.  */
@@ -68,8 +67,7 @@ yylex (void)
   return c;
 }
 
-int
-main (void)
+int main (void)
 {
   return yyparse ();
 }
