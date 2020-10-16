@@ -11,9 +11,9 @@
 
 %token NUM
 
-%token TK_PR_CONTINUAR		// CONTINUAR
+%token TK_PR_CONTINUAR      // CONTINUAR
 %token TK_PR_DE             // DE
-%token TK_PR_DEV			// DEV
+%token TK_PR_DEV		    // DEV
 %token TK_PR_ENT			// ENT
 %token TK_PR_INOUT			// E/S
 %token TK_PR_HACER			// HACER
