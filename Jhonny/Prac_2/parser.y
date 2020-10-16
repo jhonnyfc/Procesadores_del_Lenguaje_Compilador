@@ -1,11 +1,11 @@
 /* Reverse polish notation calculator.  */
 
 %{
-	#include <stdio.h>
-	#include <math.h>
-	int yylex (void);
-	void yyerror (char const *);
-	#define YYSTYPE double
+    #include <stdio.h>
+    #include <math.h>
+    int yylex (void);
+    void yyerror (char const *);
+    #define YYSTYPE double
 %}
 
 
@@ -102,7 +102,7 @@
 
 /* Called by yyparse on error.  */
 void yyerror (char const *s){
-	fprintf (stderr, "%s\n", s);
+    fprintf (stderr, "%s\n", s);
 }
 
 /* The lexical analyzer returns a double floating point
@@ -112,26 +112,26 @@ void yyerror (char const *s){
 
 #include <ctype.h>
 int yylex (void){
-	int c;
+    int c;
 
-	/* Skip white space.  */
-	while ((c = getchar ()) == ' ' || c == '\t')
-		continue;
-	
-	/* Process numbers.  */
-	if (c == '.' || isdigit (c)){
-		ungetc (c, stdin);
-		scanf ("%lf", &yylval);
-		return NUM;
-	}
+    /* Skip white space.  */
+    while ((c = getchar ()) == ' ' || c == '\t')
+        continue;
+    
+    /* Process numbers.  */
+    if (c == '.' || isdigit (c)){
+        ungetc (c, stdin);
+        scanf ("%lf", &yylval);
+        return NUM;
+    }
 
-	/* Return end-of-input.  */
-	if (c == EOF)
-		return 0;
-	/* Return a single char.  */
-	return c;
+    /* Return end-of-input.  */
+    if (c == EOF)
+        return 0;
+    /* Return a single char.  */
+    return c;
 }
 
 int main (void){
-	return yyparse ();
+    return yyparse ();
 }
