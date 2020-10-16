@@ -1,14 +1,17 @@
 all: dof comp
 
-dof: pra2.y
+dof: parser.y
 	clear
-	bison -v -d pra2.y
+	bison -v -d parser.y
 
-comp: pra2.tab.c
-	gcc pra2.tab.c -lfl -lm
+comp: parser.tab.c
+	gcc parser.tab.c -lfl -lm
+	./a.out
 
-del: lex.yy.c a.out
+del: a.out
 	clear
 	rm a.out
-	rm lex.yy.c
+	rm parser.output
+	rm parser.tab.c
+	rm parser.tab.h
 

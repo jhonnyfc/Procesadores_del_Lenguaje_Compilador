@@ -47,27 +47,27 @@ ER_PR_TUPLA			?i:"TUPLA"
 ER_PR_VAR			?i:"VAR"
 ER_PR_Y				?i:"Y"
 ER_PR_ASIG			\:\=
-ES_PR_SECUEN		";"
-ES_PR_ELSE			\[\]
-ES_PR_INIARRA		\[
-ES_PR_FINARRA		\]
-ES_PR_ENTONCES		\-\>
-ES_PR_COMA			","
-ES_PR_SUBRANGO		".."
-ES_PR_DEFVAL		":"
-ES_PR_IGUAL			"="	
-ES_PR_BARRA			"/"
-ES_PR_ABRIRPAR		"("
-ES_PR_CERRARPAR		")"
-ES_PR_SUMA			"+"
-ES_PR_MULT			"*"
-ES_PR_RESTA			"-"
-ES_PR_ABRIRLLAVE	"{"
-ES_PR_CERRARLLAVE	"}"
-ES_PR_MAYOR			">"
-ES_PR_MENOR			"<"
-ES_PR_MAYIGU		">="
-ES_PR_MENIGU		"<="
+ER_PR_SECUEN		";"
+ER_PR_ELSE			\[\]
+ER_PR_INIARRA		\[
+ER_PR_FINARRA		\]
+ER_PR_ENTONCES		\-\>
+ER_PR_COMA			","
+ER_PR_SUBRANGO		".."
+ER_PR_DEFVAL		":"
+ER_PR_IGUAL			"="	
+ER_PR_BARRA			"/"
+ER_PR_ABRIRPAR		"("
+ER_PR_CERRARPAR		")"
+ER_PR_SUMA			"+"
+ER_PR_MULT			"*"
+ER_PR_RESTA			"-"
+ER_PR_ABRIRLLAVE	"{"
+ER_PR_CERRARLLAVE	"}"
+ER_PR_MAYOR			">"
+ER_PR_MENOR			"<"
+ER_PR_MAYIGU		">="
+ER_PR_MENIGU		"<="
 
 ER_LETRA			?i:[A-Z]
 ER_CIFRA			?i:[0-9]
@@ -130,26 +130,26 @@ ER_CARAC_DESCO		.
 {ER_PR_VAR}			{printf("$: Palabra reservada 'VAR': %s \n", yytext );}
 {ER_PR_Y}			{printf("$: Palabra reservada 'Y': %s \n", yytext );}
 {ER_PR_ASIG}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_SECUEN}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_ELSE}		{printf("$: Token else: %s \n", yytext );}
-{ES_PR_INIARRA}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_ENTONCES}	{printf("$: Token: %s \n", yytext );}
-{ES_PR_COMA}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_SUBRANGO}	{printf("$: Token: %s \n", yytext );}
-{ES_PR_DEFVAL}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_IGUAL}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_BARRA}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_ABRIRPAR}	{printf("$: Token: %s \n", yytext );}
-{ES_PR_CERRARPAR}	{printf("$: Token: %s \n", yytext );}
-{ES_PR_SUMA}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_MULT}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_RESTA}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_ABRIRLLAVE}	{printf("$: Token: %s \n", yytext );}
-{ES_PR_CERRARLLAVE}	{printf("$: Token: %s \n", yytext );}
-{ES_PR_MAYOR}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_MENOR}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_MAYIGU}		{printf("$: Token: %s \n", yytext );}
-{ES_PR_MENIGU}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_SECUEN}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_ELSE}		{printf("$: Token else: %s \n", yytext );}
+{ER_PR_INIARRA}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_ENTONCES}	{printf("$: Token: %s \n", yytext );}
+{ER_PR_COMA}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_SUBRANGO}	{printf("$: Token: %s \n", yytext );}
+{ER_PR_DEFVAL}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_IGUAL}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_BARRA}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_ABRIRPAR}	{printf("$: Token: %s \n", yytext );}
+{ER_PR_CERRARPAR}	{printf("$: Token: %s \n", yytext );}
+{ER_PR_SUMA}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_MULT}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_RESTA}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_ABRIRLLAVE}	{printf("$: Token: %s \n", yytext );}
+{ER_PR_CERRARLLAVE}	{printf("$: Token: %s \n", yytext );}
+{ER_PR_MAYOR}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_MENOR}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_MAYIGU}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_MENIGU}		{printf("$: Token: %s \n", yytext );}
 
 {ER_LIT_BOOL}		{printf("$: Boleano: %s \n", yytext);}
 {ER_ID}				{printf("$: Id: %s \n", yytext );}
