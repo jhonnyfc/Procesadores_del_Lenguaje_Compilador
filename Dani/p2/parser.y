@@ -224,10 +224,10 @@ exp_a:
     | operando{
         printf("$~ Parser: Estructura de exp_a detectada 8.\n")
     }
-    | TK_LIT_ENTERO{ /* LITERAL NUMERICO??? */
+    | TK_LIT_ENTERO{
         printf("$~ Parser: Estructura de exp_a detectada 9.\n")
     }
-    | TK_PR_REAL{ /* LITERAL NUMERICO??? */
+    | TK_PR_REAL{
         printf("$~ Parser: Estructura de exp_a detectada 10.\n")
     }
     | TK_PR_RESTA exp_a{ 
