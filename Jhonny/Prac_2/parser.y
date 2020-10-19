@@ -180,19 +180,67 @@ lista_campos:
 
 lista_d_cte:
 	| TK_ID TK_PR_IGUAL TK_LIT_BOOL TK_PR_SECUEN lista_d_cte {
-
+		printf("$~ Parser: Estructura lista_d_cte econtrada 1.\n");
 	}
-	| TK_ID TK_PR_IGUAL TK_LIT_BOOL TK_PR_SECUEN lista_d_cte {
-
+	| TK_ID TK_PR_IGUAL TK_LIT_CADE TK_PR_SECUEN lista_d_cte {
+		printf("$~ Parser: Estructura lista_d_cte econtrada 2.\n");
 	}
-	| TK_ID TK_PR_IGUAL TK_LIT_BOOL TK_PR_SECUEN lista_d_cte {
-
+	| TK_ID TK_PR_IGUAL TK_LIT_CARAC TK_PR_SECUEN lista_d_cte {
+		printf("$~ Parser: Estructura lista_d_cte econtrada 3.\n");
 	}
-	| TK_ID TK_PR_IGUAL TK_LIT_BOOL TK_PR_SECUEN lista_d_cte {
-
+	| TK_ID TK_PR_IGUAL TK_LIT_COMENTARIO TK_PR_SECUEN lista_d_cte {
+		printf("$~ Parser: Estructura lista_d_cte econtrada 4.\n");
+	}
+	| TK_ID TK_PR_IGUAL TK_LIT_ENTERO TK_PR_SECUEN lista_d_cte {
+		printf("$~ Parser: Estructura lista_d_cte econtrada 5.\n");
+	}
+	| TK_ID TK_PR_IGUAL TK_LIT_REAL TK_PR_SECUEN lista_d_cte {
+		printf("$~ Parser: Estructura lista_d_cte econtrada 6.\n");
 	}
 	| %empty {}
 ;
+
+accion_d:
+	TK_PR_ACCION a_cabecera bloque TK_PR_FACCIO {
+		printf("$~ Parser: Estructura accion_d econtrada.\n");
+	}
+;
+
+funncion_d: 
+	TK_PR_FUNCION f_cabecera bloque TK_PR_DEV expresion TK_PR_FFUNCION {
+		printf("$~ Parser: Estructura funcion_d econtrada.");
+	}
+;
+
+a_cabecera: 
+	TK_ID TK_PR_ABRIRPAR d_par_form TK_PR_CERRARPAR TK_PR_SECUEN {
+		printf("$~ Parser: Estructura funcion_d econtrada .");
+	}
+;
+
+f_cabecera:
+	TK_ID TK_PR_ABRIRPAR lista_d_var TK_PR_CERRARPAR TK_PR_DEV d_tipo TK_PR_SECUEN {
+		printf("$~ Parser: Estructura f_cabecera econtrada.");
+	}
+;
+
+d_par_form:
+	d_p_form TK_PR_SECUEN d_par_form {
+		printf("$~ Parser: Estructura d_par_form econtrada.");
+	}
+	| %empty {}
+;
+
+d_p_form:
+	TK_PR_ENTERO lista_id TK_PR_DEFVAL d_tipo {
+		printf("$~ Parser: Estructura d_p_form econtrada 1.");
+	}
+	| TK_PR_SAL lista_id TK_PR_DEFVAL d_tipo {
+		printf("$~ Parser: Estructura d_p_form econtrada 2.");
+	}
+	| TK_PR_INOUT lista_id TK_PR_DEFVAL d_tipo {
+		printf("$~ Parser: Estructura d_p_form econtrada 3.");
+	}
 %%
 
 #include <stdio.h>
