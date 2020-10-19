@@ -289,7 +289,84 @@ operando:
         printf("$~ Parser: Estructura de operando detectada 4.\n")
     }
 ;
+instrucciones:
+    instruccion TK_PR_SECUEN instrucciones{
+        printf("$~ Parser: Estructura de instrucciones detectada 1.\n")
+    }
+    | instruccion{
+        printf("$~ Parser: Estructura de instrucciones detectada 2.\n")
+    }
+;
+instruccion:
+    TK_PR_CONTINUAR{
+        printf("$~ Parser: Estructura de instruccion detectada 1.\n")
+    }
+    | asignacion{
+        printf("$~ Parser: Estructura de instruccion detectada 2.\n")
+    }
+    | alternativa{
+        printf("$~ Parser: Estructura de instruccion detectada 3.\n")
+    }
+    | iteracion{
+        printf("$~ Parser: Estructura de instruccion detectada 4.\n")
+    }
+    | accion.ll{
+        printf("$~ Parser: Estructura de instruccion detectada 5.\n")
+    }
+;
+asignacion:
+    operando TK_PR_ASIG expresion{
+        printf("$~ Parser: Estructura de asignacion detectada.\n")
+    }
+;
+alternativa:
+    TK_PR_SI expresion TK_PR_ENTONCES instrucciones lista_opciones TK_PR_FSI{
+        printf("$~ Parser: Estructura de alternativa detectada.\n")
+    }
+;
+lista.opciones:
+    TK_PR_ELSE expresion TK_PR_ENTONCES instrucciones lista_opciones TK_PR_FSI{
+        printf("$~ Parser: Estructura de lista.opciones detectada.\n")
+    }
+;
+iteracion:
+    it_cota_fija{
+        printf("$~ Parser: Estructura de iteracion detectada 1.\n")
+    }
+    | it_cota_exp{
+        printf("$~ Parser: Estructura de iteracion detectada 2.\n")
+    }
+;
+it_cota_exp:
+    TK_PR_MIENTRAS expresion TK_PR_HACER instrucciones TK_PR_FMIENTR{
+        printf("$~ Parser: Estructura de it_cota_exp detectada.\n")
+    }
+;
+it_cota_fija:
+    TK_PR_PARA TK_ID TK_PR_ASIG expresion TK_PR_HASTA expresion TK_PR_HACER instrucciones TK_PR_FPARA{
+        printf("$~ Parser: Estructura de it_cota_fija detectada.\n")
+    }
+;
 
+/* Pagina 8 final */
+accion_ll:
+    TK_ID TK_PR_ABRIRPAR l_ll TK_PR_CERRARPAR{
+        printf("$~ Parser: Estructura de accion_ll detectada.\n")
+    }
+;
+funcion_ll:
+    TK_ID TK_PR_ABRIRPAR l_ll TK_PR_CERRARPAR{
+        printf("$~ Parser: Estructura de funcion_ll detectada.\n")
+    }
+;
+l_ll:
+    expresion TK_PR_COMA l_ll{
+        printf("$~ Parser: Estructura de ll_ll detectada 1.\n")
+    }
+    | expresion{
+        printf("$~ Parser: Estructura de ll_ll detectada 2.\n")
+    }
+;
 
 %%
 
