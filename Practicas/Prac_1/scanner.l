@@ -6,6 +6,7 @@
 /* Constantes manisfiestas */
 %}
 /*Exprasiones regulares*/
+
 ER_PR_CONTINUAR		?i:"CONTINUAR"
 ER_PR_DE			?i:"DE"
 ER_PR_DEV			?i:"DEV"
@@ -56,8 +57,6 @@ ER_PR_COMA			","
 ER_PR_PUNTO			"."
 ER_PR_SUBRANGO		".."
 ER_PR_DEFVAL		":"
-ER_PR_IGUAL			"="
-ER_PR_DIST			"<>"
 ER_PR_BARRA			"/"
 ER_PR_ABRIRPAR		"("
 ER_PR_CERRARPAR		")"
@@ -67,15 +66,17 @@ ER_PR_CERRARLLAVE	"}"
 ER_PR_SUMA			"+"
 ER_PR_MULT			"*"
 ER_PR_RESTA			"-"
+ER_PR_DIV			?i:"DIV"
+ER_PR_MOD			?i:"MOD"
 ER_PR_MAYOR			">"
 ER_PR_MENOR			"<"
 ER_PR_MAYIGU		">="
 ER_PR_MENIGU		"<="
+ER_PR_IGUAL			"="
+ER_PR_DIST			"<>"
 ER_PR_O				?i:"O"
 ER_PR_Y				?i:"Y"
 ER_PR_NO			?i:"NO"
-ER_PR_DIV			?i:"DIV"
-ER_PR_MOD			?i:"MOD"
 
 ER_LETRA			?i:[A-Z]
 ER_CIFRA			?i:[0-9]

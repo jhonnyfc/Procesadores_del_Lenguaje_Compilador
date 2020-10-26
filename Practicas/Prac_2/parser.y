@@ -1,5 +1,4 @@
 /* Reverse polish notation calculator.  */
-
 %{
 	#include <stdio.h>
 	#include <math.h>
@@ -56,7 +55,7 @@
 %token TK_PR_ENTONCES		// ->
 %token TK_PR_COMA			// ,
 %token TK_PR_PUNTO			// .
-%token TK_PR_SUBRANGO		//..
+%token TK_PR_SUBRANGO		// ..
 %token TK_PR_DEFVAL			// :
 %token TK_PR_BARRA			// /
 %token TK_PR_ABRIRPAR		// (
@@ -68,6 +67,7 @@
 %token TK_PR_MULT			// *
 %token TK_PR_RESTA			// -
 %token TK_PR_DIV			// DIV
+%token TK_PR_MOD			// MOD
 %token TK_PR_MAYOR			// >
 %token TK_PR_MENOR			// <
 %token TK_PR_MAYIGU			// >=
@@ -77,7 +77,6 @@
 %token TK_PR_O				// O
 %token TK_PR_Y				// Y
 %token TK_PR_NO				// NO
-%token TK_PR_MOD			// MOD
 
 %token TK_LETRA				// [A-Z]
 %token TK_CIFRA				// [0-9]
