@@ -83,7 +83,10 @@ ER_CIFRA			?i:[0-9]
 ER_DELIM			?i:[ \t\n]
 
 ER_LETRA_O_CIFRA	{ER_LETRA}|{ER_CIFRA}
-ER_ID				{ER_LETRA}({ER_LETRA}|{ER_CIFRA})*
+/*ER_ID				{ER_LETRA}({ER_LETRA}|{ER_CIFRA})* */
+ER_ID_OTHER			?i:"O_"({ER_LETRA}|{ER_CIFRA})*
+ER_ID_ARI			?i:"A_"({ER_LETRA}|{ER_CIFRA})*
+ER_ID_BOOL			?i:"B_"({ER_LETRA}|{ER_CIFRA})*
 
 ER_LIT_ENTERO		(\+|\-)?{ER_CIFRA}{ER_CIFRA}*((e|E){ER_CIFRA}{ER_CIFRA}*)?
 ER_LIT_REAL			(\+|\-)?{ER_CIFRA}{ER_CIFRA}*(\.{ER_CIFRA}{ER_CIFRA}*)?((e|E){ER_CIFRA}{ER_CIFRA}*)?
@@ -162,7 +165,9 @@ ER_CARAC_DESCO		.
 {ER_PR_MENIGU}		{printf("$: Token: %s \n", yytext );}
 
 {ER_LIT_BOOL}		{printf("$: Boleano: %s \n", yytext);}
-{ER_ID}				{printf("$: Id: %s \n", yytext );}
+{ER_ID_OTHER}		{printf("$: Id: %s \n", yytext );}
+{ER_ID_ARI}			{printf("$: Id: %s \n", yytext );}
+{ER_ID_BOOL}		{printf("$: Id: %s \n", yytext );}
 {ER_LIT_ENTERO}		{printf("$: Entero: %d\n", (int)atof( yytext ) );}
 {ER_LIT_REAL}		{printf("$: Real: %f\n", atof( yytext ) );}
 {ER_LIT_CARAC}		{printf("$: Literal caracter: %s \n", yytext );}
