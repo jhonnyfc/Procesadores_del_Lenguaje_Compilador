@@ -20,6 +20,8 @@
 %token TK_PR_HASTA			// HASTA
 %token TK_PR_REF			// REF
 %token TK_PR_SAL			// SAL
+%token TK_PR_VERDADERO      // VERDADERO 
+%token TK_PR_FALSO          // FALSO
 
 %token TK_PR_FUNCION		// FUNCION
 %token TK_PR_FFUNCION		// FFUNCION
@@ -48,8 +50,6 @@
 %token TK_PR_CONST			// CONST
 %token TK_PR_FCONST			// FCONST
 %token TK_PR_TABLA			// TABLA
-%token TK_PR_VERDADERO      // VERDADERO 
-%token TK_PR_FALSO          // FALSO
 
 %token TK_PR_ASIG			// :=
 %token TK_PR_SECUEN			// ;
@@ -79,8 +79,8 @@
 %token TK_PR_DIST           // <>
 %token TK_PR_O				// O
 %token TK_PR_Y				// Y
-%token TK_PR_MOD			// MOD
 %token TK_PR_NO				// NO
+%token TK_PR_MOD			// MOD
 
 %token TK_LETRA				// [A-Z]
 %token TK_CIFRA				// [0-9]

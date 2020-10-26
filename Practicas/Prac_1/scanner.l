@@ -6,80 +6,87 @@
 /* Constantes manisfiestas */
 %}
 /*Exprasiones regulares*/
+ER_PR_CONTINUAR		?i:"CONTINUAR"
+ER_PR_DE			?i:"DE"
+ER_PR_DEV			?i:"DEV"
+ER_PR_ENT			?i:"ENT"
+ER_PR_INOUT			?i:"E/S"
+ER_PR_HACER			?i:"HACER"
+ER_PR_HASTA			?i:"HASTA"
+ER_PR_REF			?i:"REF"
+ER_PR_SAL			?i:"SAL"
+ER_PR_VERDADERO		?i:"VERDADERO"
+ER_PR_FALSO			?i:"FALSO"
+
+ER_PR_FUNCION		?i:"FUNCION"
+ER_PR_FFUNCION		?i:"FFUNCION"
 ER_PR_ACCION		?i:"ACCION"
+ER_PR_FACCIO		?i:"FACCION"
 ER_PR_ALGORIT		?i:"ALGORITMO"
+ER_PR_FALGORI		?i:"FALGORITMO"
+ER_PR_MIENTRAS		?i:"MIENTRAS"
+ER_PR_FMIENTR		?i:"FMIENTRAS"
+ER_PR_PARA			?i:"PARA"
+ER_PR_FPARA			?i:"FPARA"
+ER_PR_SI			?i:"SI"
+ER_PR_FSI			?i:"FSI"
+
+ER_PR_TIPO			?i:"TIPO"
+ER_PR_FTIPO			?i:"FTIPO"
+ER_PR_TUPLA			?i:"TUPLA"
+ER_PR_FTUPLA		?i:"FTUPLA"
+ER_PR_VAR			?i:"VAR"
+ER_PR_FVAR			?i:"FVAR"
+ER_PR_REAL			?i:"REAL"
+ER_PR_ENTERO		?i:"ENTERO"
 ER_PR_BOOL			?i:"BOLEANO"
 ER_PR_CADENA		?i:"CADENA"
 ER_PR_CHAR			?i:"CARACTER"
 ER_PR_CONST			?i:"CONST"
-ER_PR_CONTINUAR		?i:"CONTINUAR"
-ER_PR_DE			?i:"DE"
-ER_PR_DEV			?i:"DEV"
-ER_PR_DIV			?i:"DIV"
-ER_PR_ENT			?i:"ENT"
-ER_PR_ENTERO		?i:"ENTERO"
-ER_PR_INOUT			?i:"E/S"
-ER_PR_FACCIO		?i:"FACCION"
-ER_PR_FALGORI		?i:"FALGORITMO"
 ER_PR_FCONST		?i:"FCONST"
-ER_PR_FFUNCION		?i:"FFUNCION"
-ER_PR_FMIENTR		?i:"FMIENTRAS"
-ER_PR_FPARA			?i:"FPARA"
-ER_PR_FSI			?i:"FSI"
-ER_PR_FTIPO			?i:"FTIPO"
-ER_PR_FTUPLA		?i:"FTUPLA"
-ER_PR_FUNCION		?i:"FUNCION"
-ER_PR_FVAR			?i:"FVAR"
-ER_PR_HACER			?i:"HACER"
-ER_PR_HASTA			?i:"HASTA"
-ER_PR_MIENTRAS		?i:"MIENTRAS"
-ER_PR_MOD			?i:"MOD"
-ER_PR_NO			?i:"NO"
-ER_PR_O				?i:"O"
-ER_PR_PARA			?i:"PARA"
-ER_PR_REAL			?i:"REAL"
-ER_PR_REF			?i:"REF"
-ER_PR_SAL			?i:"SAL"
-ER_PR_SI			?i:"SI"
 ER_PR_TABLA			?i:"TABLA"
-ER_PR_TIPO			?i:"TIPO"
-ER_PR_TUPLA			?i:"TUPLA"
-ER_PR_VAR			?i:"VAR"
-ER_PR_Y				?i:"Y"
-ER_PR_ASIG			\:\=
+
+ER_PR_ASIG			":="
 ER_PR_SECUEN		";"
-ER_PR_ELSE			\[\]
-ER_PR_INIARRA		\[
-ER_PR_FINARRA		\]
-ER_PR_ENTONCES		\-\>
+ER_PR_ELSE			"[]"
+ER_PR_INIARRA		"["
+ER_PR_FINARRA		"]"
+ER_PR_ENTONCES		"->"
 ER_PR_COMA			","
+ER_PR_PUNTO			"."
 ER_PR_SUBRANGO		".."
 ER_PR_DEFVAL		":"
-ER_PR_IGUAL			"="	
+ER_PR_IGUAL			"="
+ER_PR_DIST			"<>"
 ER_PR_BARRA			"/"
 ER_PR_ABRIRPAR		"("
 ER_PR_CERRARPAR		")"
+ER_PR_ABRIRLLAVE	"{"
+ER_PR_CERRARLLAVE	"}"
+
 ER_PR_SUMA			"+"
 ER_PR_MULT			"*"
 ER_PR_RESTA			"-"
-ER_PR_ABRIRLLAVE	"{"
-ER_PR_CERRARLLAVE	"}"
 ER_PR_MAYOR			">"
 ER_PR_MENOR			"<"
 ER_PR_MAYIGU		">="
 ER_PR_MENIGU		"<="
+ER_PR_O				?i:"O"
+ER_PR_Y				?i:"Y"
+ER_PR_NO			?i:"NO"
+ER_PR_DIV			?i:"DIV"
+ER_PR_MOD			?i:"MOD"
 
 ER_LETRA			?i:[A-Z]
 ER_CIFRA			?i:[0-9]
 ER_DELIM			?i:[ \t\n]
-
 
 ER_LETRA_O_CIFRA	{ER_LETRA}|{ER_CIFRA}
 ER_ID				{ER_LETRA}({ER_LETRA}|{ER_CIFRA})*
 
 ER_LIT_ENTERO		(\+|\-)?{ER_CIFRA}{ER_CIFRA}*((e|E){ER_CIFRA}{ER_CIFRA}*)?
 ER_LIT_REAL			(\+|\-)?{ER_CIFRA}{ER_CIFRA}*(\.{ER_CIFRA}{ER_CIFRA}*)?((e|E){ER_CIFRA}{ER_CIFRA}*)?
-ER_LIT_BOOL			?i:("VERDADERO"|"FALSO")
+ER_LIT_BOOL			{ER_PR_VERDADERO}|{ER_PR_FALSO}
 
 ER_LIT_CARAC		(\".\")
 ER_LIT_CADE			(\"([^"]|(\/\"[^"])*)*\"*\")
@@ -135,9 +142,11 @@ ER_CARAC_DESCO		.
 {ER_PR_INIARRA}		{printf("$: Token: %s \n", yytext );}
 {ER_PR_ENTONCES}	{printf("$: Token: %s \n", yytext );}
 {ER_PR_COMA}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_PUNTO}		{printf("$: Token: %s \n", yytext );}
 {ER_PR_SUBRANGO}	{printf("$: Token: %s \n", yytext );}
 {ER_PR_DEFVAL}		{printf("$: Token: %s \n", yytext );}
 {ER_PR_IGUAL}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_DIST}		{printf("$: Token: %s \n", yytext );}
 {ER_PR_BARRA}		{printf("$: Token: %s \n", yytext );}
 {ER_PR_ABRIRPAR}	{printf("$: Token: %s \n", yytext );}
 {ER_PR_CERRARPAR}	{printf("$: Token: %s \n", yytext );}
