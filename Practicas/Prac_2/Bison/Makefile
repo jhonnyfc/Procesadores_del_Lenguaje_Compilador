@@ -8,10 +8,9 @@ comp: parser.tab.c
 	gcc parser.tab.c -lfl -lm
 	./a.out
 
-del: a.out
+del: parser.output
 	clear
-	rm a.out
 	rm parser.output
 	rm parser.tab.c
 	rm parser.tab.h
-
+	rm a.out
