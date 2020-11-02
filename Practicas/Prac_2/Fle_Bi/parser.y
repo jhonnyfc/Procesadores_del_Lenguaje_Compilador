@@ -250,10 +250,7 @@ lista_d_cte:
 
 /* pag 7 */
 lista_d_var:
-    lista_id TK_PR_DEFVAL TK_ID_OTHER TK_PR_SECUEN lista_d_var{
-        printf("$~ Parser: Estructura de lista_d_var detectada 1.\n");
-    }
-    | lista_id TK_PR_DEFVAL d_tipo TK_PR_SECUEN lista_d_var{
+    lista_id TK_PR_DEFVAL d_tipo TK_PR_SECUEN lista_d_var{
         printf("$~ Parser: Estructura de lista_d_var detectada 2.\n");
     }
     | %empty{}
