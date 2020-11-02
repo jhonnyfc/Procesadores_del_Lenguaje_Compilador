@@ -68,12 +68,12 @@
 %left TK_PR_BARRA			// /
 %left TK_PR_DIV             // DIV
 %left TK_PR_MOD		    	// MOD
-%token TK_PR_MAYOR		    // >
-%token TK_PR_MENOR			// <
-%token TK_PR_MAYIGU			// >=
-%token TK_PR_MENIGU			// <=
-%token TK_PR_IGUAL			// =
-%token TK_PR_DIST           // <>
+%nonassoc TK_PR_MAYOR		    // >
+%nonassoc TK_PR_MENOR			// <
+%nonassoc TK_PR_MAYIGU			// >=
+%nonassoc TK_PR_MENIGU			// <=
+%nonassoc TK_PR_IGUAL			// =
+%nonassoc TK_PR_DIST           // <>
 %left TK_PR_O				// O
 %left TK_PR_Y				// Y
 %token TK_PR_NO				// NO
@@ -250,10 +250,7 @@ lista_d_cte:
 
 /* pag 7 */
 lista_d_var:
-    lista_id TK_PR_DEFVAL TK_ID_OTHER TK_PR_SECUEN lista_d_var{
-        printf("$~ Parser: Estructura de lista_d_var detectada 1.\n");
-    }
-    | lista_id TK_PR_DEFVAL d_tipo TK_PR_SECUEN lista_d_var{
+    lista_id TK_PR_DEFVAL d_tipo TK_PR_SECUEN lista_d_var{
         printf("$~ Parser: Estructura de lista_d_var detectada 2.\n");
     }
     | %empty{}
