@@ -63,19 +63,19 @@
 //%token TK_PR_ABRIRLLAVE		// {
 //%token TK_PR_CERRARLLAVE	// }
 
-%token TK_PR_SUMA			// +
-%token TK_PR_MULT			// *
-%token TK_PR_RESTA			// -
-%token TK_PR_DIV			// DIV
-%token TK_PR_MOD			// MOD
-%token TK_PR_MAYOR			// >
+%left TK_PR_SUMA			// +
+%left TK_PR_MULT			// *
+%left TK_PR_RESTA			// -
+%left TK_PR_DIV             // DIV
+%left TK_PR_MOD		    	// MOD
+%token TK_PR_MAYOR		    // >
 %token TK_PR_MENOR			// <
 %token TK_PR_MAYIGU			// >=
 %token TK_PR_MENIGU			// <=
 %token TK_PR_IGUAL			// =
 %token TK_PR_DIST           // <>
-%token TK_PR_O				// O
-%token TK_PR_Y				// Y
+%left TK_PR_O				// O
+%left TK_PR_Y				// Y
 %token TK_PR_NO				// NO
 
 //%token TK_LETRA				// [A-Z]
@@ -551,11 +551,11 @@ int yylex (void){
 		continue;
 	
 	/* Process numbers.  */
-	if (c == '.' || isdigit (c)){
+	/*if (c == '.' || isdigit (c)){
 		ungetc (c, stdin);
 		scanf ("%lf", &yylval);
 		return NUM;
-	}
+	}*/
 
 	/* Return end-of-input.  */
 	if (c == EOF)

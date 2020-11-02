@@ -1,10 +1,10 @@
-all: dof comp
+all: dob compb
 
-dof: parser.y
+dob: parser.y
 	clear
 	bison -v -d parser.y
 
-comp: parser.tab.c
+compb: parser.tab.c
 	gcc parser.tab.c -lfl -lm
 	./a.out
 
