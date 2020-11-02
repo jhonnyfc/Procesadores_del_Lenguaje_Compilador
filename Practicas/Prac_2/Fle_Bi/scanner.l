@@ -4,7 +4,7 @@
 	/*%option caseless -> se puede utilizar este en vez de poner -> ?i:*/
 %{
 /* Constantes manisfiestas */
-	#include parse.tab.c
+#include parse.tab.c
 %}
 /*Exprasiones regulares*/
 
@@ -193,33 +193,58 @@ ER_CARAC_DESCO		.
 					return TK_PR_ENTONCES;}
 {ER_PR_COMA}		{printf("$: Token: %s \n", yytext );
 					return TK_PR_COMA;}
-{ER_PR_PUNTO}		{printf("$: Token: %s \n", yytext );}
-{ER_PR_SUBRANGO}	{printf("$: Token: %s \n", yytext );}
-{ER_PR_DEFVAL}		{printf("$: Token: %s \n", yytext );}
-{ER_PR_IGUAL}		{printf("$: Token: %s \n", yytext );}
-{ER_PR_DIST}		{printf("$: Token: %s \n", yytext );}
-{ER_PR_BARRA}		{printf("$: Token: %s \n", yytext );}
-{ER_PR_ABRIRPAR}	{printf("$: Token: %s \n", yytext );}
-{ER_PR_CERRARPAR}	{printf("$: Token: %s \n", yytext );}
-{ER_PR_SUMA}		{printf("$: Token: %s \n", yytext );}
-{ER_PR_MULT}		{printf("$: Token: %s \n", yytext );}
-{ER_PR_RESTA}		{printf("$: Token: %s \n", yytext );}
+{ER_PR_PUNTO}		{printf("$: Token: %s \n", yytext );
+					return TK_PR_PUNTO;}
+{ER_PR_SUBRANGO}	{printf("$: Token: %s \n", yytext );
+					return TK_PR_SUBRANGO;}
+{ER_PR_DEFVAL}		{printf("$: Token: %s \n", yytext );
+					return TK_PR_DEFVAL}
+{ER_PR_IGUAL}		{printf("$: Token: %s \n", yytext );
+					return TK_PR_IGUAL}
+{ER_PR_DIST}		{printf("$: Token: %s \n", yytext );
+					return TK_PR_DIST}
+{ER_PR_BARRA}		{printf("$: Token: %s \n", yytext );
+					return TK_PR_BARRA;}
+{ER_PR_ABRIRPAR}	{printf("$: Token: %s \n", yytext );
+					return TK_PR_ABRIRPAR;}
+{ER_PR_CERRARPAR}	{printf("$: Token: %s \n", yytext );
+					return TK_PR_CERRARPAR}
+{ER_PR_SUMA}		{printf("$: Token: %s \n", yytext );
+					return TK_PR_SUMA;}
+{ER_PR_MULT}		{printf("$: Token: %s \n", yytext );
+					return TK_PR_MULT;}
+{ER_PR_RESTA}		{printf("$: Token: %s \n", yytext );
+					return TK_PR_RESTA;}
+
 {ER_PR_ABRIRLLAVE}	{printf("$: Token: %s \n", yytext );}
 {ER_PR_CERRARLLAVE}	{printf("$: Token: %s \n", yytext );}
-{ER_PR_MAYOR}		{printf("$: Token: %s \n", yytext );}
-{ER_PR_MENOR}		{printf("$: Token: %s \n", yytext );}
-{ER_PR_MAYIGU}		{printf("$: Token: %s \n", yytext );}
-{ER_PR_MENIGU}		{printf("$: Token: %s \n", yytext );}
 
-{ER_LIT_BOOL}		{printf("$: Boleano: %s \n", yytext);}
-{ER_ID_OTHER}		{printf("$: Id general: %s \n", yytext );}
-{ER_ID_ARI}			{printf("$: Id ari: %s \n", yytext );}
-{ER_ID_BOOL}		{printf("$: Id bool: %s \n", yytext );}
-{ER_LIT_ENTERO}		{printf("$: Entero: %d\n", (int)atof( yytext ) );}
-{ER_LIT_REAL}		{printf("$: Real: %f\n", atof( yytext ) );}
-{ER_LIT_CARAC}		{printf("$: Literal caracter: %s \n", yytext );}
-{ER_LIT_CADE}		{printf("$: Literal cadena: %s \n", yytext );}
-{ER_LIT_COMENTARIO}	{printf("$: Literal comentario: %s \n", yytext );}
+{ER_PR_MAYOR}		{printf("$: Token: %s \n", yytext );
+					return TK_PR_MAYOR;}
+{ER_PR_MENOR}		{printf("$: Token: %s \n", yytext );
+					return TK_PR_MENOR}
+{ER_PR_MAYIGU}		{printf("$: Token: %s \n", yytext );
+					return TK_PR_MAYIGU;}
+{ER_PR_MENIGU}		{printf("$: Token: %s \n", yytext );
+					return TK_PR_MENIGU;}
+{ER_LIT_BOOL}		{printf("$: Boleano: %s \n", yytext);
+					return TK_ID_BOL;}
+{ER_ID_OTHER}		{printf("$: Id general: %s \n", yytext );
+					return TK_ID_OTHER;}
+{ER_ID_ARI}			{printf("$: Id ari: %s \n", yytext );
+					return TK_ID_ARI;}
+{ER_ID_BOOL}		{printf("$: Id bool: %s \n", yytext );
+					return TK_LIT_BOOL;}
+{ER_LIT_ENTERO}		{printf("$: Entero: %d\n", (int)atof( yytext ) );
+					return TK_LIT_ENTERO;}
+{ER_LIT_REAL}		{printf("$: Real: %f\n", atof( yytext ) );
+					return TK_LIT_REAL;}
+{ER_LIT_CARAC}		{printf("$: Literal caracter: %s \n", yytext );
+					return TK_LIT_CARAC;}
+{ER_LIT_CADE}		{printf("$: Literal cadena: %s \n", yytext );
+					return TK_LIT_CADE;}
+{ER_LIT_COMENTARIO}	{printf("$: Literal comentario: %s \n", yytext );
+					return TK_LIT_COMENTARIO;}
 
 {ER_DELIM}			{}
 {ER_CARAC_DESCO}	{printf("%%: Caracter desconocido: %s \n", yytext );}
