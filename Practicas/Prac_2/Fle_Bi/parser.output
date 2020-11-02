@@ -1,5 +1,4 @@
 Estado 90 conflictos: 2 desplazamiento/reducción
-Estado 137 conflictos: 1 desplazamiento/reducción
 Estado 138 conflictos: 2 desplazamiento/reducción, 6 reducción/reducción
 Estado 164 conflictos: 1 desplazamiento/reducción
 Estado 173 conflictos: 3 desplazamiento/reducción
@@ -10,12 +9,6 @@ Estado 197 conflictos: 6 desplazamiento/reducción
 Estado 198 conflictos: 6 desplazamiento/reducción
 Estado 199 conflictos: 6 desplazamiento/reducción
 Estado 200 conflictos: 6 desplazamiento/reducción
-Estado 201 conflictos: 6 desplazamiento/reducción
-Estado 202 conflictos: 1 desplazamiento/reducción
-Estado 203 conflictos: 1 desplazamiento/reducción
-Estado 204 conflictos: 1 desplazamiento/reducción
-Estado 205 conflictos: 1 desplazamiento/reducción
-Estado 206 conflictos: 1 desplazamiento/reducción
 Estado 207 conflictos: 6 reducción/reducción
 Estado 208 conflictos: 6 reducción/reducción
 
@@ -232,12 +225,12 @@ Terminales con las reglas donde aparecen
     TK_PR_PUNTO (302) 1 79 83
     TK_PR_SUBRANGO (303) 21 23
     TK_PR_DEFVAL (304) 41 42 108 109 110
-    TK_PR_BARRA (305) 57
-    TK_PR_ABRIRPAR (306) 60 77 104 105 111 112
-    TK_PR_CERRARPAR (307) 60 77 104 105 111 112
-    TK_PR_SUMA (308) 54
-    TK_PR_MULT (309) 56
-    TK_PR_RESTA (310) 55 64
+    TK_PR_ABRIRPAR (305) 60 77 104 105 111 112
+    TK_PR_CERRARPAR (306) 60 77 104 105 111 112
+    TK_PR_SUMA (307) 54
+    TK_PR_MULT (308) 56
+    TK_PR_RESTA (309) 55 64
+    TK_PR_BARRA (310) 57
     TK_PR_DIV (311) 59
     TK_PR_MOD (312) 58
     TK_PR_MAYOR (313) 71
@@ -1362,10 +1355,10 @@ Estado 89
    58      | exp_a . TK_PR_MOD exp_a
    59      | exp_a . TK_PR_DIV exp_a
 
-    TK_PR_BARRA  desplazar e ir al estado 148
-    TK_PR_SUMA   desplazar e ir al estado 149
-    TK_PR_MULT   desplazar e ir al estado 150
-    TK_PR_RESTA  desplazar e ir al estado 151
+    TK_PR_SUMA   desplazar e ir al estado 148
+    TK_PR_MULT   desplazar e ir al estado 149
+    TK_PR_RESTA  desplazar e ir al estado 150
+    TK_PR_BARRA  desplazar e ir al estado 151
     TK_PR_DIV    desplazar e ir al estado 152
     TK_PR_MOD    desplazar e ir al estado 153
 
@@ -1907,11 +1900,11 @@ Estado 134
    59      | exp_a . TK_PR_DIV exp_a
    60      | TK_PR_ABRIRPAR exp_a . TK_PR_CERRARPAR
 
-    TK_PR_BARRA      desplazar e ir al estado 148
     TK_PR_CERRARPAR  desplazar e ir al estado 189
-    TK_PR_SUMA       desplazar e ir al estado 149
-    TK_PR_MULT       desplazar e ir al estado 150
-    TK_PR_RESTA      desplazar e ir al estado 151
+    TK_PR_SUMA       desplazar e ir al estado 148
+    TK_PR_MULT       desplazar e ir al estado 149
+    TK_PR_RESTA      desplazar e ir al estado 150
+    TK_PR_BARRA      desplazar e ir al estado 151
     TK_PR_DIV        desplazar e ir al estado 152
     TK_PR_MOD        desplazar e ir al estado 153
 
@@ -1956,12 +1949,11 @@ Estado 137
    59      | exp_a . TK_PR_DIV exp_a
    64      | TK_PR_RESTA exp_a .
 
-    TK_PR_BARRA  desplazar e ir al estado 148
+    TK_PR_BARRA  desplazar e ir al estado 151
     TK_PR_DIV    desplazar e ir al estado 152
     TK_PR_MOD    desplazar e ir al estado 153
 
-    TK_PR_BARRA  [reduce usando la regla 64 (exp_a)]
-    $default     reduce usando la regla 64 (exp_a)
+    $default  reduce usando la regla 64 (exp_a)
 
 
 Estado 138
@@ -2191,7 +2183,7 @@ Estado 147
 
 Estado 148
 
-   57 exp_a: exp_a TK_PR_BARRA . exp_a
+   54 exp_a: exp_a TK_PR_SUMA . exp_a
 
     TK_PR_REAL      desplazar e ir al estado 106
     TK_PR_ABRIRPAR  desplazar e ir al estado 136
@@ -2205,7 +2197,7 @@ Estado 148
 
 Estado 149
 
-   54 exp_a: exp_a TK_PR_SUMA . exp_a
+   56 exp_a: exp_a TK_PR_MULT . exp_a
 
     TK_PR_REAL      desplazar e ir al estado 106
     TK_PR_ABRIRPAR  desplazar e ir al estado 136
@@ -2219,7 +2211,7 @@ Estado 149
 
 Estado 150
 
-   56 exp_a: exp_a TK_PR_MULT . exp_a
+   55 exp_a: exp_a TK_PR_RESTA . exp_a
 
     TK_PR_REAL      desplazar e ir al estado 106
     TK_PR_ABRIRPAR  desplazar e ir al estado 136
@@ -2233,7 +2225,7 @@ Estado 150
 
 Estado 151
 
-   55 exp_a: exp_a TK_PR_RESTA . exp_a
+   57 exp_a: exp_a TK_PR_BARRA . exp_a
 
     TK_PR_REAL      desplazar e ir al estado 106
     TK_PR_ABRIRPAR  desplazar e ir al estado 136
@@ -2786,11 +2778,11 @@ Estado 191
    59      | exp_a . TK_PR_DIV exp_a
    60      | TK_PR_ABRIRPAR exp_a . TK_PR_CERRARPAR
 
-    TK_PR_BARRA      desplazar e ir al estado 148
     TK_PR_CERRARPAR  desplazar e ir al estado 189
-    TK_PR_SUMA       desplazar e ir al estado 149
-    TK_PR_MULT       desplazar e ir al estado 150
-    TK_PR_RESTA      desplazar e ir al estado 151
+    TK_PR_SUMA       desplazar e ir al estado 148
+    TK_PR_MULT       desplazar e ir al estado 149
+    TK_PR_RESTA      desplazar e ir al estado 150
+    TK_PR_BARRA      desplazar e ir al estado 151
     TK_PR_DIV        desplazar e ir al estado 152
     TK_PR_MOD        desplazar e ir al estado 153
 
@@ -2975,32 +2967,6 @@ Estado 200
 Estado 201
 
    54 exp_a: exp_a . TK_PR_SUMA exp_a
-   55      | exp_a . TK_PR_RESTA exp_a
-   56      | exp_a . TK_PR_MULT exp_a
-   57      | exp_a . TK_PR_BARRA exp_a
-   57      | exp_a TK_PR_BARRA exp_a .
-   58      | exp_a . TK_PR_MOD exp_a
-   59      | exp_a . TK_PR_DIV exp_a
-
-    TK_PR_BARRA  desplazar e ir al estado 148
-    TK_PR_SUMA   desplazar e ir al estado 149
-    TK_PR_MULT   desplazar e ir al estado 150
-    TK_PR_RESTA  desplazar e ir al estado 151
-    TK_PR_DIV    desplazar e ir al estado 152
-    TK_PR_MOD    desplazar e ir al estado 153
-
-    TK_PR_BARRA  [reduce usando la regla 57 (exp_a)]
-    TK_PR_SUMA   [reduce usando la regla 57 (exp_a)]
-    TK_PR_MULT   [reduce usando la regla 57 (exp_a)]
-    TK_PR_RESTA  [reduce usando la regla 57 (exp_a)]
-    TK_PR_DIV    [reduce usando la regla 57 (exp_a)]
-    TK_PR_MOD    [reduce usando la regla 57 (exp_a)]
-    $default     reduce usando la regla 57 (exp_a)
-
-
-Estado 202
-
-   54 exp_a: exp_a . TK_PR_SUMA exp_a
    54      | exp_a TK_PR_SUMA exp_a .
    55      | exp_a . TK_PR_RESTA exp_a
    56      | exp_a . TK_PR_MULT exp_a
@@ -3008,17 +2974,16 @@ Estado 202
    58      | exp_a . TK_PR_MOD exp_a
    59      | exp_a . TK_PR_DIV exp_a
 
-    TK_PR_BARRA  desplazar e ir al estado 148
-    TK_PR_MULT   desplazar e ir al estado 150
-    TK_PR_RESTA  desplazar e ir al estado 151
+    TK_PR_MULT   desplazar e ir al estado 149
+    TK_PR_RESTA  desplazar e ir al estado 150
+    TK_PR_BARRA  desplazar e ir al estado 151
     TK_PR_DIV    desplazar e ir al estado 152
     TK_PR_MOD    desplazar e ir al estado 153
 
-    TK_PR_BARRA  [reduce usando la regla 54 (exp_a)]
-    $default     reduce usando la regla 54 (exp_a)
+    $default  reduce usando la regla 54 (exp_a)
 
 
-Estado 203
+Estado 202
 
    54 exp_a: exp_a . TK_PR_SUMA exp_a
    55      | exp_a . TK_PR_RESTA exp_a
@@ -3028,16 +2993,15 @@ Estado 203
    58      | exp_a . TK_PR_MOD exp_a
    59      | exp_a . TK_PR_DIV exp_a
 
-    TK_PR_BARRA  desplazar e ir al estado 148
-    TK_PR_RESTA  desplazar e ir al estado 151
+    TK_PR_RESTA  desplazar e ir al estado 150
+    TK_PR_BARRA  desplazar e ir al estado 151
     TK_PR_DIV    desplazar e ir al estado 152
     TK_PR_MOD    desplazar e ir al estado 153
 
-    TK_PR_BARRA  [reduce usando la regla 56 (exp_a)]
-    $default     reduce usando la regla 56 (exp_a)
+    $default  reduce usando la regla 56 (exp_a)
 
 
-Estado 204
+Estado 203
 
    54 exp_a: exp_a . TK_PR_SUMA exp_a
    55      | exp_a . TK_PR_RESTA exp_a
@@ -3047,12 +3011,27 @@ Estado 204
    58      | exp_a . TK_PR_MOD exp_a
    59      | exp_a . TK_PR_DIV exp_a
 
-    TK_PR_BARRA  desplazar e ir al estado 148
+    TK_PR_BARRA  desplazar e ir al estado 151
     TK_PR_DIV    desplazar e ir al estado 152
     TK_PR_MOD    desplazar e ir al estado 153
 
-    TK_PR_BARRA  [reduce usando la regla 55 (exp_a)]
-    $default     reduce usando la regla 55 (exp_a)
+    $default  reduce usando la regla 55 (exp_a)
+
+
+Estado 204
+
+   54 exp_a: exp_a . TK_PR_SUMA exp_a
+   55      | exp_a . TK_PR_RESTA exp_a
+   56      | exp_a . TK_PR_MULT exp_a
+   57      | exp_a . TK_PR_BARRA exp_a
+   57      | exp_a TK_PR_BARRA exp_a .
+   58      | exp_a . TK_PR_MOD exp_a
+   59      | exp_a . TK_PR_DIV exp_a
+
+    TK_PR_DIV  desplazar e ir al estado 152
+    TK_PR_MOD  desplazar e ir al estado 153
+
+    $default  reduce usando la regla 57 (exp_a)
 
 
 Estado 205
@@ -3065,11 +3044,9 @@ Estado 205
    59      | exp_a . TK_PR_DIV exp_a
    59      | exp_a TK_PR_DIV exp_a .
 
-    TK_PR_BARRA  desplazar e ir al estado 148
-    TK_PR_MOD    desplazar e ir al estado 153
+    TK_PR_MOD  desplazar e ir al estado 153
 
-    TK_PR_BARRA  [reduce usando la regla 59 (exp_a)]
-    $default     reduce usando la regla 59 (exp_a)
+    $default  reduce usando la regla 59 (exp_a)
 
 
 Estado 206
@@ -3082,10 +3059,7 @@ Estado 206
    58      | exp_a TK_PR_MOD exp_a .
    59      | exp_a . TK_PR_DIV exp_a
 
-    TK_PR_BARRA  desplazar e ir al estado 148
-
-    TK_PR_BARRA  [reduce usando la regla 58 (exp_a)]
-    $default     reduce usando la regla 58 (exp_a)
+    $default  reduce usando la regla 58 (exp_a)
 
 
 Estado 207
