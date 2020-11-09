@@ -3,8 +3,8 @@
 	/* Flaga para hacer minusculas y mayusculas indistinguibles*/
 	/*%option caseless -> se puede utilizar este en vez de poner -> ?i:*/
 %{
-/* Constantes manisfiestas */
-#include parse.tab.c
+/*Constantes Manifiestas*/
+#include "parser.tab.c"
 %}
 /*Exprasiones regulares*/
 
@@ -132,7 +132,7 @@ ER_CARAC_DESCO		.
 {ER_PR_FALGORI}		{printf("$: Palabra reservada 'FALGORITMO': %s \n", yytext );
 					return TK_PR_FALGORI;}
 {ER_PR_FCONST}		{printf("$: Palabra reservada 'FCONST': %s \n", yytext );
-					rerturn TK_PR_FCONST;}
+					return TK_PR_FCONST;}
 {ER_PR_FFUNCION}	{printf("$: Palabra reservada 'FFUNCION': %s \n", yytext );
 					return TK_PR_FFUNCION;}
 {ER_PR_FMIENTR}		{printf("$: Palabra reservada 'FMIENTRAS': %s \n", yytext );
@@ -142,7 +142,7 @@ ER_CARAC_DESCO		.
 {ER_PR_FSI}			{printf("$: Palabra reservada 'FSI': %s \n", yytext );
 					return TK_PR_SI;}
 {ER_PR_FTIPO}		{printf("$: Palabra reservada 'FTIPO': %s \n", yytext );
-					rerturn TK_PR_FTIPO;}
+					return TK_PR_FTIPO;}
 {ER_PR_FTUPLA}		{printf("$: Palabra reservada 'FTUPLA': %s \n", yytext );
 					return TK_PR_FTUPLA;}
 {ER_PR_FUNCION}		{printf("$: Palabra reservada 'FUNCION': %s \n", yytext );
@@ -198,17 +198,17 @@ ER_CARAC_DESCO		.
 {ER_PR_SUBRANGO}	{printf("$: Token: %s \n", yytext );
 					return TK_PR_SUBRANGO;}
 {ER_PR_DEFVAL}		{printf("$: Token: %s \n", yytext );
-					return TK_PR_DEFVAL}
+					return TK_PR_DEFVAL;}
 {ER_PR_IGUAL}		{printf("$: Token: %s \n", yytext );
-					return TK_PR_IGUAL}
+					return TK_PR_IGUAL;}
 {ER_PR_DIST}		{printf("$: Token: %s \n", yytext );
-					return TK_PR_DIST}
+					return TK_PR_DIST;}
 {ER_PR_BARRA}		{printf("$: Token: %s \n", yytext );
 					return TK_PR_BARRA;}
 {ER_PR_ABRIRPAR}	{printf("$: Token: %s \n", yytext );
 					return TK_PR_ABRIRPAR;}
 {ER_PR_CERRARPAR}	{printf("$: Token: %s \n", yytext );
-					return TK_PR_CERRARPAR}
+					return TK_PR_CERRARPAR;}
 {ER_PR_SUMA}		{printf("$: Token: %s \n", yytext );
 					return TK_PR_SUMA;}
 {ER_PR_MULT}		{printf("$: Token: %s \n", yytext );
@@ -222,7 +222,7 @@ ER_CARAC_DESCO		.
 {ER_PR_MAYOR}		{printf("$: Token: %s \n", yytext );
 					return TK_PR_MAYOR;}
 {ER_PR_MENOR}		{printf("$: Token: %s \n", yytext );
-					return TK_PR_MENOR}
+					return TK_PR_MENOR;}
 {ER_PR_MAYIGU}		{printf("$: Token: %s \n", yytext );
 					return TK_PR_MAYIGU;}
 {ER_PR_MENIGU}		{printf("$: Token: %s \n", yytext );
@@ -250,13 +250,13 @@ ER_CARAC_DESCO		.
 {ER_CARAC_DESCO}	{printf("%%: Caracter desconocido: %s \n", yytext );}
 
 %%
-
+/*
 int main( int argc, char **argv ){
 	printf("\nCRERADORES 04-09-2020\n");
 	printf("\t @Daniel del Barrio\n");
 	printf("\t @Jhonny F. Chicaiza\n");
 
-	++argv, --argc;  /* skip over pogram name */
+	++argv, --argc;  // skip over pogram name
 	if ( argc > 0 ){
 		printf("\n");
 		yyin = fopen( argv[0], "r" );
@@ -266,4 +266,4 @@ int main( int argc, char **argv ){
 		yyin = stdin;
 	}
 	yylex();
-}
+}*/

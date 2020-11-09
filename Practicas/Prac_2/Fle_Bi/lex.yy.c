@@ -638,11 +638,12 @@ char *yytext;
 	/*Scanner para el lenguaje descrito en la practica*/
 	/* Flaga para hacer minusculas y mayusculas indistinguibles*/
 	/*%option caseless -> se puede utilizar este en vez de poner -> ?i:*/
-/* Constantes manisfiestas */
-#line 643 "lex.yy.c"
+/*Constantes Manifiestas*/
+#include "parser.tab.c"
+#line 644 "lex.yy.c"
 /*Exprasiones regulares*/
 /*ER_ID				{ER_LETRA}({ER_LETRA}|{ER_CIFRA})* */
-#line 646 "lex.yy.c"
+#line 647 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -859,10 +860,10 @@ YY_DECL
 		}
 
 	{
-#line 101 "scanner.l"
+#line 102 "scanner.l"
 
 
-#line 866 "lex.yy.c"
+#line 867 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -921,383 +922,453 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 103 "scanner.l"
-{printf("$: Palabra reservada 'ACCION': %s \n", yytext );}
+#line 104 "scanner.l"
+{printf("$: Palabra reservada 'ACCION': %s \n", yytext ); 
+					return TK_PR_ACCION;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 104 "scanner.l"
-{printf("$: Palabra reservada 'ALGORITMO': %s \n", yytext );}
+#line 106 "scanner.l"
+{printf("$: Palabra reservada 'ALGORITMO': %s \n", yytext ); 
+					return TK_PR_ALGORIT;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 105 "scanner.l"
-{printf("$: Palabra reservada 'BOLEANO': %s \n", yytext );}
+#line 108 "scanner.l"
+{printf("$: Palabra reservada 'BOLEANO': %s \n", yytext ); 
+					return TK_PR_BOOL;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 106 "scanner.l"
-{printf("$: Palabra reservada 'CADENA': %s \n", yytext );}
+#line 110 "scanner.l"
+{printf("$: Palabra reservada 'CADENA': %s \n", yytext ); 
+					return TK_PR_CADENA;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 107 "scanner.l"
-{printf("$: Palabra reservada 'CHAR': %s \n", yytext );}
+#line 112 "scanner.l"
+{printf("$: Palabra reservada 'CHAR': %s \n", yytext ); 
+					return TK_PR_CHAR;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 108 "scanner.l"
-{printf("$: Palabra reservada 'CONST': %s \n", yytext );}
+#line 114 "scanner.l"
+{printf("$: Palabra reservada 'CONST': %s \n", yytext ); 
+					return TK_PR_CONST;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 109 "scanner.l"
-{printf("$: Palabra reservada 'CONTINUAR': %s \n", yytext );}
+#line 116 "scanner.l"
+{printf("$: Palabra reservada 'CONTINUAR': %s \n", yytext ); 
+					return TK_PR_CONTINUAR;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 110 "scanner.l"
-{printf("$: Palabra reservada 'DE': %s \n", yytext );}
+#line 118 "scanner.l"
+{printf("$: Palabra reservada 'DE': %s \n", yytext );
+					return TK_PR_DE;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 111 "scanner.l"
-{printf("$: Palabra reservada 'DEV': %s \n", yytext );}
+#line 120 "scanner.l"
+{printf("$: Palabra reservada 'DEV': %s \n", yytext );
+					return TK_PR_DEV;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 112 "scanner.l"
-{printf("$: Palabra reservada 'DIV': %s \n", yytext );}
+#line 122 "scanner.l"
+{printf("$: Palabra reservada 'DIV': %s \n", yytext );
+					return TK_PR_DIV;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 113 "scanner.l"
-{printf("$: Palabra reservada 'ENT': %s \n", yytext );}
+#line 124 "scanner.l"
+{printf("$: Palabra reservada 'ENT': %s \n", yytext );
+					return TK_PR_ENT;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 114 "scanner.l"
-{printf("$: Palabra reservada 'ENTERO': %s \n", yytext );}
+#line 126 "scanner.l"
+{printf("$: Palabra reservada 'ENTERO': %s \n", yytext );
+					return TK_PR_ENTERO;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 115 "scanner.l"
-{printf("$: Palabra reservada 'E/S': %s \n", yytext );}
+#line 128 "scanner.l"
+{printf("$: Palabra reservada 'E/S': %s \n", yytext );
+					return TK_PR_INOUT;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 116 "scanner.l"
-{printf("$: Palabra reservada 'FACCION': %s \n", yytext );}
+#line 130 "scanner.l"
+{printf("$: Palabra reservada 'FACCION': %s \n", yytext );
+					return TK_PR_FACCIO;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 117 "scanner.l"
-{printf("$: Palabra reservada 'FALGORITMO': %s \n", yytext );}
+#line 132 "scanner.l"
+{printf("$: Palabra reservada 'FALGORITMO': %s \n", yytext );
+					return TK_PR_FALGORI;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 118 "scanner.l"
-{printf("$: Palabra reservada 'FCONST': %s \n", yytext );}
+#line 134 "scanner.l"
+{printf("$: Palabra reservada 'FCONST': %s \n", yytext );
+					return TK_PR_FCONST;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 119 "scanner.l"
-{printf("$: Palabra reservada 'FFUNCION': %s \n", yytext );}
+#line 136 "scanner.l"
+{printf("$: Palabra reservada 'FFUNCION': %s \n", yytext );
+					return TK_PR_FFUNCION;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 120 "scanner.l"
-{printf("$: Palabra reservada 'FMIENTRAS': %s \n", yytext );}
+#line 138 "scanner.l"
+{printf("$: Palabra reservada 'FMIENTRAS': %s \n", yytext );
+					return TK_PR_FMIENTR;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 121 "scanner.l"
-{printf("$: Palabra reservada 'FPARA': %s \n", yytext );}
+#line 140 "scanner.l"
+{printf("$: Palabra reservada 'FPARA': %s \n", yytext );
+					return TK_PR_FPARA;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 122 "scanner.l"
-{printf("$: Palabra reservada 'FSI': %s \n", yytext );}
+#line 142 "scanner.l"
+{printf("$: Palabra reservada 'FSI': %s \n", yytext );
+					return TK_PR_SI;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 123 "scanner.l"
-{printf("$: Palabra reservada 'FTIPO': %s \n", yytext );}
+#line 144 "scanner.l"
+{printf("$: Palabra reservada 'FTIPO': %s \n", yytext );
+					return TK_PR_FTIPO;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 124 "scanner.l"
-{printf("$: Palabra reservada 'FTUPLA': %s \n", yytext );}
+#line 146 "scanner.l"
+{printf("$: Palabra reservada 'FTUPLA': %s \n", yytext );
+					return TK_PR_FTUPLA;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 125 "scanner.l"
-{printf("$: Palabra reservada 'FUNCION': %s \n", yytext );}
+#line 148 "scanner.l"
+{printf("$: Palabra reservada 'FUNCION': %s \n", yytext );
+					return TK_PR_FUNCION;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 126 "scanner.l"
-{printf("$: Palabra reservada 'FVAR': %s \n", yytext );}
+#line 150 "scanner.l"
+{printf("$: Palabra reservada 'FVAR': %s \n", yytext );
+					return TK_PR_FVAR;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 127 "scanner.l"
-{printf("$: Palabra reservada 'HACER': %s \n", yytext );}
+#line 152 "scanner.l"
+{printf("$: Palabra reservada 'HACER': %s \n", yytext );
+					return TK_PR_HACER;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 128 "scanner.l"
-{printf("$: Palabra reservada 'HASTA': %s \n", yytext );}
+#line 154 "scanner.l"
+{printf("$: Palabra reservada 'HASTA': %s \n", yytext );
+					return TK_PR_HASTA;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 129 "scanner.l"
-{printf("$: Palabra reservada 'MIENTRAS': %s \n", yytext );}
+#line 156 "scanner.l"
+{printf("$: Palabra reservada 'MIENTRAS': %s \n", yytext );
+					return TK_PR_MIENTRAS;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 130 "scanner.l"
-{printf("$: Palabra reservada 'MOD': %s \n", yytext );}
+#line 158 "scanner.l"
+{printf("$: Palabra reservada 'MOD': %s \n", yytext );
+					return TK_PR_MOD;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 131 "scanner.l"
-{printf("$: Palabra reservada 'NO': %s \n", yytext );}
+#line 160 "scanner.l"
+{printf("$: Palabra reservada 'NO': %s \n", yytext );
+					return TK_PR_NO;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 132 "scanner.l"
-{printf("$: Palabra reservada 'O': %s \n", yytext );}
+#line 162 "scanner.l"
+{printf("$: Palabra reservada 'O': %s \n", yytext );
+					return TK_PR_O;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 133 "scanner.l"
-{printf("$: Palabra reservada 'PARA': %s \n", yytext );}
+#line 164 "scanner.l"
+{printf("$: Palabra reservada 'PARA': %s \n", yytext );
+					return TK_PR_PARA;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 134 "scanner.l"
-{printf("$: Palabra reservada 'REAL': %s \n", yytext );}
+#line 166 "scanner.l"
+{printf("$: Palabra reservada 'REAL': %s \n", yytext );
+					return TK_PR_REAL;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 135 "scanner.l"
-{printf("$: Palabra reservada 'REF': %s \n", yytext );}
+#line 168 "scanner.l"
+{printf("$: Palabra reservada 'REF': %s \n", yytext );
+					return TK_PR_REF;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 136 "scanner.l"
-{printf("$: Palabra reservada 'SAL': %s \n", yytext );}
+#line 170 "scanner.l"
+{printf("$: Palabra reservada 'SAL': %s \n", yytext );
+					return TK_PR_SAL;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 137 "scanner.l"
-{printf("$: Palabra reservada 'SI': %s \n", yytext );}
+#line 172 "scanner.l"
+{printf("$: Palabra reservada 'SI': %s \n", yytext );
+					return TK_PR_SI;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 138 "scanner.l"
-{printf("$: Palabra reservada 'TABLA': %s \n", yytext );}
+#line 174 "scanner.l"
+{printf("$: Palabra reservada 'TABLA': %s \n", yytext );
+					return TK_PR_TABLA;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 139 "scanner.l"
-{printf("$: Palabra reservada 'TIPO': %s \n", yytext );}
+#line 176 "scanner.l"
+{printf("$: Palabra reservada 'TIPO': %s \n", yytext );
+					return TK_PR_TIPO;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 140 "scanner.l"
-{printf("$: Palabra reservada 'TUPLA': %s \n", yytext );}
+#line 178 "scanner.l"
+{printf("$: Palabra reservada 'TUPLA': %s \n", yytext );
+					return TK_PR_TUPLA;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 141 "scanner.l"
-{printf("$: Palabra reservada 'VAR': %s \n", yytext );}
+#line 180 "scanner.l"
+{printf("$: Palabra reservada 'VAR': %s \n", yytext );
+					return TK_PR_VAR;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 142 "scanner.l"
-{printf("$: Palabra reservada 'Y': %s \n", yytext );}
+#line 182 "scanner.l"
+{printf("$: Palabra reservada 'Y': %s \n", yytext );
+					return TK_PR_Y;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 143 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 184 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_ASIG;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 144 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 186 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_SECUEN;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 145 "scanner.l"
-{printf("$: Token else: %s \n", yytext );}
+#line 188 "scanner.l"
+{printf("$: Token else: %s \n", yytext );
+					return TK_PR_ELSE;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 146 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 190 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_INIARRA;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 147 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 192 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_ENTONCES;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 148 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 194 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_COMA;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 149 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 196 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_PUNTO;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 150 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 198 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_SUBRANGO;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 151 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 200 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_DEFVAL;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 152 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 202 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_IGUAL;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 153 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 204 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_DIST;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 154 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 206 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_BARRA;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 155 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 208 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_ABRIRPAR;}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 156 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 210 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_CERRARPAR;}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 157 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 212 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_SUMA;}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 158 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 214 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_MULT;}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 159 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 216 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_RESTA;}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 160 "scanner.l"
+#line 219 "scanner.l"
 {printf("$: Token: %s \n", yytext );}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 161 "scanner.l"
+#line 220 "scanner.l"
 {printf("$: Token: %s \n", yytext );}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 162 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 222 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_MAYOR;}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 163 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 224 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_MENOR;}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 164 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 226 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_MAYIGU;}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 165 "scanner.l"
-{printf("$: Token: %s \n", yytext );}
+#line 228 "scanner.l"
+{printf("$: Token: %s \n", yytext );
+					return TK_PR_MENIGU;}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 167 "scanner.l"
-{printf("$: Boleano: %s \n", yytext);}
+#line 230 "scanner.l"
+{printf("$: Boleano: %s \n", yytext);
+					return TK_ID_BOL;}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 168 "scanner.l"
-{printf("$: Id general: %s \n", yytext );}
+#line 232 "scanner.l"
+{printf("$: Id general: %s \n", yytext );
+					return TK_ID_OTHER;}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 169 "scanner.l"
-{printf("$: Id ari: %s \n", yytext );}
+#line 234 "scanner.l"
+{printf("$: Id ari: %s \n", yytext );
+					return TK_ID_ARI;}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 170 "scanner.l"
-{printf("$: Id bool: %s \n", yytext );}
+#line 236 "scanner.l"
+{printf("$: Id bool: %s \n", yytext );
+					return TK_LIT_BOOL;}
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 171 "scanner.l"
-{printf("$: Entero: %d\n", (int)atof( yytext ) );}
+#line 238 "scanner.l"
+{printf("$: Entero: %d\n", (int)atof( yytext ) );
+					return TK_LIT_ENTERO;}
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 172 "scanner.l"
-{printf("$: Real: %f\n", atof( yytext ) );}
+#line 240 "scanner.l"
+{printf("$: Real: %f\n", atof( yytext ) );
+					return TK_LIT_REAL;}
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 173 "scanner.l"
-{printf("$: Literal caracter: %s \n", yytext );}
+#line 242 "scanner.l"
+{printf("$: Literal caracter: %s \n", yytext );
+					return TK_LIT_CARAC;}
 	YY_BREAK
 case 71:
 /* rule 71 can match eol */
 YY_RULE_SETUP
-#line 174 "scanner.l"
-{printf("$: Literal cadena: %s \n", yytext );}
+#line 244 "scanner.l"
+{printf("$: Literal cadena: %s \n", yytext );
+					return TK_LIT_CADE;}
 	YY_BREAK
 case 72:
 /* rule 72 can match eol */
 YY_RULE_SETUP
-#line 175 "scanner.l"
-{printf("$: Literal comentario: %s \n", yytext );}
+#line 246 "scanner.l"
+{printf("$: Literal comentario: %s \n", yytext );
+					return TK_LIT_COMENTARIO;}
 	YY_BREAK
 case 73:
 /* rule 73 can match eol */
 YY_RULE_SETUP
-#line 177 "scanner.l"
+#line 249 "scanner.l"
 {}
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 178 "scanner.l"
+#line 250 "scanner.l"
 {printf("%%: Caracter desconocido: %s \n", yytext );}
 	YY_BREAK
 case 75:
 YY_RULE_SETUP
-#line 180 "scanner.l"
+#line 252 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 1301 "lex.yy.c"
+#line 1372 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2302,15 +2373,15 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 180 "scanner.l"
+#line 252 "scanner.l"
 
-
+/*
 int main( int argc, char **argv ){
 	printf("\nCRERADORES 04-09-2020\n");
 	printf("\t @Daniel del Barrio\n");
 	printf("\t @Jhonny F. Chicaiza\n");
 
-	++argv, --argc;  /* skip over pogram name */
+	++argv, --argc;  // skip over pogram name
 	if ( argc > 0 ){
 		printf("\n");
 		yyin = fopen( argv[0], "r" );
@@ -2320,4 +2391,4 @@ int main( int argc, char **argv ){
 		yyin = stdin;
 	}
 	yylex();
-}
+}*/

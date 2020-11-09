@@ -8,10 +8,10 @@ dof: scanner.l
 	clear
 	flex scanner.l
 
-compf: lex.yy.c
+compf: dof lex.yy.c
 	gcc -c lex.yy.c
 
-compb: parser.tab.c
+compb: dof dob parser.tab.c lex.yy.o
 	gcc parser.tab.c lex.yy.o -lfl -lm
 
 del: parser.output
