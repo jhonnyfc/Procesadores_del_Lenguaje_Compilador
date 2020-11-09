@@ -639,7 +639,7 @@ char *yytext;
 	/* Flaga para hacer minusculas y mayusculas indistinguibles*/
 	/*%option caseless -> se puede utilizar este en vez de poner -> ?i:*/
 /*Constantes Manifiestas*/
-#include "parser.tab.c"
+#include "parser.tab.h"
 #line 644 "lex.yy.c"
 /*Exprasiones regulares*/
 /*ER_ID				{ER_LETRA}({ER_LETRA}|{ER_CIFRA})* */

@@ -23,3 +23,11 @@ del: parser.output
 	rm parser.tab.h
 	rm a.out
 
+play1: a.out
+	./a.out code
+
+play2:
+	./a.out code2
+
+play3:
+	./a.out code3

@@ -4,7 +4,7 @@
 	/*%option caseless -> se puede utilizar este en vez de poner -> ?i:*/
 %{
 /*Constantes Manifiestas*/
-#include "parser.tab.c"
+#include "parser.tab.h"
 %}
 /*Exprasiones regulares*/
 

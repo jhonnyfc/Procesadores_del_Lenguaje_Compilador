@@ -2,9 +2,9 @@
 %{
 	#include <stdio.h>
 	#include <math.h>
+    extern FILE *yyin;
 	int yylex (void);
 	void yyerror (char const *);
-	#define YYSTYPE double
 %}
 
 %token TK_PR_CONTINUAR		// CONTINUAR
@@ -95,6 +95,14 @@
 %token TK_LIT_CARAC			// Caracter
 %token TK_LIT_CADE			// Cadena
 %token TK_LIT_COMENTARIO	// Comentario
+
+%union {
+    double          num_real;
+    long int        num_entero;
+    char            *string;
+    char            caracter;
+    int             boolean;
+};
 
 %% /* Grammar rules and actions follow.  */
 
@@ -261,6 +269,18 @@ lista_id:
     }
     | TK_ID_OTHER{
         printf("$~ Parser: Estructura de lista_id detectada 2.\n");
+    }
+    | TK_ID_ARI TK_PR_COMA lista_id{
+        printf("$~ Parser: Estructura de lista_id detectada 3.\n");
+    }
+    | TK_ID_ARI {
+        printf("$~ Parser: Estructura de lista_id detectada 4.\n");
+    }
+    | TK_ID_BOL TK_PR_COMA lista_id{
+        printf("$~ Parser: Estructura de lista_id detectada 5.\n");
+    }
+    | TK_ID_BOL {
+        printf("$~ Parser: Estructura de lista_id detectada 6.\n");
     }
 ;
 decl_ent_sal:
@@ -540,27 +560,22 @@ void yyerror (char const *s){
    and tabs, and returns 0 for end-of-input.  */
 
 #include <ctype.h>
-int yylex (void){
-	int c;
 
-	/* Skip white space.  */
-	while ((c = getchar ()) == ' ' || c == '\t')
-		continue;
-	
-	/* Process numbers.  */
-	/*if (c == '.' || isdigit (c)){
-		ungetc (c, stdin);
-		scanf ("%lf", &yylval);
-		return NUM;
-	}*/
+int main (int argc, char **argv){
+    ++argv, --argc;
 
-	/* Return end-of-input.  */
-	if (c == EOF)
-		return 0;
-	/* Return a single char.  */
-	return c;
-}
+    printf("\nCRERADORES 04-09-2020\n");
+	printf("\t @Daniel del Barrio\n");
+	printf("\t @Jhonny F. Chicaiza\n");
 
-int main (void){
+	if ( argc > 0 ){
+		printf("\n");
+		yyin = fopen( argv[0], "r" );
+	}else{
+		printf("\nInserte por teclado para comprobar\n");
+		printf("Ctr + d para salir\n\n");
+		yyin = stdin;
+	}
+
 	return yyparse ();
 }

@@ -1,0 +1,14 @@
+algoritmo o_intercambio;
+    ent a_a, a_b: entero;
+    sal a_a, a_b: entero;
+{Prec: a= A AND b = B}
+    var
+        a_aux: entero;
+        o_pe: string;
+    fvar
+    a_aux:= a_a;
+    a_a:= a_b;
+    a_b:= a_aux;
+    o_pe:="hola";
+{Post: b=A AND a = B}
+falgoritmo.
