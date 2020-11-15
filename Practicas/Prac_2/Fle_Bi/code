@@ -4,11 +4,9 @@ algoritmo o_intercambio;
 {Prec: a= A AND b = B}
     var
         a_aux: entero;
-        o_pe: string;
-    fvar
+    fvar;
     a_aux:= a_a;
     a_a:= a_b;
-    a_b:= a_aux;
-    o_pe:="hola";
+    a_b:= a_aux
 {Post: b=A AND a = B}
-falgoritmo.
+falgoritmo .

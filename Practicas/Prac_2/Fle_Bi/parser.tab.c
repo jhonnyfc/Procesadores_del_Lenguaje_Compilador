@@ -1614,7 +1614,7 @@ yyreduce:
   case 2:
 #line 110 "parser.y"
                                                                                                  {
-		printf("$~ Parser: Estructura de algoritmo detectada.\n");
+		printf("#_ Parser: Estructura de algoritmo detectada.\n");
 	}
 #line 1620 "parser.tab.c"
     break;
@@ -1622,7 +1622,7 @@ yyreduce:
   case 3:
 #line 116 "parser.y"
                                                          {
-        printf("$~ Parser: Estructura de cabecera_alg detectada.\n");
+        printf("#_ Parser: Estructura de cabecera_alg detectada.\n");
     }
 #line 1628 "parser.tab.c"
     break;
@@ -1630,7 +1630,7 @@ yyreduce:
   case 4:
 #line 121 "parser.y"
                             {
-         printf("$~ Parser: Estructura de bloque_alg detectada.\n");
+         printf("#_ Parser: Estructura de bloque_alg detectada.\n");
     }
 #line 1636 "parser.tab.c"
     break;
@@ -1638,7 +1638,7 @@ yyreduce:
   case 5:
 #line 126 "parser.y"
                                   {
-        printf("$~ Parser: Estructura de decl_globales detectada 1.\n");
+        printf("#_ Parser: Estructura de decl_globales detectada 1.\n");
     }
 #line 1644 "parser.tab.c"
     break;
@@ -1646,7 +1646,7 @@ yyreduce:
   case 6:
 #line 129 "parser.y"
                                    {
-        printf("$~ Parser: Estructura de decl_globales detectada 2.\n");
+        printf("#_ Parser: Estructura de decl_globales detectada 2.\n");
     }
 #line 1652 "parser.tab.c"
     break;
@@ -1660,7 +1660,7 @@ yyreduce:
   case 8:
 #line 135 "parser.y"
                      {
-        printf("$~ Parser: Estructura de decl_a_f detectada 1.\n");
+        printf("#_ Parser: Estructura de decl_a_f detectada 1.\n");
     }
 #line 1666 "parser.tab.c"
     break;
@@ -1668,7 +1668,7 @@ yyreduce:
   case 9:
 #line 138 "parser.y"
                         {
-        printf("$~ Parser: Estructura de decl_a_f detectada 2.\n");
+        printf("#_ Parser: Estructura de decl_a_f detectada 2.\n");
     }
 #line 1674 "parser.tab.c"
     break;
@@ -1682,7 +1682,7 @@ yyreduce:
   case 11:
 #line 144 "parser.y"
                                {
-        printf("$~ Parser: Estructura de bloque detectada.\n");
+        printf("#_ Parser: Estructura de bloque detectada.\n");
     }
 #line 1688 "parser.tab.c"
     break;
@@ -1690,7 +1690,7 @@ yyreduce:
   case 12:
 #line 149 "parser.y"
                                   {
-        printf("$~ Parser: Estructura de declaraciones detectada 1.\n");
+        printf("#_ Parser: Estructura de declaraciones detectada 1.\n");
     }
 #line 1696 "parser.tab.c"
     break;
@@ -1698,7 +1698,7 @@ yyreduce:
   case 13:
 #line 152 "parser.y"
                                    {
-        printf("$~ Parser: Estructura de declaraciones detectada 2.\n");
+        printf("#_ Parser: Estructura de declaraciones detectada 2.\n");
     }
 #line 1704 "parser.tab.c"
     break;
@@ -1706,7 +1706,7 @@ yyreduce:
   case 14:
 #line 155 "parser.y"
                                    {
-        printf("$~ Parser: Estructura de declaraciones detectada 3.\n");
+        printf("#_ Parser: Estructura de declaraciones detectada 3.\n");
     }
 #line 1712 "parser.tab.c"
     break;
@@ -1720,7 +1720,7 @@ yyreduce:
   case 16:
 #line 164 "parser.y"
                                                         {
-		printf("$~ Parser: Estructura de declaracion_tipo encontrada.\n");
+		printf("#_ Parser: Estructura de declaracion_tipo encontrada.\n");
 	}
 #line 1726 "parser.tab.c"
     break;
@@ -1728,7 +1728,7 @@ yyreduce:
   case 17:
 #line 170 "parser.y"
                                                          {
-		printf("$~ Parser: Estructura de declaracion_cte encontrada.\n");
+		printf("#_ Parser: Estructura de declaracion_cte encontrada.\n");
 	}
 #line 1734 "parser.tab.c"
     break;
@@ -1736,7 +1736,7 @@ yyreduce:
   case 18:
 #line 176 "parser.y"
                                                      {
-		printf("$~ Parser: Estructura de declaracion_var encontrada.\n");
+		printf("#_ Parser: Estructura de declaracion_var encontrada.\n");
 	}
 #line 1742 "parser.tab.c"
     break;
@@ -1744,7 +1744,7 @@ yyreduce:
   case 19:
 #line 182 "parser.y"
                                                                  {
-		printf("$~ Parser: Estructura lista_d_tipo encontrada 1.\n");
+		printf("#_ Parser: Estructura lista_d_tipo encontrada 1.\n");
 	}
 #line 1750 "parser.tab.c"
     break;
@@ -1758,7 +1758,7 @@ yyreduce:
   case 21:
 #line 189 "parser.y"
                                               {
-		printf("$~ Parser: Estructura d_tipo encontrada 1.\n");
+		printf("#_ Parser: Estructura d_tipo encontrada 1.\n");
 	}
 #line 1764 "parser.tab.c"
     break;
@@ -1766,7 +1766,7 @@ yyreduce:
   case 22:
 #line 192 "parser.y"
                                                                                                         {
-		printf("$~ Parser: Estructura d_tipo encontrada 2.\n");
+		printf("#_ Parser: Estructura d_tipo encontrada 2.\n");
 	}
 #line 1772 "parser.tab.c"
     break;
@@ -1774,7 +1774,7 @@ yyreduce:
   case 23:
 #line 195 "parser.y"
                       {
-		printf("$~ Parser: Estructura d_tipo encontrada 3.\n");
+		printf("#_ Parser: Estructura d_tipo encontrada 3.\n");
 	}
 #line 1780 "parser.tab.c"
     break;
@@ -1782,7 +1782,7 @@ yyreduce:
   case 24:
 #line 198 "parser.y"
                                                  {
-		printf("$~ Parser: Estructura d_tipo encontrada 4.\n");
+		printf("#_ Parser: Estructura d_tipo encontrada 4.\n");
 	}
 #line 1788 "parser.tab.c"
     break;
@@ -1790,7 +1790,7 @@ yyreduce:
   case 25:
 #line 201 "parser.y"
                            {
-		printf("$~ Parser: Estructura d_tipo encontrada 5.\n");
+		printf("#_ Parser: Estructura d_tipo encontrada 5.\n");
 	}
 #line 1796 "parser.tab.c"
     break;
@@ -1798,7 +1798,7 @@ yyreduce:
   case 26:
 #line 204 "parser.y"
                        {
-		printf("$~ Parser: Estructura d_tipo econtrada int 6.\n");
+		printf("#_ Parser: Estructura d_tipo econtrada int 6.\n");
 	}
 #line 1804 "parser.tab.c"
     break;
@@ -1806,7 +1806,7 @@ yyreduce:
   case 27:
 #line 207 "parser.y"
                      {
-		printf("$~ Parser: Estructura d_tipo econtrada bool 7.\n");
+		printf("#_ Parser: Estructura d_tipo econtrada bool 7.\n");
 	}
 #line 1812 "parser.tab.c"
     break;
@@ -1814,7 +1814,7 @@ yyreduce:
   case 28:
 #line 210 "parser.y"
                      {
-		printf("$~ Parser: Estructura d_tipo econtrada char 8.\n");
+		printf("#_ Parser: Estructura d_tipo econtrada char 8.\n");
 	}
 #line 1820 "parser.tab.c"
     break;
@@ -1822,7 +1822,7 @@ yyreduce:
   case 29:
 #line 213 "parser.y"
                      {
-		printf("$~ Parser: Estructura d_tipo econtrada real 9.\n");
+		printf("#_ Parser: Estructura d_tipo econtrada real 9.\n");
 	}
 #line 1828 "parser.tab.c"
     break;
@@ -1830,7 +1830,7 @@ yyreduce:
   case 30:
 #line 216 "parser.y"
                        {
-		printf("$~ Parser: Estructura d_tipo econtrada cadena 10.\n");
+		printf("#_ Parser: Estructura d_tipo econtrada cadena 10.\n");
 	}
 #line 1836 "parser.tab.c"
     break;
@@ -1838,7 +1838,7 @@ yyreduce:
   case 31:
 #line 222 "parser.y"
                   {
-		printf("$~ Parser: Estructura expreasion_t econtrada 1.\n");
+		printf("#_ Parser: Estructura expreasion_t econtrada 1.\n");
 	}
 #line 1844 "parser.tab.c"
     break;
@@ -1846,7 +1846,7 @@ yyreduce:
   case 32:
 #line 225 "parser.y"
                        {
-		printf("$~ Parser: Estructura expreasion_t econtrada 2.\n");
+		printf("#_ Parser: Estructura expreasion_t econtrada 2.\n");
 	}
 #line 1852 "parser.tab.c"
     break;
@@ -1854,7 +1854,7 @@ yyreduce:
   case 33:
 #line 231 "parser.y"
                                                                  {
-		printf("$~ Parser: Estructura lista_campos econtrada.\n");
+		printf("#_ Parser: Estructura lista_campos econtrada.\n");
 	}
 #line 1860 "parser.tab.c"
     break;
@@ -1868,7 +1868,7 @@ yyreduce:
   case 35:
 #line 238 "parser.y"
                                                                      {
-		printf("$~ Parser: Estructura lista_d_cte econtrada 1.\n");
+		printf("#_ Parser: Estructura lista_d_cte econtrada 1.\n");
 	}
 #line 1874 "parser.tab.c"
     break;
@@ -1876,7 +1876,7 @@ yyreduce:
   case 36:
 #line 241 "parser.y"
                                                                        {
-		printf("$~ Parser: Estructura lista_d_cte econtrada 2.\n");
+		printf("#_ Parser: Estructura lista_d_cte econtrada 2.\n");
 	}
 #line 1882 "parser.tab.c"
     break;
@@ -1884,7 +1884,7 @@ yyreduce:
   case 37:
 #line 244 "parser.y"
                                                                         {
-		printf("$~ Parser: Estructura lista_d_cte econtrada 3.\n");
+		printf("#_ Parser: Estructura lista_d_cte econtrada 3.\n");
 	}
 #line 1890 "parser.tab.c"
     break;
@@ -1892,7 +1892,7 @@ yyreduce:
   case 38:
 #line 247 "parser.y"
                                                                              {
-		printf("$~ Parser: Estructura lista_d_cte econtrada 4.\n");
+		printf("#_ Parser: Estructura lista_d_cte econtrada 4.\n");
 	}
 #line 1898 "parser.tab.c"
     break;
@@ -1900,7 +1900,7 @@ yyreduce:
   case 39:
 #line 250 "parser.y"
                                                                          {
-		printf("$~ Parser: Estructura lista_d_cte econtrada 5.\n");
+		printf("#_ Parser: Estructura lista_d_cte econtrada 5.\n");
 	}
 #line 1906 "parser.tab.c"
     break;
@@ -1908,7 +1908,7 @@ yyreduce:
   case 40:
 #line 253 "parser.y"
                                                                        {
-		printf("$~ Parser: Estructura lista_d_cte econtrada 6.\n");
+		printf("#_ Parser: Estructura lista_d_cte econtrada 6.\n");
 	}
 #line 1914 "parser.tab.c"
     break;
@@ -1922,7 +1922,7 @@ yyreduce:
   case 42:
 #line 261 "parser.y"
                                                          {
-        printf("$~ Parser: Estructura de lista_d_var detectada 2.\n");
+        printf("#_ Parser: Estructura de lista_d_var detectada 2.\n");
     }
 #line 1928 "parser.tab.c"
     break;
@@ -1936,7 +1936,7 @@ yyreduce:
   case 44:
 #line 267 "parser.y"
                                    {
-        printf("$~ Parser: Estructura de lista_id detectada 1.\n");
+        printf("#_ Parser: Estructura de lista_id detectada 1.\n");
     }
 #line 1942 "parser.tab.c"
     break;
@@ -1944,7 +1944,7 @@ yyreduce:
   case 45:
 #line 270 "parser.y"
                  {
-        printf("$~ Parser: Estructura de lista_id detectada 2.\n");
+        printf("#_ Parser: Estructura de lista_id detectada 2.\n");
     }
 #line 1950 "parser.tab.c"
     break;
@@ -1952,7 +1952,7 @@ yyreduce:
   case 46:
 #line 273 "parser.y"
                                    {
-        printf("$~ Parser: Estructura de lista_id detectada 3.\n");
+        printf("#_ Parser: Estructura de lista_id detectada 3.\n");
     }
 #line 1958 "parser.tab.c"
     break;
@@ -1960,7 +1960,7 @@ yyreduce:
   case 47:
 #line 276 "parser.y"
                 {
-        printf("$~ Parser: Estructura de lista_id detectada 4.\n");
+        printf("#_ Parser: Estructura de lista_id detectada 4.\n");
     }
 #line 1966 "parser.tab.c"
     break;
@@ -1968,7 +1968,7 @@ yyreduce:
   case 48:
 #line 279 "parser.y"
                                    {
-        printf("$~ Parser: Estructura de lista_id detectada 5.\n");
+        printf("#_ Parser: Estructura de lista_id detectada 5.\n");
     }
 #line 1974 "parser.tab.c"
     break;
@@ -1976,7 +1976,7 @@ yyreduce:
   case 49:
 #line 282 "parser.y"
                 {
-        printf("$~ Parser: Estructura de lista_id detectada 6.\n");
+        printf("#_ Parser: Estructura de lista_id detectada 6.\n");
     }
 #line 1982 "parser.tab.c"
     break;
@@ -1984,7 +1984,7 @@ yyreduce:
   case 50:
 #line 287 "parser.y"
             {
-        printf("$~ Parser: Estructura de decl_ent_sal detectada 1.\n");
+        printf("#_ Parser: Estructura de decl_ent_sal detectada 1.\n");
     }
 #line 1990 "parser.tab.c"
     break;
@@ -1992,7 +1992,7 @@ yyreduce:
   case 51:
 #line 290 "parser.y"
                        {
-        printf("$~ Parser: Estructura de decl_ent_sal detectada 2.\n");
+        printf("#_ Parser: Estructura de decl_ent_sal detectada 2.\n");
     }
 #line 1998 "parser.tab.c"
     break;
@@ -2000,7 +2000,7 @@ yyreduce:
   case 52:
 #line 293 "parser.y"
               {
-        printf("$~ Parser: Estructura de decl_ent_sal detectada 3.\n");
+        printf("#_ Parser: Estructura de decl_ent_sal detectada 3.\n");
     }
 #line 2006 "parser.tab.c"
     break;
@@ -2008,7 +2008,7 @@ yyreduce:
   case 53:
 #line 298 "parser.y"
                          {
-        printf("$~ Parser: Estructura de decl_ent detectada.\n");
+        printf("#_ Parser: Estructura de decl_ent detectada.\n");
     }
 #line 2014 "parser.tab.c"
     break;
@@ -2016,7 +2016,7 @@ yyreduce:
   case 54:
 #line 303 "parser.y"
                          {
-        printf("$~ Parser: Estructura de decl_sal detectada.\n");
+        printf("#_ Parser: Estructura de decl_sal detectada.\n");
     }
 #line 2022 "parser.tab.c"
     break;
@@ -2024,7 +2024,7 @@ yyreduce:
   case 55:
 #line 308 "parser.y"
           {
-        printf("$~ Parser: Estructura de expresion detectada 1.\n");
+        printf("#_ Parser: Estructura de expresion detectada 1.\n");
     }
 #line 2030 "parser.tab.c"
     break;
@@ -2032,7 +2032,7 @@ yyreduce:
   case 56:
 #line 311 "parser.y"
             {
-        printf("$~ Parser: Estructura de expresion detectada 2.\n");
+        printf("#_ Parser: Estructura de expresion detectada 2.\n");
     }
 #line 2038 "parser.tab.c"
     break;
@@ -2040,7 +2040,7 @@ yyreduce:
   case 57:
 #line 314 "parser.y"
                  {
-        printf("$~ Parser: Estructura de expresion detectada 3.\n");
+        printf("#_ Parser: Estructura de expresion detectada 3.\n");
     }
 #line 2046 "parser.tab.c"
     break;
@@ -2048,7 +2048,7 @@ yyreduce:
   case 58:
 #line 319 "parser.y"
                           {
-        printf("$~ Parser: Estructura de exp_a detectada 1.\n");
+        printf("#_ Parser: Estructura de exp_a detectada 1.\n");
     }
 #line 2054 "parser.tab.c"
     break;
@@ -2056,7 +2056,7 @@ yyreduce:
   case 59:
 #line 322 "parser.y"
                              {
-        printf("$~ Parser: Estructura de exp_a detectada 2.\n");
+        printf("#_ Parser: Estructura de exp_a detectada 2.\n");
     }
 #line 2062 "parser.tab.c"
     break;
@@ -2064,7 +2064,7 @@ yyreduce:
   case 60:
 #line 325 "parser.y"
                             {
-        printf("$~ Parser: Estructura de exp_a detectada 3.\n");
+        printf("#_ Parser: Estructura de exp_a detectada 3.\n");
     }
 #line 2070 "parser.tab.c"
     break;
@@ -2072,7 +2072,7 @@ yyreduce:
   case 61:
 #line 328 "parser.y"
                              {
-        printf("$~ Parser: Estructura de exp_a detectada 4.\n");
+        printf("#_ Parser: Estructura de exp_a detectada 4.\n");
     }
 #line 2078 "parser.tab.c"
     break;
@@ -2080,7 +2080,7 @@ yyreduce:
   case 62:
 #line 331 "parser.y"
                            {
-        printf("$~ Parser: Estructura de exp_a detectada 5.\n");
+        printf("#_ Parser: Estructura de exp_a detectada 5.\n");
     }
 #line 2086 "parser.tab.c"
     break;
@@ -2088,7 +2088,7 @@ yyreduce:
   case 63:
 #line 334 "parser.y"
                            {
-        printf("$~ Parser: Estructura de exp_a detectada 6.\n");
+        printf("#_ Parser: Estructura de exp_a detectada 6.\n");
     }
 #line 2094 "parser.tab.c"
     break;
@@ -2096,7 +2096,7 @@ yyreduce:
   case 64:
 #line 337 "parser.y"
                                           {
-        printf("$~ Parser: Estructura de exp_a detectada 7.\n");
+        printf("#_ Parser: Estructura de exp_a detectada 7.\n");
     }
 #line 2102 "parser.tab.c"
     break;
@@ -2104,7 +2104,7 @@ yyreduce:
   case 65:
 #line 340 "parser.y"
                   {
-        printf("$~ Parser: Estructura de exp_a detectada 8.\n");
+        printf("#_ Parser: Estructura de exp_a detectada 8.\n");
     }
 #line 2110 "parser.tab.c"
     break;
@@ -2112,7 +2112,7 @@ yyreduce:
   case 66:
 #line 343 "parser.y"
                    { /* LITERAL NUMERICO??? */
-        printf("$~ Parser: Estructura de exp_a detectada 9.\n");
+        printf("#_ Parser: Estructura de exp_a detectada 9.\n");
     }
 #line 2118 "parser.tab.c"
     break;
@@ -2120,7 +2120,7 @@ yyreduce:
   case 67:
 #line 346 "parser.y"
                 { /* LITERAL NUMERICO??? */
-        printf("$~ Parser: Estructura de exp_a detectada 10.\n");
+        printf("#_ Parser: Estructura de exp_a detectada 10.\n");
     }
 #line 2126 "parser.tab.c"
     break;
@@ -2128,7 +2128,7 @@ yyreduce:
   case 68:
 #line 349 "parser.y"
                        { 
-        printf("$~ Parser: Estructura de exp_a detectada 11.\n");
+        printf("#_ Parser: Estructura de exp_a detectada 11.\n");
     }
 #line 2134 "parser.tab.c"
     break;
@@ -2136,7 +2136,7 @@ yyreduce:
   case 69:
 #line 354 "parser.y"
                        {
-        printf("$~ Parser: Estructura de exp_b detectada 1.\n");
+        printf("#_ Parser: Estructura de exp_b detectada 1.\n");
     }
 #line 2142 "parser.tab.c"
     break;
@@ -2144,7 +2144,7 @@ yyreduce:
   case 70:
 #line 357 "parser.y"
                          {
-        printf("$~ Parser: Estructura de exp_b detectada 2.\n");
+        printf("#_ Parser: Estructura de exp_b detectada 2.\n");
     }
 #line 2150 "parser.tab.c"
     break;
@@ -2152,7 +2152,7 @@ yyreduce:
   case 71:
 #line 360 "parser.y"
                     {
-        printf("$~ Parser: Estructura de exp_b detectada 3.\n");
+        printf("#_ Parser: Estructura de exp_b detectada 3.\n");
     }
 #line 2158 "parser.tab.c"
     break;
@@ -2160,7 +2160,7 @@ yyreduce:
   case 72:
 #line 363 "parser.y"
                    {
-        printf("$~ Parser: Estructura de exp_b detectada 4.\n");
+        printf("#_ Parser: Estructura de exp_b detectada 4.\n");
     }
 #line 2166 "parser.tab.c"
     break;
@@ -2168,7 +2168,7 @@ yyreduce:
   case 73:
 #line 366 "parser.y"
                      {
-        printf("$~ Parser: Estructura de exp_b detectada 5.\n");
+        printf("#_ Parser: Estructura de exp_b detectada 5.\n");
     }
 #line 2174 "parser.tab.c"
     break;
@@ -2176,7 +2176,7 @@ yyreduce:
   case 74:
 #line 369 "parser.y"
                  { 
-        printf("$~ Parser: Estructura de exp_b detectada 6.\n");
+        printf("#_ Parser: Estructura de exp_b detectada 6.\n");
     }
 #line 2182 "parser.tab.c"
     break;
@@ -2184,7 +2184,7 @@ yyreduce:
   case 75:
 #line 372 "parser.y"
                                      { 
-        printf("$~ Parser: Estructura de exp_b detectada 7.\n");
+        printf("#_ Parser: Estructura de exp_b detectada 7.\n");
     }
 #line 2190 "parser.tab.c"
     break;
@@ -2192,7 +2192,7 @@ yyreduce:
   case 76:
 #line 375 "parser.y"
                                      { 
-        printf("$~ Parser: Estructura de exp_b detectada 8.\n");
+        printf("#_ Parser: Estructura de exp_b detectada 8.\n");
     }
 #line 2198 "parser.tab.c"
     break;
@@ -2200,7 +2200,7 @@ yyreduce:
   case 77:
 #line 378 "parser.y"
                                       { 
-        printf("$~ Parser: Estructura de exp_b detectada 9.\n");
+        printf("#_ Parser: Estructura de exp_b detectada 9.\n");
     }
 #line 2206 "parser.tab.c"
     break;
@@ -2208,7 +2208,7 @@ yyreduce:
   case 78:
 #line 381 "parser.y"
                                       {  
-        printf("$~ Parser: Estructura de exp_b detectada 10.\n");
+        printf("#_ Parser: Estructura de exp_b detectada 10.\n");
     }
 #line 2214 "parser.tab.c"
     break;
@@ -2216,7 +2216,7 @@ yyreduce:
   case 79:
 #line 384 "parser.y"
                                      { 
-        printf("$~ Parser: Estructura de exp_b detectada 11.\n");
+        printf("#_ Parser: Estructura de exp_b detectada 11.\n");
     }
 #line 2222 "parser.tab.c"
     break;
@@ -2224,7 +2224,7 @@ yyreduce:
   case 80:
 #line 387 "parser.y"
                                     { 
-        printf("$~ Parser: Estructura de exp_b detectada 12.\n");
+        printf("#_ Parser: Estructura de exp_b detectada 12.\n");
     }
 #line 2230 "parser.tab.c"
     break;
@@ -2232,7 +2232,7 @@ yyreduce:
   case 81:
 #line 390 "parser.y"
                                           { 
-        printf("$~ Parser: Estructura de exp_b detectada 13.\n");
+        printf("#_ Parser: Estructura de exp_b detectada 13.\n");
     }
 #line 2238 "parser.tab.c"
     break;
@@ -2240,7 +2240,7 @@ yyreduce:
   case 82:
 #line 395 "parser.y"
               {
-        printf("$~ Parser: Estructura de operando detectada 1.\n");
+        printf("#_ Parser: Estructura de operando detectada 1.\n");
     }
 #line 2246 "parser.tab.c"
     break;
@@ -2248,7 +2248,7 @@ yyreduce:
   case 83:
 #line 398 "parser.y"
                                             {
-        printf("$~ Parser: Estructura de operando detectada 2.\n");
+        printf("#_ Parser: Estructura de operando detectada 2.\n");
     }
 #line 2254 "parser.tab.c"
     break;
@@ -2256,7 +2256,7 @@ yyreduce:
   case 84:
 #line 401 "parser.y"
                                                          {
-        printf("$~ Parser: Estructura de operando detectada 3.\n");
+        printf("#_ Parser: Estructura de operando detectada 3.\n");
     }
 #line 2262 "parser.tab.c"
     break;
@@ -2264,7 +2264,7 @@ yyreduce:
   case 85:
 #line 404 "parser.y"
                             {
-        printf("$~ Parser: Estructura de operando detectada 4.\n");
+        printf("#_ Parser: Estructura de operando detectada 4.\n");
     }
 #line 2270 "parser.tab.c"
     break;
@@ -2272,7 +2272,7 @@ yyreduce:
   case 86:
 #line 409 "parser.y"
               {
-        printf("$~ Parser: Estructura de operando detectada 1.\n");
+        printf("#_ Parser: Estructura de operando detectada 1.\n");
     }
 #line 2278 "parser.tab.c"
     break;
@@ -2280,7 +2280,7 @@ yyreduce:
   case 87:
 #line 412 "parser.y"
                                               {
-        printf("$~ Parser: Estructura de operando detectada 2.\n");
+        printf("#_ Parser: Estructura de operando detectada 2.\n");
     }
 #line 2286 "parser.tab.c"
     break;
@@ -2288,7 +2288,7 @@ yyreduce:
   case 88:
 #line 415 "parser.y"
                                                           {
-        printf("$~ Parser: Estructura de operando detectada 3.\n");
+        printf("#_ Parser: Estructura de operando detectada 3.\n");
     }
 #line 2294 "parser.tab.c"
     break;
@@ -2296,7 +2296,7 @@ yyreduce:
   case 89:
 #line 418 "parser.y"
                              {
-        printf("$~ Parser: Estructura de operando detectada 4.\n");
+        printf("#_ Parser: Estructura de operando detectada 4.\n");
     }
 #line 2302 "parser.tab.c"
     break;
@@ -2304,7 +2304,7 @@ yyreduce:
   case 90:
 #line 423 "parser.y"
                                           {
-        printf("$~ Parser: Estructura de instrucciones detectada 1.\n");
+        printf("#_ Parser: Estructura de instrucciones detectada 1.\n");
     }
 #line 2310 "parser.tab.c"
     break;
@@ -2312,7 +2312,7 @@ yyreduce:
   case 91:
 #line 426 "parser.y"
                  {
-        printf("$~ Parser: Estructura de instrucciones detectada 2.\n");
+        printf("#_ Parser: Estructura de instrucciones detectada 2.\n");
     }
 #line 2318 "parser.tab.c"
     break;
@@ -2320,7 +2320,7 @@ yyreduce:
   case 92:
 #line 431 "parser.y"
                    {
-        printf("$~ Parser: Estructura de instruccion detectada 1.\n");
+        printf("#_ Parser: Estructura de instruccion detectada 1.\n");
     }
 #line 2326 "parser.tab.c"
     break;
@@ -2328,7 +2328,7 @@ yyreduce:
   case 93:
 #line 434 "parser.y"
                 {
-        printf("$~ Parser: Estructura de instruccion detectada 2.\n");
+        printf("#_ Parser: Estructura de instruccion detectada 2.\n");
     }
 #line 2334 "parser.tab.c"
     break;
@@ -2336,7 +2336,7 @@ yyreduce:
   case 94:
 #line 437 "parser.y"
                  {
-        printf("$~ Parser: Estructura de instruccion detectada 3.\n");
+        printf("#_ Parser: Estructura de instruccion detectada 3.\n");
     }
 #line 2342 "parser.tab.c"
     break;
@@ -2344,7 +2344,7 @@ yyreduce:
   case 95:
 #line 440 "parser.y"
                {
-        printf("$~ Parser: Estructura de instruccion detectada 4.\n");
+        printf("#_ Parser: Estructura de instruccion detectada 4.\n");
     }
 #line 2350 "parser.tab.c"
     break;
@@ -2352,7 +2352,7 @@ yyreduce:
   case 96:
 #line 443 "parser.y"
                {
-        printf("$~ Parser: Estructura de instruccion detectada 5.\n");
+        printf("#_ Parser: Estructura de instruccion detectada 5.\n");
     }
 #line 2358 "parser.tab.c"
     break;
@@ -2360,7 +2360,7 @@ yyreduce:
   case 97:
 #line 448 "parser.y"
                                      {
-        printf("$~ Parser: Estructura de asignacion detectada.\n");
+        printf("#_ Parser: Estructura de asignacion detectada.\n");
     }
 #line 2366 "parser.tab.c"
     break;
@@ -2368,7 +2368,7 @@ yyreduce:
   case 98:
 #line 451 "parser.y"
                                         {
-        printf("$~ Parser: Estructura de asignacion detectada.\n");
+        printf("#_ Parser: Estructura de asignacion detectada.\n");
     }
 #line 2374 "parser.tab.c"
     break;
@@ -2376,7 +2376,7 @@ yyreduce:
   case 99:
 #line 456 "parser.y"
                                                                             {
-        printf("$~ Parser: Estructura de alternativa detectada.\n");
+        printf("#_ Parser: Estructura de alternativa detectada.\n");
     }
 #line 2382 "parser.tab.c"
     break;
@@ -2384,7 +2384,7 @@ yyreduce:
   case 100:
 #line 461 "parser.y"
                                                                      {
-        printf("$~ Parser: Estructura de lista_opciones detectada.\n");
+        printf("#_ Parser: Estructura de lista_opciones detectada.\n");
     }
 #line 2390 "parser.tab.c"
     break;
@@ -2398,7 +2398,7 @@ yyreduce:
   case 102:
 #line 467 "parser.y"
                 {
-        printf("$~ Parser: Estructura de iteracion detectada 1.\n");
+        printf("#_ Parser: Estructura de iteracion detectada 1.\n");
     }
 #line 2404 "parser.tab.c"
     break;
@@ -2406,7 +2406,7 @@ yyreduce:
   case 103:
 #line 470 "parser.y"
                  {
-        printf("$~ Parser: Estructura de iteracion detectada 2.\n");
+        printf("#_ Parser: Estructura de iteracion detectada 2.\n");
     }
 #line 2412 "parser.tab.c"
     break;
@@ -2414,7 +2414,7 @@ yyreduce:
   case 104:
 #line 475 "parser.y"
                                                                     {
-        printf("$~ Parser: Estructura de it_cota_exp detectada.\n");
+        printf("#_ Parser: Estructura de it_cota_exp detectada.\n");
     }
 #line 2420 "parser.tab.c"
     break;
@@ -2422,7 +2422,7 @@ yyreduce:
   case 105:
 #line 480 "parser.y"
                                                                                                            {
-        printf("$~ Parser: Estructura de it_cota_fija detectada.\n");
+        printf("#_ Parser: Estructura de it_cota_fija detectada.\n");
     }
 #line 2428 "parser.tab.c"
     break;
@@ -2430,7 +2430,7 @@ yyreduce:
   case 106:
 #line 487 "parser.y"
                                                     {
-		printf("$~ Parser: Estructura accion_d econtrada.\n");
+		printf("#_ Parser: Estructura accion_d econtrada.\n");
 	}
 #line 2436 "parser.tab.c"
     break;
@@ -2438,7 +2438,7 @@ yyreduce:
   case 107:
 #line 493 "parser.y"
                                                                            {
-		printf("$~ Parser: Estructura funcion_d econtrada.");
+		printf("#_ Parser: Estructura funcion_d econtrada.");
 	}
 #line 2444 "parser.tab.c"
     break;
@@ -2446,7 +2446,7 @@ yyreduce:
   case 108:
 #line 499 "parser.y"
                                                                            {
-		printf("$~ Parser: Estructura funcion_d econtrada .");
+		printf("#_ Parser: Estructura funcion_d econtrada .");
 	}
 #line 2452 "parser.tab.c"
     break;
@@ -2454,7 +2454,7 @@ yyreduce:
   case 109:
 #line 505 "parser.y"
                                                                                              {
-		printf("$~ Parser: Estructura f_cabecera econtrada.");
+		printf("#_ Parser: Estructura f_cabecera econtrada.");
 	}
 #line 2460 "parser.tab.c"
     break;
@@ -2462,7 +2462,7 @@ yyreduce:
   case 110:
 #line 511 "parser.y"
                                          {
-		printf("$~ Parser: Estructura d_par_form econtrada.");
+		printf("#_ Parser: Estructura d_par_form econtrada.");
 	}
 #line 2468 "parser.tab.c"
     break;
@@ -2476,7 +2476,7 @@ yyreduce:
   case 112:
 #line 518 "parser.y"
                                                   {
-		printf("$~ Parser: Estructura d_p_form econtrada 1.");
+		printf("#_ Parser: Estructura d_p_form econtrada 1.");
 	}
 #line 2482 "parser.tab.c"
     break;
@@ -2484,7 +2484,7 @@ yyreduce:
   case 113:
 #line 521 "parser.y"
                                                  {
-		printf("$~ Parser: Estructura d_p_form econtrada 2.");
+		printf("#_ Parser: Estructura d_p_form econtrada 2.");
 	}
 #line 2490 "parser.tab.c"
     break;
@@ -2492,7 +2492,7 @@ yyreduce:
   case 114:
 #line 524 "parser.y"
                                                    {
-		printf("$~ Parser: Estructura d_p_form econtrada 3.");
+		printf("#_ Parser: Estructura d_p_form econtrada 3.");
 	}
 #line 2498 "parser.tab.c"
     break;
@@ -2500,7 +2500,7 @@ yyreduce:
   case 115:
 #line 530 "parser.y"
                                                    {
-        printf("$~ Parser: Estructura de accion_ll detectada.\n");
+        printf("#_ Parser: Estructura de accion_ll detectada.\n");
     }
 #line 2506 "parser.tab.c"
     break;
@@ -2508,7 +2508,7 @@ yyreduce:
   case 116:
 #line 535 "parser.y"
                                                    {
-        printf("$~ Parser: Estructura de funcion_ll detectada.\n");
+        printf("#_ Parser: Estructura de funcion_ll detectada.\n");
     }
 #line 2514 "parser.tab.c"
     break;
@@ -2516,7 +2516,7 @@ yyreduce:
   case 117:
 #line 540 "parser.y"
                              {
-        printf("$~ Parser: Estructura de ll_ll detectada 1.\n");
+        printf("#_ Parser: Estructura de ll_ll detectada 1.\n");
     }
 #line 2522 "parser.tab.c"
     break;
@@ -2524,7 +2524,7 @@ yyreduce:
   case 118:
 #line 543 "parser.y"
                {
-        printf("$~ Parser: Estructura de ll_ll detectada 2.\n");
+        printf("#_ Parser: Estructura de ll_ll detectada 2.\n");
     }
 #line 2530 "parser.tab.c"
     break;
