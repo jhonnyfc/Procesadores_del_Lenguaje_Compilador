@@ -140,7 +140,7 @@ ER_CARAC_DESCO		.
 {ER_PR_FPARA}		{printf("$: Palabra reservada 'FPARA': %s \n", yytext );
 					return TK_PR_FPARA;}
 {ER_PR_FSI}			{printf("$: Palabra reservada 'FSI': %s \n", yytext );
-					return TK_PR_SI;}
+					return TK_PR_FSI;}
 {ER_PR_FTIPO}		{printf("$: Palabra reservada 'FTIPO': %s \n", yytext );
 					return TK_PR_FTIPO;}
 {ER_PR_FTUPLA}		{printf("$: Palabra reservada 'FTUPLA': %s \n", yytext );

@@ -9,4 +9,7 @@ typdef struct {
     int nextQua;
 } quadTab;
 
+
+void gen(quadTable qTabla, int pos, int *cosas);
+
 #endif

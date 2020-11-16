@@ -11,6 +11,23 @@ algoritmo o_orden3;
             a_med := a_c; 
             a_min := a_b
         fsi
+    [] a_b >= a_a y a_b >= a_c ->
+        a_max := a_b;
+        si a_a >= a_c -> 
+            a_med := a_a; a_min := a_c
+        [] a_a < a_c -> 
+            a_med := a_c; 
+            a_min := a_a
+        fsi
+    [] a_c >= a_b y a_c >= a_a ->
+        a_max := a_c;
+        si a_b >= a_a ->
+            a_med := a_b; 
+            a_min := a_a
+        [] a_b < a_a ->
+            a_med := a_a;
+            a_min := a_b
+        fsi
     fsi
 {Post: a=A AND b = B AND c= C ...}
 falgoritmo .

@@ -31,20 +31,3 @@ algoritmo o_orden3;
     fsi
 {Post: a=A AND b = B AND c= C ...}
 falgoritmo .
-
-algoritmo o_orden3;
-    ent a_a, a_b, a_c: entero; 
-    sal a_max, a_min, a_med: entero;
-{Prec: a = A AND b = B AND c = C}
-    si a_a >= a_b y a_a >= a_c ->
-        a_max := a_a;
-        si a_b >= a_c -> 
-            a_med := a_b; 
-            a_min := a_c
-        [] a_b < a_c -> 
-            a_med := a_c; 
-            a_min := a_b
-        fsi
-    fsi
-{Post: a=A AND b = B AND c= C ...}
-falgoritmo .

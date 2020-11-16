@@ -1038,7 +1038,7 @@ case 20:
 YY_RULE_SETUP
 #line 142 "scanner.l"
 {printf("$: Palabra reservada 'FSI': %s \n", yytext );
-					return TK_PR_SI;}
+					return TK_PR_FSI;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
