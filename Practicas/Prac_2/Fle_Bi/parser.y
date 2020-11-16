@@ -129,7 +129,9 @@ decl_globales:
     | declaracion_cte decl_globales{
         printf("#_ Parser: Estructura de decl_globales detectada 2.\n");
     } 
-    | %empty {}
+    | %empty {
+        printf("#_ Parser: Estructura de decl_globales detectada: VACIO 3.\n");
+    }
 ;
 decl_a_f:
     accion_d decl_a_f{
@@ -138,7 +140,9 @@ decl_a_f:
     | funcion_d decl_a_f{
         printf("#_ Parser: Estructura de decl_a_f detectada 2.\n");
     }
-    | %empty {}
+    | %empty {
+        printf("#_ Parser: Estructura de decl_a_f detectada: VACIO 3.\n");
+    }
 ;  
 bloque:
     declaraciones instrucciones{
@@ -155,7 +159,9 @@ declaraciones:
     | declaracion_var declaraciones{
         printf("#_ Parser: Estructura de declaraciones detectada 3.\n");
     }
-    | %empty{}
+    | %empty{
+        printf("#_ Parser: Estructura de declaraciones detectada: VACIO 4.\n");
+    }
 ;
 
 /*pag 6*/
@@ -182,7 +188,9 @@ lista_d_tipo:
 	TK_ID_OTHER TK_PR_IGUAL d_tipo TK_PR_SECUEN lista_d_tipo {
 		printf("#_ Parser: Estructura lista_d_tipo encontrada 1.\n");
 	}
-	| %empty {}
+	| %empty {
+        printf("#_ Parser: Estructura lista_d_tipo encontrada: VACIO 2.\n");
+    }
 ;
 
 d_tipo:
@@ -229,9 +237,11 @@ expresion_t:
 
 lista_campos:
 	TK_ID_OTHER TK_PR_IGUAL d_tipo TK_PR_SECUEN lista_campos {
-		printf("#_ Parser: Estructura lista_campos econtrada.\n");
+		printf("#_ Parser: Estructura lista_campos econtrada 1.\n");
 	}
-	| %empty {}
+	| %empty {
+        printf("#_ Parser: Estructura lista_campos econtrada:VACIO 2.\n");
+    }
 ;
 
 lista_d_cte:
@@ -253,15 +263,19 @@ lista_d_cte:
 	| TK_ID_OTHER TK_PR_IGUAL TK_LIT_REAL TK_PR_SECUEN lista_d_cte {
 		printf("#_ Parser: Estructura lista_d_cte econtrada 6.\n");
 	}
-	| %empty {}
+	| %empty {
+            printf("#_ Parser: Estructura lista_d_cte econtrada: VACIO 7.\n");
+    }
 ;
 
 /* pag 7 */
 lista_d_var:
     lista_id TK_PR_DEFVAL d_tipo TK_PR_SECUEN lista_d_var{
-        printf("#_ Parser: Estructura de lista_d_var detectada 2.\n");
+        printf("#_ Parser: Estructura de lista_d_var detectada 1.\n");
     }
-    | %empty{}
+    | %empty{ 
+        printf("#_ Parser: Estructura de lista_d_var detectada: VACIO 2.\n");
+    }
 ;
 lista_id:
     TK_ID_OTHER TK_PR_COMA lista_id{
@@ -459,9 +473,11 @@ alternativa:
 ;
 lista_opciones:
     TK_PR_ELSE expresion TK_PR_ENTONCES instrucciones lista_opciones {
-        printf("#_ Parser: Estructura de lista_opciones detectada.\n");
+        printf("#_ Parser: Estructura de lista_opciones detectada 1.\n");
     }
-    | %empty {}
+    | %empty {
+       printf("#_ Parser: Estructura de lista_opciones detectada: VACIO 2.\n");
+    }
 ;
 iteracion:
     it_cota_fija{
@@ -509,9 +525,11 @@ f_cabecera:
 
 d_par_form:
 	d_p_form TK_PR_SECUEN d_par_form {
-		printf("#_ Parser: Estructura d_par_form econtrada.");
+		printf("#_ Parser: Estructura d_par_form econtrada 1.");
 	}
-	| %empty {}
+	| %empty {
+        printf("#_ Parser: Estructura d_par_form econtrada:VACIO 2.");
+    }
 ;
 
 d_p_form:

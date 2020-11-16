@@ -1,23 +1,16 @@
-algoritmo orden3;
-    ent a, b, c: entero; sal max, min, med: entero;
+algoritmo o_orden3;
+    ent a_a, a_b, a_c: entero; 
+    sal a_max, a_min, a_med: entero;
 {Prec: a = A AND b = B AND c = C}
-    si a >= b y a >= c ->
-        max := a;
-        si b >= c ->med := b; min := c
-            [] b <c ->med := c; min := b
-        fsi
-    [] b >= a y b >= c ->
-        max := b;
-        si a >= c ->med := a; min := c
-        [] a <c ->med := c; min := a
-        fsi
-    [] c >= b y c >= a ->
-        max := c;
-        si b >= a ->med := b; min := a
-        [] b <a ->med := a; min := b
+    si a_a >= a_b y a_a >= a_c ->
+        a_max := a_a;
+        si a_b >= a_c -> 
+            a_med := a_b; 
+            a_min := a_c
+        [] a_b < a_c -> 
+            a_med := a_c; 
+            a_min := a_b
         fsi
     fsi
-    a := verdadero;
-    a:= falso;
 {Post: a=A AND b = B AND c= C ...}
-falgoritmo
+falgoritmo .
