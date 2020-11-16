@@ -8,10 +8,10 @@ algoritmo o_sumacomb;
     a_i:= 0;
     a_suma:= 0;
     a_comb:= a_m;
-    mientras a_i <a_n hacer
+    mientras a_i < a_n hacer
         a_suma := a_suma + a_comb;
-        a_comb := a_comb * (a_m - a_i -1) div (a_i + 2);
-    a_i := a_i+1
-    fmientras;
+        a_comb := a_comb * (a_m - a_i - 1) div (a_i + 2);
+        a_i := a_i + 1
+    fmientras
 {Post: n =N AND suma = SUMATORIO(i=1..N)(M sobre i)}
 falgoritmo .
