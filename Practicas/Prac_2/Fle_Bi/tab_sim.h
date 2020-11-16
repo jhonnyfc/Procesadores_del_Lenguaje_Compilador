@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
 typdef struct {
     char *name;
     var_tipo vtyp;
@@ -15,19 +16,20 @@ typdef union {
 
 typdfe enum {
 
-} symType;
+} symType;*/
 
-typdef struct tabNodo {
+typdef struct nodeTab {
     int id;
+    char *name;
+    /*
     symType styp;
-    symbol simb;
-    struct tabNodo *sig;
-} tabNodo;
+    symbol simb;*/
+    struct nodeTab *next;
+} nodeTab;
 
 typdef struct {
     int size;
-    tabNodo *first;
-    tabNodo *last;
+    nodeTab *first;
 } symTab;
 
 void ini_Tab(symTab *tabla);
