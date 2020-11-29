@@ -1,26 +1,45 @@
-all: dob dof compf compb
+CC = gcc
+COMBI = bison
+COMFLE = flex
 
-dob: parser.y
+FLBI = -d -v
+FLFLE = -i
+FLC = -c
+
+DEPCU = tab_cua.h
+DEPSY = tab_sim.h
+DEPS = $(DEPCU) $(DEPSY)
+DEPF = $(DEPS) parser.tab.h
+
+LIBS = -lfl -lm
+
+all: doB doF compF compTC compTS compB
+
+doB: parser.y $(DEPS)
+	$(COMBI) $(FLBI) parser.y
+
+doF: scanner.l
+	$(COMFLE) $(FLFLE) scanner.l
+
+compF: lex.yy.c $(DEPSF)
+	$(CC) $(FLC) lex.yy.c
+
+compTC: tab_cua.c $(DEPCU)
+	$(CC) $(FLC) tab_cua.c
+
+compTS: tab_sim.c $(DEPSY)
+	$(CC) $(FLC) tab_sim.c
+
+compB: parser.tab.c lex.yy.o tab_cua.o tab_sim.o $(DEPS)
+	$(CC) parser.tab.c lex.yy.o tab_cua.o tab_sim.o $(LIBS)
+
+clean: parser.output
 	clear
-	bison -v -d parser.y
-
-dof: scanner.l
-	clear
-	flex scanner.l
-
-compf: dof lex.yy.c
-	gcc -c lex.yy.c
-
-compb: dof dob parser.tab.c lex.yy.o
-	gcc parser.tab.c lex.yy.o -lfl -lm
-
-del: parser.output
-	clear
-	rm lex.yy.c
-	rm lex.yy.o
-	rm parser.output
 	rm parser.tab.c
+	rm parser.output
 	rm parser.tab.h
+	rm lex.yy.c
+	rm *.o
 	rm a.out
 
 play1: a.out

@@ -4,6 +4,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define T_DESC 0
+#define T_ENTERO 1
+#define T_REAL 2
+#define T_BOOL 3
+#define T_CHAR 4
+#define T_CADENA 5
+
+// Estructuras de uso para los operadores
+typedef struct {
+    int id;
+    int tipo;
+} st_arit;
+
+typedef struct {
+    
+} st_bool;
+
+typedef struct {
+    int tipo;
+    st_arit ari;
+    st_bool bool;
+} st_exp;
+
+///////
 /*
 typdef struct {
     char *name;
@@ -18,8 +42,10 @@ typdfe enum {
 
 } symType;*/
 
-typdef struct nodeTab {
-    int id;
+// Cola symTable
+
+typedef struct nodeTab {
+    int id; 
     char *name;
     /*
     symType styp;
@@ -27,9 +53,10 @@ typdef struct nodeTab {
     struct nodeTab *next;
 } nodeTab;
 
-typdef struct {
+typedef struct {
     int size;
     nodeTab *first;
+    nodeTab *last;
 } symTab;
 
 void ini_Tab(symTab *tabla);

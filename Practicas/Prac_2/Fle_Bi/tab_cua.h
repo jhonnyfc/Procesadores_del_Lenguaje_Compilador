@@ -4,12 +4,12 @@
 #define NCOL 4
 #define NROWS 100
 
-typdef struct {
+typedef struct {
     int table[NCOL][NROWS];
     int nextQua;
 } quadTab;
 
 
-void gen(quadTable qTabla, int pos, int *cosas);
+void gen(quadTab *qTabla, int *cosas);
 
 #endif

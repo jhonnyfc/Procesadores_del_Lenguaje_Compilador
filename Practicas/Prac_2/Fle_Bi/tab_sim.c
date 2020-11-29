@@ -5,8 +5,9 @@
 void ini_Tab(symTab *tabla){
     tabla->size = 0;
     tabla->first = NULL;
+    tabla->last = NULL;
 }
 
-int newTemp(){
+int newTemp(symTab *tabla){
     
 }

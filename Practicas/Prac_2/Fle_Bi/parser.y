@@ -1,10 +1,15 @@
 /* Reverse polish notation calculator.  */
 %{
-	#include <stdio.h>
-	#include <math.h>
-    extern FILE *yyin;
-	int yylex (void);
-	void yyerror (char const *);
+#include <stdio.h>
+#include "tab_sim.h"
+#include "tab_cua.h"
+
+int yylex (void);
+void yyerror (char const *);
+extern FILE *yyin;
+
+symTab      miSimTab;
+quadTab     miQuadTab;
 %}
 
 %token TK_PR_CONTINUAR		// CONTINUAR
@@ -87,21 +92,39 @@
 %token TK_ID_ARI
 %token TK_ID_BOL
 
+%token TK_LIT_CARAC			// Caracter
+%token TK_LIT_CADE			// Cadena
+%token TK_LIT_COMENTARIO	// Comentario
 
 %token TK_LIT_ENTERO		// Entero con exponente
 %token TK_LIT_REAL			// Real con exponente
 %token TK_LIT_BOOL			// ("VERDADERO"|"FALSO")
 
-%token TK_LIT_CARAC			// Caracter
-%token TK_LIT_CADE			// Cadena
-%token TK_LIT_COMENTARIO	// Comentario
+// Tipos
+%type <ty_tipo> d_tipo
+%type <ty_tipo> lista_id
+
+%type <ty_st_exp> expresion
+
+%type <ty_st_ari> operando_ari
+%type <ty_st_ari> exp_a
+
+%type <ty_st_bool> operando_bool
+%type <ty_st_bool> exp_b
 
 %union {
-    double          num_real;
-    long int        num_entero;
-    char            *string;
-    char            caracter;
-    int             boolean;
+    double      ty_num_real;
+    long int    ty_num_entero;
+    char        *ty_string;
+    char        ty_caracter;
+    int         ty_boolean;
+
+    int         ty_tipo;
+
+    st_arit     ty_st_ari;
+    st_bool     ty_st_bool;
+
+    st_exp      ty_st_exp;
 };
 
 %% /* Grammar rules and actions follow.  */
@@ -143,7 +166,7 @@ decl_a_f:
     | %empty {
         printf("#_ Parser: Estructura de decl_a_f detectada: VACIO 3.\n");
     }
-;  
+;
 bloque:
     declaraciones instrucciones{
         printf("#_ Parser: Estructura de bloque detectada.\n");
@@ -196,33 +219,43 @@ lista_d_tipo:
 d_tipo:
 	TK_PR_TUPLA lista_campos TK_PR_FTUPLA {
 		printf("#_ Parser: Estructura d_tipo encontrada 1.\n");
+        $$ = T_DESC;
 	}
 	| TK_PR_TABLA TK_PR_INIARRA expresion_t TK_PR_SUBRANGO expresion_t TK_PR_FINARRA TK_PR_DE d_tipo{
 		printf("#_ Parser: Estructura d_tipo encontrada 2.\n");
+        $$ = T_DESC;
 	}
 	| TK_ID_OTHER {
 		printf("#_ Parser: Estructura d_tipo encontrada 3.\n");
+        $$ = T_DESC;
 	}
 	| expresion_t TK_PR_SUBRANGO expresion_t {
 		printf("#_ Parser: Estructura d_tipo encontrada 4.\n");
+        $$ = T_DESC;
 	}
 	| TK_PR_REF d_tipo {
 		printf("#_ Parser: Estructura d_tipo encontrada 5.\n");
+        $$ = T_DESC;
 	}
 	| TK_PR_ENTERO {
 		printf("#_ Parser: Estructura d_tipo econtrada int 6.\n");
+        $$ = T_ENTERO;
 	}
 	| TK_PR_BOOL {
 		printf("#_ Parser: Estructura d_tipo econtrada bool 7.\n");
+        $$ = T_BOOL;
 	}
 	| TK_PR_CHAR {
 		printf("#_ Parser: Estructura d_tipo econtrada char 8.\n");
+        $$ = T_CHAR;
 	}
 	| TK_PR_REAL {
 		printf("#_ Parser: Estructura d_tipo econtrada real 9.\n");
+        $$ = T_REAL;
 	}
 	| TK_PR_CADENA {
 		printf("#_ Parser: Estructura d_tipo econtrada cadena 10.\n");
+        $$ = T_CADENA;
 	}
 ;
 
@@ -270,7 +303,8 @@ lista_d_cte:
 
 /* pag 7 */
 lista_d_var:
-    lista_id TK_PR_DEFVAL d_tipo TK_PR_SECUEN lista_d_var{
+    lista_id TK_PR_SECUEN lista_d_var{
+        /*Hemos bajado 'TK_PR_DEFVAL d_tipo' a lista_id */
         printf("#_ Parser: Estructura de lista_d_var detectada 1.\n");
     }
     | %empty{ 
@@ -278,23 +312,31 @@ lista_d_var:
     }
 ;
 lista_id:
-    TK_ID_OTHER TK_PR_COMA lista_id{
+    TK_ID_OTHER TK_PR_DEFVAL d_tipo {
+        /*Control de errores ?*/
+        /*Insetar_var_ts() poner funcion*/
         printf("#_ Parser: Estructura de lista_id detectada 1.\n");
+        $$ = $3;
     }
-    | TK_ID_OTHER{
+    | TK_ID_ARI TK_PR_DEFVAL d_tipo {
         printf("#_ Parser: Estructura de lista_id detectada 2.\n");
+        $$ = $3;
+    }
+    | TK_ID_BOL TK_PR_DEFVAL d_tipo {
+        printf("#_ Parser: Estructura de lista_id detectada 3.\n");
+        $$ = $3;
+    }
+    | TK_ID_OTHER TK_PR_COMA lista_id{
+        printf("#_ Parser: Estructura de lista_id detectada 4.\n");
+        $$ = $3;
     }
     | TK_ID_ARI TK_PR_COMA lista_id{
-        printf("#_ Parser: Estructura de lista_id detectada 3.\n");
-    }
-    | TK_ID_ARI {
-        printf("#_ Parser: Estructura de lista_id detectada 4.\n");
+        printf("#_ Parser: Estructura de lista_id detectada 5.\n");
+        $$ = $3;
     }
     | TK_ID_BOL TK_PR_COMA lista_id{
-        printf("#_ Parser: Estructura de lista_id detectada 5.\n");
-    }
-    | TK_ID_BOL {
         printf("#_ Parser: Estructura de lista_id detectada 6.\n");
+        $$ = $3;
     }
 ;
 decl_ent_sal:
@@ -321,6 +363,8 @@ decl_sal:
 expresion:
     exp_a {
         printf("#_ Parser: Estructura de expresion detectada 1.\n");
+        $$.tipo = 
+        $$.
     }
     | exp_b {
         printf("#_ Parser: Estructura de expresion detectada 2.\n");
@@ -493,7 +537,7 @@ it_cota_exp:
     }
 ;
 it_cota_fija:
-    TK_PR_PARA TK_ID_OTHER TK_PR_ASIG expresion TK_PR_HASTA expresion TK_PR_HACER instrucciones TK_PR_FPARA{
+    TK_PR_PARA TK_ID_ARI TK_PR_ASIG expresion TK_PR_HASTA expresion TK_PR_HACER instrucciones TK_PR_FPARA{
         printf("#_ Parser: Estructura de it_cota_fija detectada.\n");
     }
 ;
@@ -519,7 +563,8 @@ a_cabecera:
 
 f_cabecera:
 	TK_ID_OTHER TK_PR_ABRIRPAR lista_d_var TK_PR_CERRARPAR TK_PR_DEV d_tipo TK_PR_SECUEN {
-		printf("#_ Parser: Estructura f_cabecera econtrada.");
+        /*Dudas de tk_id_oher tipo y d_tipo devuelto*/
+        printf("#_ Parser: Estructura f_cabecera econtrada.");
 	}
 ;
 

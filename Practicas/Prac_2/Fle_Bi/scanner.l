@@ -4,6 +4,8 @@
 	/*%option caseless -> se puede utilizar este en vez de poner -> ?i:*/
 %{
 /*Constantes Manifiestas*/
+#include "tab_sim.h"
+#include "tab_cua.h"
 #include "parser.tab.h"
 %}
 /*Exprasiones regulares*/
@@ -89,13 +91,13 @@ ER_ID_OTHER			?i:"O_"({ER_LETRA}|{ER_CIFRA})*
 ER_ID_ARI			?i:"A_"({ER_LETRA}|{ER_CIFRA})*
 ER_ID_BOOL			?i:"B_"({ER_LETRA}|{ER_CIFRA})*
 
-ER_LIT_ENTERO		(\+|\-)?{ER_CIFRA}{ER_CIFRA}*((e|E){ER_CIFRA}{ER_CIFRA}*)?
-ER_LIT_REAL			(\+|\-)?{ER_CIFRA}{ER_CIFRA}*(\.{ER_CIFRA}{ER_CIFRA}*)?((e|E){ER_CIFRA}{ER_CIFRA}*)?
-ER_LIT_BOOL			{ER_PR_VERDADERO}|{ER_PR_FALSO}
-
 ER_LIT_CARAC		(\".\")
 ER_LIT_CADE			(\"([^"]|(\/\"[^"])*)*\"*\")
 ER_LIT_COMENTARIO	(\{([^}]|(\/\}[^}])*)*\}*\})
+
+ER_LIT_ENTERO		(\+|\-)?{ER_CIFRA}{ER_CIFRA}*((e|E){ER_CIFRA}{ER_CIFRA}*)?
+ER_LIT_REAL			(\+|\-)?{ER_CIFRA}{ER_CIFRA}*(\.{ER_CIFRA}{ER_CIFRA}*)?((e|E){ER_CIFRA}{ER_CIFRA}*)?
+ER_LIT_BOOL			{ER_PR_VERDADERO}|{ER_PR_FALSO}
 
 ER_CARAC_DESCO		.
 
