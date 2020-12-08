@@ -11,6 +11,14 @@
 #define T_CHAR 4
 #define T_CADENA 5
 
+#define EXP_ARI 6
+#define EXP_BOOL 7
+
+#define OP_SUMA_INT 15
+#define OP_SUMA_REAL 15
+#define OP_RESTA_INT 15
+#define OP_RESTA_REAL 15
+
 // Estructuras de uso para los operadores
 typedef struct {
     int id;
@@ -47,6 +55,7 @@ typdfe enum {
 typedef struct nodeTab {
     int id; 
     char *name;
+    int type;
     /*
     symType styp;
     symbol simb;*/
@@ -61,6 +70,8 @@ typedef struct {
 
 void ini_Tab(symTab *tabla);
 
-int newTemp(symTab *tabla);
+int newTemp(symTab *tabla, char *name, int tipo);
+
+int insert_sym(symTab *tabla, nodeTab *nodo);
 
 #endif

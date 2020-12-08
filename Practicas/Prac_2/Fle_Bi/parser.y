@@ -363,11 +363,14 @@ decl_sal:
 expresion:
     exp_a {
         printf("#_ Parser: Estructura de expresion detectada 1.\n");
-        $$.tipo = 
-        $$.
+        $$.tipo = EXP_ARI;
+        $$.ari.id = $1.id
+        $$.ari.tipo = $1.tipo
     }
     | exp_b {
         printf("#_ Parser: Estructura de expresion detectada 2.\n");
+        $$.tipo = EXP_BOOL;
+        // Continuar esto
     }
     | funcion_ll {
         printf("#_ Parser: Estructura de expresion detectada 3.\n");
@@ -375,9 +378,10 @@ expresion:
 ;
 exp_a:
     exp_a TK_PR_SUMA exp_a{
+        /*hacemos solo pra enteros con entero y real con real o mezcaloms int real */
         printf("#_ Parser: Estructura de exp_a detectada 1.\n");
     }
-    | exp_a TK_PR_RESTA exp_a{
+    | exp_a TK_PR_RESTA exp_a {
         printf("#_ Parser: Estructura de exp_a detectada 2.\n");
     }
     | exp_a TK_PR_MULT exp_a{
@@ -398,10 +402,10 @@ exp_a:
     | operando_ari{
         printf("#_ Parser: Estructura de exp_a detectada 8.\n");
     }
-    | TK_LIT_ENTERO{ /* LITERAL NUMERICO??? */
+    | TK_LIT_ENTERO{
         printf("#_ Parser: Estructura de exp_a detectada 9.\n");
     }
-    | TK_PR_REAL{ /* LITERAL NUMERICO??? */
+    | TK_PR_REAL{
         printf("#_ Parser: Estructura de exp_a detectada 10.\n");
     }
     | TK_PR_RESTA exp_a{ 

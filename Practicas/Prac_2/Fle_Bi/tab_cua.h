@@ -10,6 +10,6 @@ typedef struct {
 } quadTab;
 
 
-void gen(quadTab *qTabla, int *cosas);
+void gen(quadTab *qTabla, int operac, int op1, int op2, int dest);
 
 #endif
