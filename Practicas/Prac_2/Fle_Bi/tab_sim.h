@@ -68,13 +68,15 @@ typedef struct {
     nodeTab *last;
 } symTab;
 
-void ini_Tab(symTab *tabla);
+void ini_tsym(symTab *tabla);
 
 int newTemp(symTab *tabla, char *nombre, int tipo);
 
 int insert_tsym(symTab *tabla, nodeTab *nodo);
 
-void print_TS(symTab *tabla);
+void print_tsym(symTab *tabla);
+
+nodeTab *find_tsym(symTab *tabla, char *nombre);
 
 #endif
 

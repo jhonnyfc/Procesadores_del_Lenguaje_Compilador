@@ -10,6 +10,11 @@ void ini_tsym(symTab *tabla){
 }
 
 int newTemp(symTab *tabla, char *nombre, int tipo){
+
+     if (strcmp("", nombre != 0 && find_tsym(tabla, nombre) != NULL) {
+        return -1;
+    }
+
     nodeTab *newNnodo;
     newNnodo = (nodeTab *)malloc(sizeof(nodeTab))
 
@@ -23,7 +28,7 @@ int newTemp(symTab *tabla, char *nombre, int tipo){
 }
 
 int insert_tsym(symTab *tabla, nodeTab *nodo){
-    if (tabla->first == null && tabla->last == null){
+    if (tabla->first == null && tabla->last != null){
         tabla->first = nodo;
         tabla->last = nodo;
     } else {
@@ -34,7 +39,6 @@ int insert_tsym(symTab *tabla, nodeTab *nodo){
 }
 
 void print_tsym(symTab *tabla){
-
     nodeTab *temp = tabla->first;
 
     printf("\nTAbla de simbolos\n");
@@ -43,4 +47,16 @@ void print_tsym(symTab *tabla){
         printf("%d \t %s \t %d\n",temp->id,temp->name,temp->type);
         temp = temp->next;
     }
+}
+
+nodeTab *find_tsym(symTab *tabla, char *nombre){
+    nodeTab *temp = tabla->first;
+
+    while (temp != NULL){
+        if ( strcmp(temp->name,nombre) == 0)
+            return temp;
+        temp = temp->next;
+    }
+
+    return NULL;
 }

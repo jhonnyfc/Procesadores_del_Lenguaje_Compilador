@@ -382,7 +382,7 @@ exp_a:
         /*hacemos solo pra enteros con entero y real con real o mezcaloms int real */
         printf("#_ Parser: Estructura de exp_a detectada 1.\n");
         if ($1.tipo == T_ENTERO && $3.tipo == T_ENTERO){
-
+            
         } else if ($1.tipo == T_REAL && $3.tipo == T_REAL) {
 
         } else if ($1.tipo == T_REAL && $3.tipo == T_ENTERO) {
