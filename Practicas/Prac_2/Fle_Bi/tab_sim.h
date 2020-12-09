@@ -77,3 +77,7 @@ int insert_tsym(symTab *tabla, nodeTab *nodo);
 void print_TS(symTab *tabla);
 
 #endif
+
+
+
+

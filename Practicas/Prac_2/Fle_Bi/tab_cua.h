@@ -9,7 +9,12 @@ typedef struct {
     int nextQua;
 } quadTab;
 
+void ini_tqua(quadTab *qTabla);
+
+void mostrar_tqua(quadTab *qTabla);
 
 void gen(quadTab *qTabla, int operac, int op1, int op2, int dest);
+
+
 
 #endif
