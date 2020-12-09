@@ -15,9 +15,9 @@
 #define EXP_BOOL 7
 
 #define OP_SUMA_INT 15
-#define OP_SUMA_REAL 15
-#define OP_RESTA_INT 15
-#define OP_RESTA_REAL 15
+#define OP_SUMA_REAL 16
+#define OP_RESTA_INT 17
+#define OP_RESTA_REAL 18
 
 // Estructuras de uso para los operadores
 typedef struct {
@@ -70,8 +70,10 @@ typedef struct {
 
 void ini_Tab(symTab *tabla);
 
-int newTemp(symTab *tabla, char *name, int tipo);
+int newTemp(symTab *tabla, char *nombre, int tipo);
 
-int insert_sym(symTab *tabla, nodeTab *nodo);
+int insert_tsym(symTab *tabla, nodeTab *nodo);
+
+void print_TS(symTab *tabla);
 
 #endif

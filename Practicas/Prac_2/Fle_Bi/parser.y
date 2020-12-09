@@ -316,6 +316,7 @@ lista_id:
         /*Control de errores ?*/
         /*Insetar_var_ts() poner funcion*/
         printf("#_ Parser: Estructura de lista_id detectada 1.\n");
+        
         $$ = $3;
     }
     | TK_ID_ARI TK_PR_DEFVAL d_tipo {
@@ -380,6 +381,15 @@ exp_a:
     exp_a TK_PR_SUMA exp_a{
         /*hacemos solo pra enteros con entero y real con real o mezcaloms int real */
         printf("#_ Parser: Estructura de exp_a detectada 1.\n");
+        if ($1.tipo == T_ENTERO && $3.tipo == T_ENTERO){
+
+        } else if ($1.tipo == T_REAL && $3.tipo == T_REAL) {
+
+        } else if ($1.tipo == T_REAL && $3.tipo == T_ENTERO) {
+
+        } else if ($1.tipo == T_ENTERO && $3.tipo == T_REAL) {
+
+        }
     }
     | exp_a TK_PR_RESTA exp_a {
         printf("#_ Parser: Estructura de exp_a detectada 2.\n");
@@ -392,9 +402,11 @@ exp_a:
     }
     | exp_a TK_PR_MOD exp_a{
         printf("#_ Parser: Estructura de exp_a detectada 5.\n");
+        /*solo con entero*/
     }
     | exp_a TK_PR_DIV exp_a{
         printf("#_ Parser: Estructura de exp_a detectada 6.\n");
+        /*solo con enteros*/
     }
     | TK_PR_ABRIRPAR exp_a TK_PR_CERRARPAR{
         printf("#_ Parser: Estructura de exp_a detectada 7.\n");
