@@ -1,4 +1,4 @@
-algoritmo o_intercambio;
+algoritmo a_intercambio;
     ent a_a, a_b: entero;
     sal a_a, a_b: entero;
 {Prec: a= A AND b = B}

@@ -33,7 +33,7 @@ compTS: tab_sim.c $(DEPSY)
 compB: parser.tab.c lex.yy.o tab_cua.o tab_sim.o $(DEPS)
 	$(CC) parser.tab.c lex.yy.o tab_cua.o tab_sim.o $(LIBS)
 
-clean: parser.output
+cl: parser.output
 	clear
 	rm parser.tab.c
 	rm parser.output

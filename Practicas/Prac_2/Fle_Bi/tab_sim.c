@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 
 void ini_tsym(symTab *tabla){
     tabla->size = 0;
@@ -10,25 +11,25 @@ void ini_tsym(symTab *tabla){
 }
 
 int newTemp(symTab *tabla, char *nombre, int tipo){
-
-     if (strcmp("", nombre != 0 && find_tsym(tabla, nombre) != NULL) {
+     if (strcmp("", nombre) != 0 && find_tsym(tabla, nombre) != NULL) {
         return -1;
     }
 
-    nodeTab *newNnodo;
-    newNnodo = (nodeTab *)malloc(sizeof(nodeTab))
+    nodeTab *newNodo;
+    newNodo = (nodeTab *)malloc(sizeof(nodeTab));
 
-    newNnodo->name = (char *) malloc(sizeof(char) * strlen(nombre));
-    strcpy(newNnodo->name, nombre);
-    newNnodo->type = tipo;
-    newNnodo->next = null;
+    newNodo->id = tabla->size;
+    newNodo->name = (char *) malloc(sizeof(char) * strlen(nombre));
+    strcpy(newNodo->name, nombre);
+    newNodo->type = tipo;
+    newNodo->next = NULL;
 
     // y lo metemos en la cola
-    insert_tsym(tabla,newNnodo);
+    return insert_tsym(tabla,newNodo);
 }
 
 int insert_tsym(symTab *tabla, nodeTab *nodo){
-    if (tabla->first == null && tabla->last != null){
+    if (tabla->first == NULL && tabla->last != NULL){
         tabla->first = nodo;
         tabla->last = nodo;
     } else {
@@ -36,6 +37,8 @@ int insert_tsym(symTab *tabla, nodeTab *nodo){
         tabla->last = nodo;
     }
     tabla->size++;
+
+    return tabla->size - 1;
 }
 
 void print_tsym(symTab *tabla){

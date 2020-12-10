@@ -18,6 +18,12 @@
 #define OP_SUMA_REAL 16
 #define OP_RESTA_INT 17
 #define OP_RESTA_REAL 18
+#define OP_MULT_INT 19
+#define OP_MULT_REAL 20
+#define OP_DIV_REAL 21
+#define OP_DIV_INT 22
+#define OP_MOD 23
+#define OP_INT_TO_REAL 24
 
 // Estructuras de uso para los operadores
 typedef struct {

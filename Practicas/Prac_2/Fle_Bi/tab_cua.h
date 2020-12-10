@@ -3,6 +3,7 @@
 
 #define NCOL 4
 #define NROWS 100
+#define OPERNDO_NULL -5
 
 typedef struct {
     int table[NCOL][NROWS];

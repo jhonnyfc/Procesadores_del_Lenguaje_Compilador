@@ -11,10 +11,10 @@ void ini_tqua(quadTab *qTabla) {
 
 void mostrar_tqua(quadTab *qTabla) {
     int i;
-    print("\n");
+    printf("\n");
     for (i = 0; i < qTabla->nextQua; i++) {
-        printf("Cuadrupla # %2d: %s %2d (arg1) %2d (arg2) %2d (result)\n", 
-        	i,
+        printf("Cuadrupla # %d: opera: %2d, op1: %2d, op2: %2d, resu: %2d\n", 
+        	i+1,
             qTabla->table[i][0],
             qTabla->table[i][1],
             qTabla->table[i][2],

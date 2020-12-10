@@ -1,4 +1,4 @@
-algoritmo o_orden3;
+algoritmo a_orden3;
     ent a_a, a_b, a_c: entero; 
     sal a_max, a_min, a_med: entero;
 {Prec: a = A AND b = B AND c = C}

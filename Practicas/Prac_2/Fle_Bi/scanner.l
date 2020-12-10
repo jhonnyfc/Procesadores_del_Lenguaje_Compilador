@@ -87,7 +87,6 @@ ER_DELIM			?i:[ \t\n]
 
 ER_LETRA_O_CIFRA	{ER_LETRA}|{ER_CIFRA}
 /*ER_ID				{ER_LETRA}({ER_LETRA}|{ER_CIFRA})* */
-ER_ID_OTHER			?i:"O_"({ER_LETRA}|{ER_CIFRA})*
 ER_ID_ARI			?i:"A_"({ER_LETRA}|{ER_CIFRA})*
 ER_ID_BOOL			?i:"B_"({ER_LETRA}|{ER_CIFRA})*
 
@@ -231,8 +230,6 @@ ER_CARAC_DESCO		.
 					return TK_PR_MENIGU;}
 {ER_LIT_BOOL}		{printf("$: Boleano: %s \n", yytext);
 					return TK_ID_BOL;}
-{ER_ID_OTHER}		{printf("$: Id general: %s \n", yytext );
-					return TK_ID_OTHER;}
 {ER_ID_ARI}			{printf("$: Id ari: %s \n", yytext );
 					return TK_ID_ARI;}
 {ER_ID_BOOL}		{printf("$: Id bool: %s \n", yytext );

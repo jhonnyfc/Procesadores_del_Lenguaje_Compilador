@@ -1,15 +1,15 @@
 /* Reverse polish notation calculator.  */
 %{
-#include <stdio.h>
-#include "tab_sim.h"
-#include "tab_cua.h"
+    #include <stdio.h>
+    #include "tab_sim.h"
+    #include "tab_cua.h"
 
-int yylex (void);
-void yyerror (char const *);
-extern FILE *yyin;
+    int yylex (void);
+    void yyerror (char const *);
+    extern FILE *yyin;
 
-symTab      miSimTab;
-quadTab     miQuadTab;
+    symTab      miSimTab;
+    quadTab     miQuadTab;
 %}
 
 %token TK_PR_CONTINUAR		// CONTINUAR
@@ -88,9 +88,8 @@ quadTab     miQuadTab;
 //%token TK_DELIM				// [ \t\n]
 
 //%token TK_LETRA_O_CIFRA
-%token TK_ID_OTHER
-%token TK_ID_ARI
-%token TK_ID_BOL
+%token <ty_string> TK_ID_ARI
+%token <ty_string> TK_ID_BOL
 
 %token TK_LIT_CARAC			// Caracter
 %token TK_LIT_CADE			// Cadena
@@ -130,60 +129,93 @@ quadTab     miQuadTab;
 %% /* Grammar rules and actions follow.  */
 
 desc_algoritmo:
-	TK_PR_ALGORIT TK_ID_OTHER TK_PR_SECUEN cabecera_alg bloque_alg TK_PR_FALGORI TK_PR_PUNTO {
-		printf("#_ Parser: Estructura de algoritmo detectada.\n");
+	TK_PR_ALGORIT TK_ID_ARI TK_PR_SECUEN cabecera_alg bloque_alg TK_PR_FALGORI TK_PR_PUNTO {
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura de algoritmo detectada.\n"); 
+        #endif
 	}
 ;
 
 cabecera_alg:
     decl_globales decl_a_f decl_ent_sal TK_LIT_COMENTARIO{
-        printf("#_ Parser: Estructura de cabecera_alg detectada.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de cabecera_alg detectada.\n"); 
+        #endif
     }
 ;
+
 bloque_alg:
     bloque TK_LIT_COMENTARIO{
-         printf("#_ Parser: Estructura de bloque_alg detectada.\n");
+         #ifdef _DEBUG
+            printf("#_ Parser: Estructura de bloque_alg detectada.\n"); 
+        #endif
     }
 ;   
+
 decl_globales:
     declaracion_tipo decl_globales{
-        printf("#_ Parser: Estructura de decl_globales detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de decl_globales detectada 1.\n"); 
+        #endif
     } 
     | declaracion_cte decl_globales{
-        printf("#_ Parser: Estructura de decl_globales detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de decl_globales detectada 2.\n"); 
+        #endif
     } 
     | %empty {
-        printf("#_ Parser: Estructura de decl_globales detectada: VACIO 3.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de decl_globales detectada: VACIO 3.\n"); 
+        #endif
     }
 ;
+
 decl_a_f:
     accion_d decl_a_f{
-        printf("#_ Parser: Estructura de decl_a_f detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de decl_a_f detectada 1.\n"); 
+        #endif
     } 
     | funcion_d decl_a_f{
-        printf("#_ Parser: Estructura de decl_a_f detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de decl_a_f detectada 2.\n"); 
+        #endif
     }
     | %empty {
-        printf("#_ Parser: Estructura de decl_a_f detectada: VACIO 3.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de decl_a_f detectada: VACIO 3.\n"); 
+        #endif
     }
 ;
+
 bloque:
     declaraciones instrucciones{
-        printf("#_ Parser: Estructura de bloque detectada.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de bloque detectada.\n"); 
+        #endif
     } 
 ;
+
 declaraciones:
     declaracion_tipo declaraciones{
-        printf("#_ Parser: Estructura de declaraciones detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de declaraciones detectada 1.\n"); 
+        #endif
     }
     | declaracion_cte declaraciones{
-        printf("#_ Parser: Estructura de declaraciones detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de declaraciones detectada 2.\n"); 
+        #endif
     }
     | declaracion_var declaraciones{
-        printf("#_ Parser: Estructura de declaraciones detectada 3.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de declaraciones detectada 3.\n"); 
+        #endif
     }
     | %empty{
-        printf("#_ Parser: Estructura de declaraciones detectada: VACIO 4.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de declaraciones detectada: VACIO 4.\n"); 
+        #endif
     }
 ;
 
@@ -191,436 +223,744 @@ declaraciones:
 
 declaracion_tipo:
 	TK_PR_TIPO lista_d_tipo TK_PR_FTIPO TK_PR_SECUEN{
-		printf("#_ Parser: Estructura de declaracion_tipo encontrada.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura de declaracion_tipo encontrada.\n"); 
+        #endif
 	}
 ;
 
 declaracion_cte:
 	TK_PR_CONST lista_d_cte TK_PR_FCONST TK_PR_SECUEN{
-		printf("#_ Parser: Estructura de declaracion_cte encontrada.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura de declaracion_cte encontrada.\n"); 
+        #endif
 	}
 ;
 
 declaracion_var:
 	TK_PR_VAR lista_d_var TK_PR_FVAR TK_PR_SECUEN{
-		printf("#_ Parser: Estructura de declaracion_var encontrada.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura de declaracion_var encontrada.\n"); 
+        #endif
 	}
 ;
 
 lista_d_tipo:
-	TK_ID_OTHER TK_PR_IGUAL d_tipo TK_PR_SECUEN lista_d_tipo {
-		printf("#_ Parser: Estructura lista_d_tipo encontrada 1.\n");
+	TK_ID_ARI TK_PR_IGUAL d_tipo TK_PR_SECUEN lista_d_tipo {
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura lista_d_tipo encontrada 1.\n"); 
+        #endif
 	}
 	| %empty {
-        printf("#_ Parser: Estructura lista_d_tipo encontrada: VACIO 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura lista_d_tipo encontrada: VACIO 2.\n"); 
+        #endif
     }
 ;
 
 d_tipo:
 	TK_PR_TUPLA lista_campos TK_PR_FTUPLA {
-		printf("#_ Parser: Estructura d_tipo encontrada 1.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_tipo encontrada 1.\n"); 
+        #endif
         $$ = T_DESC;
 	}
 	| TK_PR_TABLA TK_PR_INIARRA expresion_t TK_PR_SUBRANGO expresion_t TK_PR_FINARRA TK_PR_DE d_tipo{
-		printf("#_ Parser: Estructura d_tipo encontrada 2.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_tipo encontrada 2.\n"); 
+        #endif
         $$ = T_DESC;
 	}
-	| TK_ID_OTHER {
-		printf("#_ Parser: Estructura d_tipo encontrada 3.\n");
+	| TK_ID_ARI {
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_tipo encontrada 3.\n"); 
+        #endif
         $$ = T_DESC;
 	}
 	| expresion_t TK_PR_SUBRANGO expresion_t {
-		printf("#_ Parser: Estructura d_tipo encontrada 4.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_tipo encontrada 4.\n"); 
+        #endif
         $$ = T_DESC;
 	}
 	| TK_PR_REF d_tipo {
-		printf("#_ Parser: Estructura d_tipo encontrada 5.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_tipo encontrada 5.\n"); 
+        #endif
         $$ = T_DESC;
 	}
 	| TK_PR_ENTERO {
-		printf("#_ Parser: Estructura d_tipo econtrada int 6.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_tipo econtrada int 6.\n"); 
+        #endif
         $$ = T_ENTERO;
 	}
 	| TK_PR_BOOL {
-		printf("#_ Parser: Estructura d_tipo econtrada bool 7.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_tipo econtrada bool 7.\n"); 
+        #endif
         $$ = T_BOOL;
 	}
 	| TK_PR_CHAR {
-		printf("#_ Parser: Estructura d_tipo econtrada char 8.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_tipo econtrada char 8.\n"); 
+        #endif
         $$ = T_CHAR;
 	}
 	| TK_PR_REAL {
-		printf("#_ Parser: Estructura d_tipo econtrada real 9.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_tipo econtrada real 9.\n"); 
+        #endif
         $$ = T_REAL;
 	}
 	| TK_PR_CADENA {
-		printf("#_ Parser: Estructura d_tipo econtrada cadena 10.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_tipo econtrada cadena 10.\n"); 
+        #endif
         $$ = T_CADENA;
 	}
 ;
 
 expresion_t:
 	expresion {
-		printf("#_ Parser: Estructura expreasion_t econtrada 1.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura expreasion_t econtrada 1.\n"); 
+        #endif
 	}
 	| TK_LIT_CARAC {
-		printf("#_ Parser: Estructura expreasion_t econtrada 2.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura expreasion_t econtrada 2.\n"); 
+        #endif
 	}
 ;
 
 lista_campos:
-	TK_ID_OTHER TK_PR_IGUAL d_tipo TK_PR_SECUEN lista_campos {
-		printf("#_ Parser: Estructura lista_campos econtrada 1.\n");
+	TK_ID_ARI TK_PR_IGUAL d_tipo TK_PR_SECUEN lista_campos {
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura lista_campos econtrada 1.\n"); 
+        #endif
 	}
 	| %empty {
-        printf("#_ Parser: Estructura lista_campos econtrada:VACIO 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura lista_campos econtrada:VACIO 2.\n"); 
+        #endif
     }
 ;
 
 lista_d_cte:
-	TK_ID_OTHER TK_PR_IGUAL TK_LIT_BOOL TK_PR_SECUEN lista_d_cte {
-		printf("#_ Parser: Estructura lista_d_cte econtrada 1.\n");
+	TK_ID_ARI TK_PR_IGUAL TK_LIT_BOOL TK_PR_SECUEN lista_d_cte {
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura lista_d_cte econtrada 1.\n"); 
+        #endif
 	}
-	| TK_ID_OTHER TK_PR_IGUAL TK_LIT_CADE TK_PR_SECUEN lista_d_cte {
-		printf("#_ Parser: Estructura lista_d_cte econtrada 2.\n");
+	| TK_ID_ARI TK_PR_IGUAL TK_LIT_CADE TK_PR_SECUEN lista_d_cte {
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura lista_d_cte econtrada 2.\n"); 
+        #endif
 	}
-	| TK_ID_OTHER TK_PR_IGUAL TK_LIT_CARAC TK_PR_SECUEN lista_d_cte {
-		printf("#_ Parser: Estructura lista_d_cte econtrada 3.\n");
+	| TK_ID_ARI TK_PR_IGUAL TK_LIT_CARAC TK_PR_SECUEN lista_d_cte {
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura lista_d_cte econtrada 3.\n"); 
+        #endif
 	}
-	| TK_ID_OTHER TK_PR_IGUAL TK_LIT_COMENTARIO TK_PR_SECUEN lista_d_cte {
-		printf("#_ Parser: Estructura lista_d_cte econtrada 4.\n");
+	| TK_ID_ARI TK_PR_IGUAL TK_LIT_COMENTARIO TK_PR_SECUEN lista_d_cte {
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura lista_d_cte econtrada 4.\n"); 
+        #endif
 	}
-	| TK_ID_OTHER TK_PR_IGUAL TK_LIT_ENTERO TK_PR_SECUEN lista_d_cte {
-		printf("#_ Parser: Estructura lista_d_cte econtrada 5.\n");
+	| TK_ID_ARI TK_PR_IGUAL TK_LIT_ENTERO TK_PR_SECUEN lista_d_cte {
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura lista_d_cte econtrada 5.\n"); 
+        #endif
 	}
-	| TK_ID_OTHER TK_PR_IGUAL TK_LIT_REAL TK_PR_SECUEN lista_d_cte {
-		printf("#_ Parser: Estructura lista_d_cte econtrada 6.\n");
+	| TK_ID_ARI TK_PR_IGUAL TK_LIT_REAL TK_PR_SECUEN lista_d_cte {
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura lista_d_cte econtrada 6.\n"); 
+        #endif
 	}
 	| %empty {
-            printf("#_ Parser: Estructura lista_d_cte econtrada: VACIO 7.\n");
+            #ifdef _DEBUG
+            printf("#_ Parser: Estructura lista_d_cte econtrada: VACIO 7.\n"); 
+        #endif
     }
 ;
 
 /* pag 7 */
+
 lista_d_var:
     lista_id TK_PR_SECUEN lista_d_var{
         /*Hemos bajado 'TK_PR_DEFVAL d_tipo' a lista_id */
-        printf("#_ Parser: Estructura de lista_d_var detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de lista_d_var detectada 1.\n"); 
+        #endif
     }
     | %empty{ 
-        printf("#_ Parser: Estructura de lista_d_var detectada: VACIO 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de lista_d_var detectada: VACIO 2.\n"); 
+        #endif
     }
 ;
+
 lista_id:
-    TK_ID_OTHER TK_PR_DEFVAL d_tipo {
+    TK_ID_ARI TK_PR_DEFVAL d_tipo {
         /*Control de errores ?*/
         /*Insetar_var_ts() poner funcion*/
-        printf("#_ Parser: Estructura de lista_id detectada 1.\n");
-        
-        $$ = $3;
-    }
-    | TK_ID_ARI TK_PR_DEFVAL d_tipo {
-        printf("#_ Parser: Estructura de lista_id detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de lista_id detectada 1.\n"); 
+        #endif
         $$ = $3;
     }
     | TK_ID_BOL TK_PR_DEFVAL d_tipo {
-        printf("#_ Parser: Estructura de lista_id detectada 3.\n");
-        $$ = $3;
-    }
-    | TK_ID_OTHER TK_PR_COMA lista_id{
-        printf("#_ Parser: Estructura de lista_id detectada 4.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de lista_id detectada 3.\n"); 
+        #endif
         $$ = $3;
     }
     | TK_ID_ARI TK_PR_COMA lista_id{
-        printf("#_ Parser: Estructura de lista_id detectada 5.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de lista_id detectada 5.\n"); 
+        #endif
         $$ = $3;
     }
     | TK_ID_BOL TK_PR_COMA lista_id{
-        printf("#_ Parser: Estructura de lista_id detectada 6.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de lista_id detectada 6.\n"); 
+        #endif
         $$ = $3;
     }
 ;
+
 decl_ent_sal:
     decl_ent{
-        printf("#_ Parser: Estructura de decl_ent_sal detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de decl_ent_sal detectada 1.\n"); 
+        #endif
     }
     | decl_ent decl_sal{
-        printf("#_ Parser: Estructura de decl_ent_sal detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de decl_ent_sal detectada 2.\n"); 
+        #endif
     }
     | decl_sal{
-        printf("#_ Parser: Estructura de decl_ent_sal detectada 3.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de decl_ent_sal detectada 3.\n"); 
+        #endif
     }
 ;
+
 decl_ent:
     TK_PR_ENT lista_d_var{
-        printf("#_ Parser: Estructura de decl_ent detectada.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de decl_ent detectada.\n"); 
+        #endif
     }
 ;
+
 decl_sal:
     TK_PR_SAL lista_d_var{
-        printf("#_ Parser: Estructura de decl_sal detectada.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de decl_sal detectada.\n"); 
+        #endif
     }
 ;
+
 expresion:
     exp_a {
-        printf("#_ Parser: Estructura de expresion detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de expresion detectada 1.\n"); 
+        #endif
         $$.tipo = EXP_ARI;
-        $$.ari.id = $1.id
-        $$.ari.tipo = $1.tipo
+        $$.ari.id = $1.id;
+        $$.ari.tipo = $1.tipo;
     }
     | exp_b {
-        printf("#_ Parser: Estructura de expresion detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de expresion detectada 2.\n"); 
+        #endif
         $$.tipo = EXP_BOOL;
         // Continuar esto
     }
     | funcion_ll {
-        printf("#_ Parser: Estructura de expresion detectada 3.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de expresion detectada 3.\n"); 
+        #endif
     }
 ;
+
 exp_a:
     exp_a TK_PR_SUMA exp_a{
         /*hacemos solo pra enteros con entero y real con real o mezcaloms int real */
-        printf("#_ Parser: Estructura de exp_a detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_a detectada 1.\n"); 
+        #endif
         if ($1.tipo == T_ENTERO && $3.tipo == T_ENTERO){
-            
+            int id_res = newTemp(&miSimTab,"",T_ENTERO);
+            gen(&miQuadTab,OP_SUMA_INT,$1.id,$3.id,id_res);
+
+            $$.id = id_res;
+            $$.tipo = T_ENTERO;
         } else if ($1.tipo == T_REAL && $3.tipo == T_REAL) {
-
+            int id_res = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_SUMA_REAL,$1.id,$3.id,id_res);
+            
+            $$.id = id_res;
+            $$.tipo = T_REAL;
         } else if ($1.tipo == T_REAL && $3.tipo == T_ENTERO) {
+            int op1 = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_INT_TO_REAL,$3.id,OPERNDO_NULL,op1);
 
+            int id_res = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_SUMA_REAL,$1.id,op1,id_res);
+
+            $$.id = id_res;
+            $$.tipo = T_REAL;
         } else if ($1.tipo == T_ENTERO && $3.tipo == T_REAL) {
+            int op1 = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_INT_TO_REAL,$1.id,OPERNDO_NULL,op1);
 
+            int id_res = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_SUMA_REAL,$3.id,op1,id_res);
+
+            $$.id = id_res;
+            $$.tipo = T_REAL;
         }
     }
     | exp_a TK_PR_RESTA exp_a {
-        printf("#_ Parser: Estructura de exp_a detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_a detectada 2.\n"); 
+        #endif
+        if ($1.tipo == T_ENTERO && $3.tipo == T_ENTERO){
+            int id_res = newTemp(&miSimTab,"",T_ENTERO);
+            gen(&miQuadTab,OP_RESTA_INT,$1.id,$3.id,id_res);
+
+            $$.id = id_res;
+            $$.tipo = T_ENTERO;
+        } else if ($1.tipo == T_REAL && $3.tipo == T_REAL) {
+            int id_res = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_RESTA_REAL,$1.id,$3.id,id_res);
+            
+            $$.id = id_res;
+            $$.tipo = T_REAL;
+        } else if ($1.tipo == T_REAL && $3.tipo == T_ENTERO) {
+            int op1 = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_INT_TO_REAL,$3.id,OPERNDO_NULL,op1);
+
+            int id_res = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_RESTA_REAL,$1.id,op1,id_res);
+
+            $$.id = id_res;
+            $$.tipo = T_REAL;
+        } else if ($1.tipo == T_ENTERO && $3.tipo == T_REAL) {
+            int op1 = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_INT_TO_REAL,$1.id,OPERNDO_NULL,op1);
+
+            int id_res = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_RESTA_REAL,$3.id,op1,id_res);
+
+            $$.id = id_res;
+            $$.tipo = T_REAL;
+        }
     }
     | exp_a TK_PR_MULT exp_a{
-        printf("#_ Parser: Estructura de exp_a detectada 3.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_a detectada 3.\n"); 
+        #endif
+        if ($1.tipo == T_ENTERO && $3.tipo == T_ENTERO){
+            int id_res = newTemp(&miSimTab,"",T_ENTERO);
+            gen(&miQuadTab,OP_MULT_INT,$1.id,$3.id,id_res);
+
+            $$.id = id_res;
+            $$.tipo = T_ENTERO;
+        } else if ($1.tipo == T_REAL && $3.tipo == T_REAL) {
+            int id_res = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_MULT_REAL,$1.id,$3.id,id_res);
+            
+            $$.id = id_res;
+            $$.tipo = T_REAL;
+        } else if ($1.tipo == T_REAL && $3.tipo == T_ENTERO) {
+            int op1 = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_INT_TO_REAL,$3.id,OPERNDO_NULL,op1);
+
+            int id_res = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_MULT_REAL,$1.id,op1,id_res);
+
+            $$.id = id_res;
+            $$.tipo = T_REAL;
+        } else if ($1.tipo == T_ENTERO && $3.tipo == T_REAL) {
+            int op1 = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_INT_TO_REAL,$1.id,OPERNDO_NULL,op1);
+
+            int id_res = newTemp(&miSimTab,"",T_REAL);
+            gen(&miQuadTab,OP_MULT_REAL,$3.id,op1,id_res);
+
+            $$.id = id_res;
+            $$.tipo = T_REAL;
+        }
     }
     | exp_a TK_PR_BARRA exp_a{
-        printf("#_ Parser: Estructura de exp_a detectada 4.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_a detectada 4.\n"); 
+        #endif
+
     }
     | exp_a TK_PR_MOD exp_a{
-        printf("#_ Parser: Estructura de exp_a detectada 5.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_a detectada 5.\n"); 
+        #endif
         /*solo con entero*/
+
     }
     | exp_a TK_PR_DIV exp_a{
-        printf("#_ Parser: Estructura de exp_a detectada 6.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_a detectada 6.\n"); 
+        #endif
         /*solo con enteros*/
+
     }
     | TK_PR_ABRIRPAR exp_a TK_PR_CERRARPAR{
-        printf("#_ Parser: Estructura de exp_a detectada 7.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_a detectada 7.\n"); 
+        #endif
+        $$ = $2;
     }
     | operando_ari{
-        printf("#_ Parser: Estructura de exp_a detectada 8.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_a detectada 8.\n"); 
+        #endif
+        $$ = $1;
     }
     | TK_LIT_ENTERO{
-        printf("#_ Parser: Estructura de exp_a detectada 9.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_a detectada 9.\n"); 
+        #endif
+        $$.id = newTemp(&miSimTab,"",T_ENTERO);
+        $$.tipo = T_ENTERO;
     }
     | TK_PR_REAL{
-        printf("#_ Parser: Estructura de exp_a detectada 10.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_a detectada 10.\n"); 
+        #endif
+        $$.id = newTemp(&miSimTab,"",T_REAL);
+        $$.tipo = T_REAL;
     }
     | TK_PR_RESTA exp_a{ 
-        printf("#_ Parser: Estructura de exp_a detectada 11.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_a detectada 11.\n"); 
+        #endif
     }
 ;
+
 exp_b:
     exp_b TK_PR_Y exp_b{
-        printf("#_ Parser: Estructura de exp_b detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_b detectada 1.\n"); 
+        #endif
     }
     | exp_b TK_PR_O exp_b{
-        printf("#_ Parser: Estructura de exp_b detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_b detectada 2.\n"); 
+        #endif
     }
     | TK_PR_NO exp_b{
-        printf("#_ Parser: Estructura de exp_b detectada 3.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_b detectada 3.\n"); 
+        #endif
     }
     | operando_bool{
-        printf("#_ Parser: Estructura de exp_b detectada 4.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_b detectada 4.\n"); 
+        #endif
     }
     | TK_PR_VERDADERO{
-        printf("#_ Parser: Estructura de exp_b detectada 5.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_b detectada 5.\n"); 
+        #endif
     }
     | TK_PR_FALSO{ 
-        printf("#_ Parser: Estructura de exp_b detectada 6.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_b detectada 6.\n"); 
+        #endif
     }
     | expresion TK_PR_MAYOR expresion{ 
-        printf("#_ Parser: Estructura de exp_b detectada 7.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_b detectada 7.\n"); 
+        #endif
     }
     | expresion TK_PR_MENOR expresion{ 
-        printf("#_ Parser: Estructura de exp_b detectada 8.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_b detectada 8.\n"); 
+        #endif
     }
     | expresion TK_PR_MAYIGU expresion{ 
-        printf("#_ Parser: Estructura de exp_b detectada 9.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_b detectada 9.\n"); 
+        #endif
     }
     | expresion TK_PR_MENIGU expresion{  
-        printf("#_ Parser: Estructura de exp_b detectada 10.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_b detectada 10.\n"); 
+        #endif
     }
     | expresion TK_PR_IGUAL expresion{ 
-        printf("#_ Parser: Estructura de exp_b detectada 11.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_b detectada 11.\n"); 
+        #endif
     }
     | expresion TK_PR_DIST expresion{ 
-        printf("#_ Parser: Estructura de exp_b detectada 12.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_b detectada 12.\n"); 
+        #endif
     }
     | TK_PR_ABRIRPAR exp_b TK_PR_CERRARPAR{ 
-        printf("#_ Parser: Estructura de exp_b detectada 13.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de exp_b detectada 13.\n"); 
+        #endif
     }
 ;
+
 operando_ari:
     TK_ID_ARI {
-        printf("#_ Parser: Estructura de operando detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de operando detectada 1.\n"); 
+        #endif
+        nodeTab *nodo = find_tsym(&miSimTab,$1);
+        $$.id = nodo->id;
+        $$.tipo = nodo->type;
     }
     | operando_ari TK_PR_PUNTO operando_ari {
-        printf("#_ Parser: Estructura de operando detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de operando detectada 2.\n"); 
+        #endif
     }
     | operando_ari TK_PR_INIARRA expresion TK_PR_FINARRA {
-        printf("#_ Parser: Estructura de operando detectada 3.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de operando detectada 3.\n"); 
+        #endif
     }   
     | operando_ari TK_PR_REF{
-        printf("#_ Parser: Estructura de operando detectada 4.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de operando detectada 4.\n"); 
+        #endif
     }
 ;
+
 operando_bool:
     TK_ID_BOL {
-        printf("#_ Parser: Estructura de operando detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de operando detectada 1.\n"); 
+        #endif
     }
     | operando_bool TK_PR_PUNTO operando_bool {
-        printf("#_ Parser: Estructura de operando detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de operando detectada 2.\n"); 
+        #endif
     }
     | operando_bool TK_PR_INIARRA expresion TK_PR_FINARRA {
-        printf("#_ Parser: Estructura de operando detectada 3.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de operando detectada 3.\n"); 
+        #endif
     }   
     | operando_bool TK_PR_REF{
-        printf("#_ Parser: Estructura de operando detectada 4.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de operando detectada 4.\n"); 
+        #endif
     }
 ;
+
 instrucciones:
     instruccion TK_PR_SECUEN instrucciones{
-        printf("#_ Parser: Estructura de instrucciones detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de instrucciones detectada 1.\n"); 
+        #endif
     }
     | instruccion{
-        printf("#_ Parser: Estructura de instrucciones detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de instrucciones detectada 2.\n"); 
+        #endif
     }
 ;
+
 instruccion:
     TK_PR_CONTINUAR{
-        printf("#_ Parser: Estructura de instruccion detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de instruccion detectada 1.\n"); 
+        #endif
     }
     | asignacion{
-        printf("#_ Parser: Estructura de instruccion detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de instruccion detectada 2.\n"); 
+        #endif
     }
     | alternativa{
-        printf("#_ Parser: Estructura de instruccion detectada 3.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de instruccion detectada 3.\n"); 
+        #endif
     }
     | iteracion{
-        printf("#_ Parser: Estructura de instruccion detectada 4.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de instruccion detectada 4.\n"); 
+        #endif
     }
     | accion_ll{
-        printf("#_ Parser: Estructura de instruccion detectada 5.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de instruccion detectada 5.\n"); 
+        #endif
     }
 ;
+
 asignacion:
     operando_ari TK_PR_ASIG expresion{
-        printf("#_ Parser: Estructura de asignacion detectada.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de asignacion detectada.\n"); 
+        #endif
     }
     | operando_bool TK_PR_ASIG expresion{
-        printf("#_ Parser: Estructura de asignacion detectada.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de asignacion detectada.\n"); 
+        #endif
     }
 ;
+
 alternativa:
     TK_PR_SI expresion TK_PR_ENTONCES instrucciones lista_opciones TK_PR_FSI{
-        printf("#_ Parser: Estructura de alternativa detectada.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de alternativa detectada.\n"); 
+        #endif
     }
 ;
+
 lista_opciones:
     TK_PR_ELSE expresion TK_PR_ENTONCES instrucciones lista_opciones {
-        printf("#_ Parser: Estructura de lista_opciones detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de lista_opciones detectada 1.\n"); 
+        #endif
     }
     | %empty {
-       printf("#_ Parser: Estructura de lista_opciones detectada: VACIO 2.\n");
+       #ifdef _DEBUG
+            printf("#_ Parser: Estructura de lista_opciones detectada: VACIO 2.\n"); 
+        #endif
     }
 ;
+
 iteracion:
     it_cota_fija{
-        printf("#_ Parser: Estructura de iteracion detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de iteracion detectada 1.\n"); 
+        #endif
     }
     | it_cota_exp{
-        printf("#_ Parser: Estructura de iteracion detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de iteracion detectada 2.\n"); 
+        #endif
     }
 ;
+
 it_cota_exp:
     TK_PR_MIENTRAS expresion TK_PR_HACER instrucciones TK_PR_FMIENTR{
-        printf("#_ Parser: Estructura de it_cota_exp detectada.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de it_cota_exp detectada.\n"); 
+        #endif
     }
 ;
+
 it_cota_fija:
     TK_PR_PARA TK_ID_ARI TK_PR_ASIG expresion TK_PR_HASTA expresion TK_PR_HACER instrucciones TK_PR_FPARA{
-        printf("#_ Parser: Estructura de it_cota_fija detectada.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de it_cota_fija detectada.\n"); 
+        #endif
     }
 ;
 /* pag 8*/
 
 accion_d:
 	TK_PR_ACCION a_cabecera bloque TK_PR_FACCIO {
-		printf("#_ Parser: Estructura accion_d econtrada.\n");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura accion_d econtrada.\n"); 
+        #endif
 	}
 ;
 
 funcion_d: 
 	TK_PR_FUNCION f_cabecera bloque TK_PR_DEV expresion TK_PR_FFUNCION {
-		printf("#_ Parser: Estructura funcion_d econtrada.");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura funcion_d econtrada.\n"); 
+        #endif
 	}
 ;
 
 a_cabecera: 
-	TK_ID_OTHER TK_PR_ABRIRPAR d_par_form TK_PR_CERRARPAR TK_PR_SECUEN {
-		printf("#_ Parser: Estructura funcion_d econtrada .");
+	TK_ID_ARI TK_PR_ABRIRPAR d_par_form TK_PR_CERRARPAR TK_PR_SECUEN {
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura funcion_d econtrada .\n"); 
+        #endif
 	}
 ;
 
 f_cabecera:
-	TK_ID_OTHER TK_PR_ABRIRPAR lista_d_var TK_PR_CERRARPAR TK_PR_DEV d_tipo TK_PR_SECUEN {
-        /*Dudas de tk_id_oher tipo y d_tipo devuelto*/
-        printf("#_ Parser: Estructura f_cabecera econtrada.");
+	TK_ID_ARI TK_PR_ABRIRPAR lista_d_var TK_PR_CERRARPAR TK_PR_DEV d_tipo TK_PR_SECUEN {
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura f_cabecera econtrada.\n"); 
+        #endif
 	}
 ;
 
 d_par_form:
 	d_p_form TK_PR_SECUEN d_par_form {
-		printf("#_ Parser: Estructura d_par_form econtrada 1.");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_par_form econtrada 1.\n"); 
+        #endif
 	}
 	| %empty {
-        printf("#_ Parser: Estructura d_par_form econtrada:VACIO 2.");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura d_par_form econtrada:VACIO 2.\n"); 
+        #endif
     }
 ;
 
 d_p_form:
 	TK_PR_ENTERO lista_id TK_PR_DEFVAL d_tipo {
-		printf("#_ Parser: Estructura d_p_form econtrada 1.");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_p_form econtrada 1.\n"); 
+        #endif
 	}
 	| TK_PR_SAL lista_id TK_PR_DEFVAL d_tipo {
-		printf("#_ Parser: Estructura d_p_form econtrada 2.");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_p_form econtrada 2.\n"); 
+        #endif 
 	}
 	| TK_PR_INOUT lista_id TK_PR_DEFVAL d_tipo {
-		printf("#_ Parser: Estructura d_p_form econtrada 3.");
+		#ifdef _DEBUG
+            printf("#_ Parser: Estructura d_p_form econtrada 3.\n"); 
+        #endif 
 	}
 ;
 
 accion_ll:
-    TK_ID_OTHER TK_PR_ABRIRPAR l_ll TK_PR_CERRARPAR{
-        printf("#_ Parser: Estructura de accion_ll detectada.\n");
+    TK_ID_ARI TK_PR_ABRIRPAR l_ll TK_PR_CERRARPAR{
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de accion_ll detectada.\n"); 
+        #endif
     }
 ;
+
 funcion_ll:
-    TK_ID_OTHER TK_PR_ABRIRPAR l_ll TK_PR_CERRARPAR{
-        printf("#_ Parser: Estructura de funcion_ll detectada.\n");
+    TK_ID_ARI TK_PR_ABRIRPAR l_ll TK_PR_CERRARPAR{
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de funcion_ll detectada.\n"); 
+        #endif
     }
 ;
+
 l_ll:
     expresion TK_PR_COMA l_ll{
-        printf("#_ Parser: Estructura de ll_ll detectada 1.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de ll_ll detectada 1.\n"); 
+        #endif
     }
     | expresion{
-        printf("#_ Parser: Estructura de ll_ll detectada 2.\n");
+        #ifdef _DEBUG
+            printf("#_ Parser: Estructura de ll_ll detectada 2.\n"); 
+        #endif
     }
 ;
 

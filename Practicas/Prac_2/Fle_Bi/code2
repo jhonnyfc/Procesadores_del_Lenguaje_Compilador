@@ -1,4 +1,4 @@
-algoritmo o_sumacomb;
+algoritmo a_sumacomb;
     ent a_n, a_m: entero;
     sal a_suma: entero;
 {Prec: n= N AND m = M AND M >= N >0}
