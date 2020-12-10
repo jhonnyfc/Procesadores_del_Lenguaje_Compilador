@@ -23,6 +23,7 @@ void mostrar_tqua(quadTab *qTabla) {
 }
 
 void gen(quadTab *qTabla, int operac, int op1, int op2, int dest){
+    printf("XDDDDDDDDDDDDDDDDDDDDDDD \n");
     qTabla->table[qTabla->nextQua][0] = operac;
     qTabla->table[qTabla->nextQua][1] = op1;
     qTabla->table[qTabla->nextQua][2] = op2;

@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define OPERNDO_NULL -5
+#define ERR_YA_EXISTE_VAR -2
+
 #define T_DESC 0
 #define T_ENTERO 1
 #define T_REAL 2
@@ -23,7 +26,11 @@
 #define OP_DIV_REAL 21
 #define OP_DIV_INT 22
 #define OP_MOD 23
-#define OP_INT_TO_REAL 24
+#define OP_TO_NEG_INT 24
+#define OP_TO_NEG_REAL 25
+#define OP_INT_TO_REAL 26
+
+#define getNameVar(name)  #name
 
 // Estructuras de uso para los operadores
 typedef struct {

@@ -5,6 +5,7 @@ COMFLE = flex
 FLBI = -d -v
 FLFLE = -i
 FLC = -c
+FLEND = -D DEBUG_MOD
 
 DEPCU = tab_cua.h
 DEPSY = tab_sim.h
@@ -14,6 +15,8 @@ DEPF = $(DEPS) parser.tab.h
 LIBS = -lfl -lm
 
 all: doB doF compF compTC compTS compB
+
+debug: doB doF compF compTC compTS compDebu
 
 doB: parser.y $(DEPS)
 	$(COMBI) $(FLBI) parser.y
@@ -32,6 +35,9 @@ compTS: tab_sim.c $(DEPSY)
 
 compB: parser.tab.c lex.yy.o tab_cua.o tab_sim.o $(DEPS)
 	$(CC) parser.tab.c lex.yy.o tab_cua.o tab_sim.o $(LIBS)
+
+compDebu: parser.tab.c lex.yy.o tab_cua.o tab_sim.o $(DEPS)
+	$(CC) $(FLEND) parser.tab.c lex.yy.o tab_cua.o tab_sim.o $(LIBS)
 
 cl: parser.output
 	clear

@@ -11,8 +11,9 @@ void ini_tsym(symTab *tabla){
 }
 
 int newTemp(symTab *tabla, char *nombre, int tipo){
+    printf("XPPPPPPPPPPPPPPPPPPP-%s-\n",nombre);
      if (strcmp("", nombre) != 0 && find_tsym(tabla, nombre) != NULL) {
-        return -1;
+        return ERR_YA_EXISTE_VAR;
     }
 
     nodeTab *newNodo;
