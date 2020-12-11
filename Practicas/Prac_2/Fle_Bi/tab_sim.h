@@ -17,20 +17,21 @@
 #define EXP_ARI 6
 #define EXP_BOOL 7
 
-#define OP_SUMA_INT 15
-#define OP_SUMA_REAL 16
-#define OP_RESTA_INT 17
-#define OP_RESTA_REAL 18
-#define OP_MULT_INT 19
-#define OP_MULT_REAL 20
-#define OP_DIV_REAL 21
-#define OP_DIV_INT 22
-#define OP_MOD 23
-#define OP_TO_NEG_INT 24
-#define OP_TO_NEG_REAL 25
-#define OP_INT_TO_REAL 26
+#define OP_SUMA_INT 8
+#define OP_SUMA_REAL 9
+#define OP_RESTA_INT 10
+#define OP_RESTA_REAL 11
+#define OP_MULT_INT 12
+#define OP_MULT_REAL 13
+#define OP_DIV_REAL 14
+#define OP_DIV_INT 15
+#define OP_MOD 16
+#define OP_TO_NEG_INT 16
+#define OP_TO_NEG_REAL 17
+#define OP_INT_TO_REAL 18
+#define OP_ASIGNA 19
 
-#define getNameVar(name)  #name
+
 
 // Estructuras de uso para los operadores
 typedef struct {

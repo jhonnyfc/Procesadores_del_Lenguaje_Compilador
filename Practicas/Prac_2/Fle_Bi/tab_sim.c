@@ -11,7 +11,6 @@ void ini_tsym(symTab *tabla){
 }
 
 int newTemp(symTab *tabla, char *nombre, int tipo){
-    printf("XPPPPPPPPPPPPPPPPPPP-%s-\n",nombre);
      if (strcmp("", nombre) != 0 && find_tsym(tabla, nombre) != NULL) {
         return ERR_YA_EXISTE_VAR;
     }
@@ -30,7 +29,7 @@ int newTemp(symTab *tabla, char *nombre, int tipo){
 }
 
 int insert_tsym(symTab *tabla, nodeTab *nodo){
-    if (tabla->first == NULL && tabla->last != NULL){
+    if (tabla->first == NULL && tabla->last == NULL){
         tabla->first = nodo;
         tabla->last = nodo;
     } else {
@@ -46,9 +45,9 @@ void print_tsym(symTab *tabla){
     nodeTab *temp = tabla->first;
 
     printf("\nTAbla de simbolos\n");
-    printf("id \t name \t type\n");
+    printf("\tid \t name \t type\n");
     while (temp != NULL){
-        printf("%d \t %s \t %d\n",temp->id,temp->name,temp->type);
+        printf("\t%d \t %s \t %d\n",temp->id,temp->name,temp->type);
         temp = temp->next;
     }
 }

@@ -9,11 +9,12 @@ void ini_tqua(quadTab *qTabla) {
     qTabla->nextQua = 0;
 }
 
-void mostrar_tqua(quadTab *qTabla) {
+void print_tqua(quadTab *qTabla) {
     int i;
-    printf("\n");
+    printf("\nTAbla de Cuadruplas\n");
+    printf("\tpos \topera \t idOp1 \t idOp2 \t idResu \n");
     for (i = 0; i < qTabla->nextQua; i++) {
-        printf("Cuadrupla # %d: opera: %2d, op1: %2d, op2: %2d, resu: %2d\n", 
+        printf("\t%d \t %d \t %d \t %d \t %d\n", 
         	i+1,
             qTabla->table[i][0],
             qTabla->table[i][1],
@@ -23,7 +24,6 @@ void mostrar_tqua(quadTab *qTabla) {
 }
 
 void gen(quadTab *qTabla, int operac, int op1, int op2, int dest){
-    printf("XDDDDDDDDDDDDDDDDDDDDDDD \n");
     qTabla->table[qTabla->nextQua][0] = operac;
     qTabla->table[qTabla->nextQua][1] = op1;
     qTabla->table[qTabla->nextQua][2] = op2;

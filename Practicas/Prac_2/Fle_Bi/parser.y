@@ -93,13 +93,13 @@
 %token <ty_string> TK_ID_ARI
 %token <ty_string> TK_ID_BOL
 
-%token TK_LIT_CARAC			// Caracter
-%token TK_LIT_CADE			// Cadena
-%token TK_LIT_COMENTARIO	// Comentario
+%token <ty_caracter> TK_LIT_CARAC			// Caracter
+%token <ty_string> TK_LIT_CADE			// Cadena
+%token <ty_string> TK_LIT_COMENTARIO	// Comentario
 
-%token TK_LIT_ENTERO		// Entero con exponente
-%token TK_LIT_REAL			// Real con exponente
-%token TK_LIT_BOOL			// ("VERDADERO"|"FALSO")
+%token <ty_num_entero> TK_LIT_ENTERO		// Entero con exponente
+%token <ty_num_real> TK_LIT_REAL			// Real con exponente
+%token <ty_boolean> TK_LIT_BOOL			// ("VERDADERO"|"FALSO")
 
 // Tipos
 %type <ty_tipo> d_tipo
@@ -350,34 +350,9 @@ lista_campos:
 ;
 
 lista_d_cte:
-	TK_ID_ARI TK_PR_IGUAL TK_LIT_BOOL TK_PR_SECUEN lista_d_cte {
+	TK_ID_ARI TK_PR_IGUAL literal TK_PR_SECUEN lista_d_cte {
 		#ifdef DEBUG_MOD
             printf("#_ Parser: Estructura lista_d_cte econtrada 1.\n"); 
-        #endif
-	}
-	| TK_ID_ARI TK_PR_IGUAL TK_LIT_CADE TK_PR_SECUEN lista_d_cte {
-		#ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura lista_d_cte econtrada 2.\n"); 
-        #endif
-	}
-	| TK_ID_ARI TK_PR_IGUAL TK_LIT_CARAC TK_PR_SECUEN lista_d_cte {
-		#ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura lista_d_cte econtrada 3.\n"); 
-        #endif
-	}
-	| TK_ID_ARI TK_PR_IGUAL TK_LIT_COMENTARIO TK_PR_SECUEN lista_d_cte {
-		#ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura lista_d_cte econtrada 4.\n"); 
-        #endif
-	}
-	| TK_ID_ARI TK_PR_IGUAL TK_LIT_ENTERO TK_PR_SECUEN lista_d_cte {
-		#ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura lista_d_cte econtrada 5.\n"); 
-        #endif
-	}
-	| TK_ID_ARI TK_PR_IGUAL TK_LIT_REAL TK_PR_SECUEN lista_d_cte {
-		#ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura lista_d_cte econtrada 6.\n"); 
         #endif
 	}
 	| %empty {
@@ -385,6 +360,39 @@ lista_d_cte:
             printf("#_ Parser: Estructura lista_d_cte econtrada: VACIO 7.\n"); 
         #endif
     }
+;
+
+literal:
+    TK_LIT_BOOL {
+		#ifdef DEBUG_MOD
+            printf("#_ Parser: Estructura TK_LIT_BOOL econtrada 1 -> %d.\n",$1); 
+        #endif
+	}
+	| TK_LIT_CADE {
+		#ifdef DEBUG_MOD
+            printf("#_ Parser: Estructura TK_LIT_CADE econtrada 2 -> %s.\n",$1); 
+        #endif
+	}
+	| TK_LIT_CARAC {
+		#ifdef DEBUG_MOD
+            printf("#_ Parser: Estructura TK_LIT_CARAC econtrada 3 -> %c.\n",$1); 
+        #endif
+	}
+	| TK_LIT_COMENTARIO {
+		#ifdef DEBUG_MOD
+            printf("#_ Parser: Estructura TK_LIT_COMENTARIO econtrada 4.\n"); 
+        #endif
+	}
+	| TK_LIT_ENTERO {
+		#ifdef DEBUG_MOD
+            printf("#_ Parser: Estructura TK_LIT_ENTERO econtrada 5 -> %ld.\n",$1); 
+        #endif
+	}
+	| TK_LIT_REAL {
+		#ifdef DEBUG_MOD
+            printf("#_ Parser: Estructura TK_LIT_REAL econtrada 6 -> %f.\n",$1); 
+        #endif
+	}
 ;
 
 /* pag 7 */
@@ -407,7 +415,7 @@ lista_id:
     TK_ID_ARI TK_PR_DEFVAL d_tipo {
         /*Control de errores ?*/
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de lista_id detectada 1.\n"); 
+            printf("#_ Parser: Estructura de lista_id detectada 1 -> %s.\n",$1); 
         #endif
         if (newTemp(&miSimTab,$1,$3) == ERR_YA_EXISTE_VAR)
             yyerror("!! Variable (%s) ya definida",$1);
@@ -884,6 +892,12 @@ asignacion:
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de asignacion detectada.\n"); 
         #endif
+        if ($3.tipo == EXP_ARI && $1.tipo == $3.ari.tipo){
+            
+            gen(&miQuadTab,OP_ASIGNA,$3.ari.id,OPERNDO_NULL,$1.id);
+        } else {
+            yyerror("!! Los tipos no son iguales");
+        }
     }
     | operando_bool TK_PR_ASIG expresion{
         #ifdef DEBUG_MOD
@@ -1066,5 +1080,8 @@ int main (int argc, char **argv){
     ini_tqua(&miQuadTab);
 
     yyparse();
+
+    print_tsym(&miSimTab);
+    print_tqua(&miQuadTab);
 	return 0;
 }
