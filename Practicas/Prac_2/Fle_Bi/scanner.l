@@ -3,10 +3,12 @@
 	/* Flaga para hacer minusculas y mayusculas indistinguibles*/
 	/*%option caseless -> se puede utilizar este en vez de poner -> ?i:*/
 %{
-/*Constantes Manifiestas*/
-#include "tab_sim.h"
-#include "tab_cua.h"
-#include "parser.tab.h"
+	/*Constantes Manifiestas*/
+	#include "utiles.h"
+	#include "tab_sim.h"
+	#include "tab_cua.h"
+	#include "bool_tools.h"
+	#include "parser.tab.h"
 %}
 
 /*Exprasiones regulares*/

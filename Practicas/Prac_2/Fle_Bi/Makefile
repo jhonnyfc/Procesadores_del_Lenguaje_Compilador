@@ -5,21 +5,23 @@ COMFLE = flex
 FLBI = -d -v
 FLFLE = -i
 FLC = -c
-FLDBGFL = -D DEBUG_MOD
-FLEND = -D DEBUG_MOD
+FLDBG = -D DEBUG_MOD
 
+#modulos
 DEPCU = tab_cua.h
 DEPSY = tab_sim.h
-DEPS = $(DEPCU) $(DEPSY)
+DEPS = $(DEPCU) $(DEPSY) bool_tools.h
 DEPF = $(DEPS) parser.tab.h
 
 LIBS = -lfl -lm
 
-all: doB doF compF compTC compTS compB
+all: doB doF compF compTC compTS compBO compB
 
-debug: doB doF compFdbg compTC compTS compBdbg
-debugB: doB doF compF compTC compTS compBdbg
-debugF: doB doF compFdbg compTC compTS compB
+debug: doB doF compFdbg compTC compTS compBO compBdbg
+
+debugB: doB doF compF compTC compTS compBO compBdbg
+
+debugF: doB doF compFdbg compTC compTS compBO compB 
 
 doB: parser.y $(DEPS)
 	$(COMBI) $(FLBI) parser.y
@@ -31,7 +33,7 @@ compF: lex.yy.c $(DEPSF)
 	$(CC) $(FLC) lex.yy.c
 
 compFdbg: lex.yy.c $(DEPSF)
-	$(CC) $(FLC) $(FLDBGFL) lex.yy.c
+	$(CC) $(FLC) $(FLDBG) lex.yy.c
 
 compTC: tab_cua.c $(DEPCU)
 	$(CC) $(FLC) tab_cua.c
@@ -39,11 +41,14 @@ compTC: tab_cua.c $(DEPCU)
 compTS: tab_sim.c $(DEPSY)
 	$(CC) $(FLC) tab_sim.c
 
-compB: parser.tab.c lex.yy.o tab_cua.o tab_sim.o $(DEPS)
-	$(CC) parser.tab.c lex.yy.o tab_cua.o tab_sim.o $(LIBS)
+compBO: bool_tools.c $(DEPSY) $(DEPCU)
+	$(CC) $(FLC) bool_tools.c
 
-compBdbg: parser.tab.c lex.yy.o tab_cua.o tab_sim.o $(DEPS)
-	$(CC) $(FLEND) parser.tab.c lex.yy.o tab_cua.o tab_sim.o $(LIBS)
+compB: parser.tab.c lex.yy.o tab_cua.o tab_sim.o bool_tools.o $(DEPS)
+	$(CC) parser.tab.c lex.yy.o tab_cua.o tab_sim.o bool_tools.o $(LIBS)
+
+compBdbg: parser.tab.c lex.yy.o tab_cua.o tab_sim.o bool_tools.o $(DEPS)
+	$(CC) $(FLDBG) parser.tab.c lex.yy.o tab_cua.o tab_sim.o bool_tools.o $(LIBS)
 
 cl: parser.output
 	clear

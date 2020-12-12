@@ -1,8 +1,7 @@
-#include "tab_sim.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
+#include "tab_sim.h"
 
 void ini_tsym(symTab *tabla){
     tabla->size = 0;
@@ -45,9 +44,9 @@ void print_tsym(symTab *tabla){
     nodeTab *temp = tabla->first;
 
     printf("\nTAbla de simbolos\n");
-    printf("\tid \t name \t type\n");
+    printf("\tid \t\tname \t\ttype\n");
     while (temp != NULL){
-        printf("\t%d \t %s \t %d\n",temp->id,temp->name,temp->type);
+        printf("\t%d \t\t%s \t\t%d\n",temp->id,temp->name,temp->type);
         temp = temp->next;
     }
 }

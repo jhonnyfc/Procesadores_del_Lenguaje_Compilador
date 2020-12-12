@@ -2,16 +2,19 @@
 %{
     #include <stdio.h>
     #include <stdarg.h>
+    #include "utiles.h"
     #include "tab_sim.h"
     #include "tab_cua.h"
+    #include "bool_tools.h"
 
-    int yylex (void);
-    void yyerror (char const *, ...);
     extern FILE *yyin;
     extern int yylineno;
 
     symTab      miSimTab;
     quadTab     miQuadTab;
+
+    int yylex (void);
+    void yyerror (char const *, ...);
 %}
 
 %token TK_PR_CONTINUAR		// CONTINUAR
@@ -112,6 +115,9 @@
 
 %type <ty_st_bool> operando_bool
 %type <ty_st_bool> exp_b
+
+%type <ty_tipo> aux_b
+%type <ty_tipo> compop
 
 %union {
     double      ty_num_real;
@@ -418,7 +424,7 @@ lista_id:
             printf("#_ Parser: Estructura de lista_id detectada 1 -> %s.\n",$1); 
         #endif
         if (newTemp(&miSimTab,$1,$3) == ERR_YA_EXISTE_VAR)
-            yyerror("!! Variable (%s) ya definida",$1);
+            yyerror("!! Variable (%s) ya definida.",$1);
 
         $$ = $3;
     }
@@ -427,7 +433,7 @@ lista_id:
             printf("#_ Parser: Estructura de lista_id detectada 3.\n"); 
         #endif
         if (newTemp(&miSimTab,$1,$3) == ERR_YA_EXISTE_VAR)
-            yyerror("!! Variable (%s) ya definida",$1);
+            yyerror("!! Variable (%s) ya definida.",$1);
         $$ = $3;
     }
     | TK_ID_ARI TK_PR_COMA lista_id{
@@ -435,7 +441,7 @@ lista_id:
             printf("#_ Parser: Estructura de lista_id detectada 5.\n"); 
         #endif
         if (newTemp(&miSimTab,$1,$3) == ERR_YA_EXISTE_VAR)
-            yyerror("!! Variable (%s) ya definida",$1);
+            yyerror("!! Variable (%s) ya definida.",$1);
         $$ = $3;
     }
     | TK_ID_BOL TK_PR_COMA lista_id{
@@ -443,7 +449,7 @@ lista_id:
             printf("#_ Parser: Estructura de lista_id detectada 6.\n"); 
         #endif
         if (newTemp(&miSimTab,$1,$3) == ERR_YA_EXISTE_VAR)
-            yyerror("!! Variable (%s) ya definida",$1);
+            yyerror("!! Variable (%s) ya definida.",$1);
         $$ = $3;
     }
 ;
@@ -496,7 +502,8 @@ expresion:
             printf("#_ Parser: Estructura de expresion detectada 2.\n"); 
         #endif
         $$.tipo = EXP_BOOL;
-        // Continuar esto
+        $$.bool.trues = $1.trues;
+        $$.bool.falses = $1.falses;
     }
     | funcion_ll {
         #ifdef DEBUG_MOD
@@ -541,6 +548,8 @@ exp_a:
 
             $$.id = id_res;
             $$.tipo = T_REAL;
+        } else {
+            yyerror("!! El tipo %s y el %s no son compatibles para la suma.",DF_NAMES[$1.tipo],DF_NAMES[$3.tipo]);
         }
     }
     | exp_a TK_PR_RESTA exp_a {
@@ -577,6 +586,8 @@ exp_a:
 
             $$.id = id_res;
             $$.tipo = T_REAL;
+        } else {
+            yyerror("!! El tipo %s y el %s no son compatibles para la resta.",DF_NAMES[$1.tipo],DF_NAMES[$3.tipo]);
         }
     }
     | exp_a TK_PR_MULT exp_a{
@@ -613,6 +624,8 @@ exp_a:
 
             $$.id = id_res;
             $$.tipo = T_REAL;
+        }  else {
+            yyerror("!! El tipo %s y el %s no son compatibles para la multiplicacion.",DF_NAMES[$1.tipo],DF_NAMES[$3.tipo]);
         }
     }
     | exp_a TK_PR_BARRA exp_a{
@@ -655,6 +668,8 @@ exp_a:
 
             $$.id = id_res;
             $$.tipo = T_REAL;
+        }  else {
+            yyerror("!! El tipo %s y el %s no son compatibles para la division.",DF_NAMES[$1.tipo],DF_NAMES[$3.tipo]);
         }
     }
     | exp_a TK_PR_MOD exp_a{
@@ -668,6 +683,8 @@ exp_a:
 
             $$.id = id_res;
             $$.tipo = T_ENTERO;
+        } else {
+            yyerror("!! El tipo %s y el %s no son compatibles para el resto , solo int.",DF_NAMES[$1.tipo],DF_NAMES[$3.tipo]);
         }
     }
     | exp_a TK_PR_DIV exp_a{
@@ -681,6 +698,8 @@ exp_a:
 
             $$.id = id_res;
             $$.tipo = T_ENTERO;
+        }  else {
+            yyerror("!! El tipo %s y el %s no son compatibles para la division entera.",DF_NAMES[$1.tipo],DF_NAMES[$3.tipo]);
         }
     }
     | TK_PR_ABRIRPAR exp_a TK_PR_CERRARPAR{
@@ -725,32 +744,43 @@ exp_a:
 
             $$.id = id_res;
             $$.tipo = T_REAL;
+        }   else {
+            yyerror("!! El tipo %s es compatibles para la opearcion negativo .",DF_NAMES[$2.tipo]);
         }
     }
 ;
 
 exp_b:
-    exp_b TK_PR_Y exp_b{
+    exp_b TK_PR_Y aux_b exp_b{
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de exp_b detectada 1.\n"); 
         #endif
+        backpatch(&miQuadTab,$1.trues,$3);
+        $$.trues = merge($1.falses,$4.falses);
+        $$.falses = $4.falses;
     }
-    | exp_b TK_PR_O exp_b{
+    | exp_b TK_PR_O aux_b exp_b{
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de exp_b detectada 2.\n"); 
         #endif
+        backpatch(&miQuadTab,$1.trues,$3);
+        $$.trues = merge($1.falses,$4.falses);
+        $$.falses = $4.falses;
     }
     | TK_PR_NO exp_b{
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de exp_b detectada 3.\n"); 
         #endif
+        $$.trues = $2.falses;
+        $$.falses = $2.trues;
     }
     | operando_bool{
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de exp_b detectada 4.\n"); 
         #endif
+        $$ = $1;
     }
-    | TK_PR_VERDADERO{
+    | TK_PR_VERDADERO {
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de exp_b detectada 5.\n"); 
         #endif
@@ -760,40 +790,65 @@ exp_b:
             printf("#_ Parser: Estructura de exp_b detectada 6.\n"); 
         #endif
     }
-    | expresion TK_PR_MAYOR expresion{ 
+    | expresion compop expresion{ 
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de exp_b detectada 7.\n"); 
         #endif
-    }
-    | expresion TK_PR_MENOR expresion{ 
-        #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de exp_b detectada 8.\n"); 
-        #endif
-    }
-    | expresion TK_PR_MAYIGU expresion{ 
-        #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de exp_b detectada 9.\n"); 
-        #endif
-    }
-    | expresion TK_PR_MENIGU expresion{  
-        #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de exp_b detectada 10.\n"); 
-        #endif
-    }
-    | expresion TK_PR_IGUAL expresion{ 
-        #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de exp_b detectada 11.\n"); 
-        #endif
-    }
-    | expresion TK_PR_DIST expresion{ 
-        #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de exp_b detectada 12.\n"); 
-        #endif
+        $$.trues = makelist(miQuadTab.nextQua);
+        $$.falses = makelist(miQuadTab.nextQua);
+
+        gen(&miQuadTab,$2,$1.ari.id,$3.ari.id,OPERNDO_NULL);
+        gen(&miQuadTab,OP_GOTO,OPERNDO_NULL,OPERNDO_NULL,OPERNDO_NULL);
     }
     | TK_PR_ABRIRPAR exp_b TK_PR_CERRARPAR{ 
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de exp_b detectada 13.\n"); 
         #endif
+    }
+;
+
+compop:
+    TK_PR_MAYOR { 
+        #ifdef DEBUG_MOD
+            printf("#_ Parser: Estructura de exp_b detectada 7.\n"); 
+        #endif
+        $$ = OP_MAYOR;
+    }
+    | TK_PR_MENOR { 
+        #ifdef DEBUG_MOD
+            printf("#_ Parser: Estructura de exp_b detectada 8.\n"); 
+        #endif
+        $$ = OP_MENOR;
+    }
+    | TK_PR_MAYIGU { 
+        #ifdef DEBUG_MOD
+            printf("#_ Parser: Estructura de exp_b detectada 9.\n"); 
+        #endif
+        $$ = OP_MAYOR_IGUAL;
+    }
+    | TK_PR_MENIGU {
+        #ifdef DEBUG_MOD
+            printf("#_ Parser: Estructura de exp_b detectada 10.\n"); 
+        #endif
+        $$ = OP_MENOR_IGUAL;
+    }
+    |TK_PR_IGUAL { 
+        #ifdef DEBUG_MOD
+            printf("#_ Parser: Estructura de exp_b detectada 11.\n"); 
+        #endif
+        $$ = OP_DISTINTO;
+    }
+    | TK_PR_DIST { 
+        #ifdef DEBUG_MOD
+            printf("#_ Parser: Estructura de exp_b detectada 12.\n"); 
+        #endif
+        $$ = OP_IGUAL;
+    }
+;
+
+aux_b:
+    %empty{
+        $$ = miQuadTab.nextQua;
     }
 ;
 
@@ -828,6 +883,12 @@ operando_bool:
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de operando detectada 1.\n"); 
         #endif
+        $$.trues = makelist(miQuadTab.nextQua);
+        $$.falses = makelist(miQuadTab.nextQua+1);
+
+        nodeTab *nodo = find_tsym(&miSimTab,$1);
+        gen(&miQuadTab,OP_GOTO_CONDI,nodo->id,OPERNDO_NULL,OPERNDO_NULL);
+        gen(&miQuadTab,OP_GOTO,OPERNDO_NULL,OPERNDO_NULL,OPERNDO_NULL);
     }
     | operando_bool TK_PR_PUNTO operando_bool {
         #ifdef DEBUG_MOD
@@ -892,17 +953,23 @@ asignacion:
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de asignacion detectada.\n"); 
         #endif
-        if ($3.tipo == EXP_ARI && $1.tipo == $3.ari.tipo){
-            
+        if ($1.tipo == EXP_ARI && $1.tipo == $3.ari.tipo){
+
             gen(&miQuadTab,OP_ASIGNA,$3.ari.id,OPERNDO_NULL,$1.id);
         } else {
-            yyerror("!! Los tipos no son iguales");
+            yyerror("!! El tipo %s no se puede asignar al %s.", DF_NAMES[$3.ari.tipo],DF_NAMES[$1.tipo]);
         }
     }
     | operando_bool TK_PR_ASIG expresion{
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de asignacion detectada.\n"); 
+            printf("#_ Parser: Estructura de asignacion detectada 2.\n"); 
         #endif
+        if ($3.tipo == EXP_BOOL){
+            $1.trues = $3.bool.trues;
+            $1.falses = $3.bool.falses;
+        } else {
+            yyerror("!! El tipo %s no se puede asignar al tipo bool", DF_NAMES[$3.tipo]);
+        }
     }
 ;
 
@@ -1053,10 +1120,11 @@ l_ll:
 
 void yyerror (char const *s, ...){
     va_list args;
-    fprintf(stderr, "!! Error en la linea %d: ", yylineno);
+    fprintf(stderr, "!! Error en la linea %d: \n", yylineno);
     va_start(args, s);
     vfprintf(stderr, s, args);
     va_end(args);
+    printf("\n\n");
 }
 
 int main (int argc, char **argv){
