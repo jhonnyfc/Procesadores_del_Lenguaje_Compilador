@@ -382,31 +382,31 @@ struct yy_trans_info
 static const flex_int16_t yy_accept[237] =
     {   0,
         0,    0,   75,   73,   72,   72,   73,   53,   54,   56,
-       55,   46,   57,   47,   52,   67,   49,   42,   61,   50,
+       55,   46,   57,   47,   52,   66,   49,   42,   61,   50,
        60,   73,   73,   73,   73,   73,   73,   73,   73,   73,
        30,   73,   73,   73,   73,   73,   40,   44,   58,   59,
-        0,    0,   70,    0,   67,   45,   48,    0,   67,    0,
-       41,   63,   51,   62,    0,    0,   65,    0,   66,    0,
+        0,    0,   69,    0,   66,   45,   48,    0,   66,    0,
+       41,   63,   51,   62,    0,    0,   64,    0,   65,    0,
         0,    8,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,   29,    0,    0,
         0,   35,    0,    0,    0,    0,    0,   43,    0,    0,
-       71,   69,    0,   70,   69,   68,   67,    0,    0,   65,
+       70,   68,    0,   69,   68,   67,   66,    0,    0,   64,
 
-        0,   66,    0,    0,    0,    9,   10,   13,   11,    0,
+        0,   65,    0,    0,    0,    9,   10,   13,   11,    0,
         0,    0,    0,    0,    0,   20,    0,    0,    0,    0,
         0,    0,    0,   28,    0,    0,   33,   34,    0,    0,
-        0,   39,    0,   71,   70,    0,   68,    0,   67,    0,
+        0,   39,    0,   70,   69,    0,   67,    0,   66,    0,
         0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
         0,    0,    0,    0,    0,    0,    0,   24,    0,    0,
-        0,   31,   32,    0,   37,    0,    0,    0,   68,    0,
-        0,    0,    0,    0,    6,    0,    0,    0,    0,   64,
+        0,   31,   32,    0,   37,    0,    0,    0,   67,    0,
+        0,    0,    0,    0,    6,    0,    0,    0,    0,   71,
         0,    0,    0,   19,   21,    0,    0,   25,   26,    0,
-       36,   38,    0,   68,    1,    0,    0,    4,    0,    0,
+       36,   38,    0,   67,    1,    0,    0,    4,    0,    0,
 
        12,    0,    0,   16,    0,    0,   22,    0,    0,    0,
         0,    3,    0,    0,   14,    0,    0,    0,   23,    0,
         0,    0,    5,    0,    0,   17,    0,   27,    0,    2,
-        7,    0,   18,   64,   15,    0
+        7,    0,   18,   71,   15,    0
     } ;
 
 static const YY_CHAR yy_ec[256] =
@@ -644,7 +644,7 @@ static const flex_int32_t yy_rule_can_match_eol[75] =
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0,     };
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0,     };
 
 static yy_state_type yy_last_accepting_state;
 static char *yy_last_accepting_cpos;
@@ -1594,16 +1594,6 @@ YY_RULE_SETUP
 #line 487 "scanner.l"
 {
 	#ifdef DEBUG_MOD
-		printf("$: Boleano: %s \n", yytext);
-	#endif
-	return TK_ID_BOL;
-}
-	YY_BREAK
-case 65:
-YY_RULE_SETUP
-#line 493 "scanner.l"
-{
-	#ifdef DEBUG_MOD
 		printf("$: Id ari: %s \n", yytext );
 	#endif
 	yylval.ty_string = (char *)malloc(sizeof(char)*strlen(yytext));
@@ -1611,19 +1601,21 @@ YY_RULE_SETUP
 	return TK_ID_ARI;
 }
 	YY_BREAK
-case 66:
+case 65:
 YY_RULE_SETUP
-#line 501 "scanner.l"
+#line 495 "scanner.l"
 {
 	#ifdef DEBUG_MOD
 		printf("$: Id bool: %s \n", yytext );
 	#endif
+	yylval.ty_string = (char *)malloc(sizeof(char)*strlen(yytext));
+	strcpy(yylval.ty_string, yytext);
 	return TK_LIT_BOOL;
 }
 	YY_BREAK
-case 67:
+case 66:
 YY_RULE_SETUP
-#line 507 "scanner.l"
+#line 503 "scanner.l"
 {
 	#ifdef DEBUG_MOD
 		printf("$: Entero: %d\n", (int)atof( yytext ) );
@@ -1632,9 +1624,9 @@ YY_RULE_SETUP
 	return TK_LIT_ENTERO;
 }
 	YY_BREAK
-case 68:
+case 67:
 YY_RULE_SETUP
-#line 514 "scanner.l"
+#line 510 "scanner.l"
 {
 	#ifdef DEBUG_MOD
 		printf("$: Real: %f\n", atof( yytext ) );
@@ -1643,9 +1635,9 @@ YY_RULE_SETUP
 	return TK_LIT_REAL;
 }
 	YY_BREAK
-case 69:
+case 68:
 YY_RULE_SETUP
-#line 521 "scanner.l"
+#line 517 "scanner.l"
 {
 	#ifdef DEBUG_MOD
 		printf("$: Literal caracter: %c \n", yytext[1] );
@@ -1654,10 +1646,10 @@ YY_RULE_SETUP
 	return TK_LIT_CARAC;
 }
 	YY_BREAK
-case 70:
-/* rule 70 can match eol */
+case 69:
+/* rule 69 can match eol */
 YY_RULE_SETUP
-#line 528 "scanner.l"
+#line 524 "scanner.l"
 {
 	#ifdef DEBUG_MOD
 		printf("$: Literal cadena: %s \n", yytext );
@@ -1667,10 +1659,10 @@ YY_RULE_SETUP
 	return TK_LIT_CADE;
 }
 	YY_BREAK
-case 71:
-/* rule 71 can match eol */
+case 70:
+/* rule 70 can match eol */
 YY_RULE_SETUP
-#line 536 "scanner.l"
+#line 532 "scanner.l"
 {
 	#ifdef DEBUG_MOD
 		printf("$: Literal comentario: %s \n", yytext );
@@ -1678,15 +1670,30 @@ YY_RULE_SETUP
 	return TK_LIT_COMENTARIO;
 }
 	YY_BREAK
+case 71:
+YY_RULE_SETUP
+#line 538 "scanner.l"
+{
+	#ifdef DEBUG_MOD
+		printf("$: Boleano: %s \n", yytext);
+	#endif
+	int val = 0;
+	if (strcmp(yytext,"VERDADERO") || strcmp(yytext,"verdadero")){
+		val = 1;
+	}
+	yylval.ty_boolean = val;
+	return TK_ID_BOL;
+}
+	YY_BREAK
 case 72:
 /* rule 72 can match eol */
 YY_RULE_SETUP
-#line 543 "scanner.l"
+#line 550 "scanner.l"
 {}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 544 "scanner.l"
+#line 551 "scanner.l"
 {
 	//#ifdef DEBUG_MOD
 		printf("$: Caracter desconocido: %s \n", yytext );
@@ -1695,10 +1702,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 74:
 YY_RULE_SETUP
-#line 550 "scanner.l"
+#line 557 "scanner.l"
 ECHO;
 	YY_BREAK
-#line 1702 "lex.yy.c"
+#line 1709 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2715,7 +2722,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 550 "scanner.l"
+#line 557 "scanner.l"
 
 
 /*

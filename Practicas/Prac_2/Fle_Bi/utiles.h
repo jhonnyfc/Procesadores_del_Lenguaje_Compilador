@@ -1,15 +1,16 @@
 #ifndef utiles_h
 #define utiles_h
 
+// Tcua
 #define NCOL 4
 #define NROWS 100
+
 #define OPERACION 0
 #define OP1_ID 1
 #define OP2_ID 2
 #define RESUL_ID 3
 
-
-#define OPERNDO_NULL -5
+// Tsym
 #define ERR_YA_EXISTE_VAR -2
 
 #define T_DESC 0
@@ -43,19 +44,24 @@
 #define OP_DISTINTO 25
 #define OP_IGUAL 26
 
-#define OP_GOTO_CONDI 27
-#define OP_GOTO 28
+#define OPERNDO_NULL 27
+
+#define OP_GOTO_CONDI 28
+#define OP_GOTO 29
+
+#define DF_IN 30
+#define DF_OUT 31
 
 const static char* DF_NAMES[] = {
     "Desconocido",
-    "Entero",
-    "Real",
-    "Bool",
-    "Char",
-    "Cadena",
+    "Entero    ",
+    "Real     ",
+    "Bool     ",
+    "Char     ",
+    "Cadena   ",
 
     "Expresoin Ari",
-    "Expresion Bool"
+    "Expresion Bool",
 
     "Suma int",
     "Suma real",
@@ -65,17 +71,26 @@ const static char* DF_NAMES[] = {
     "Multi real",
     "Div real",
     "Div int",
-    "Mod",
+    "Mod      ",
     "Negativo int",
     "Negativo real",
     "int To real",
-    "Asignacion"
-    "Mayor",
-    "Menor",
-    "Mayo igual",
+    "Asignacion",
+
+    "Mayor   ",
+    "Menor   ",
+    "Mayor igual",
     "Menor igual",
     "Distinto",
-    "Igual"
+    "Igual    ",
+
+    "Opracion Null",
+
+    "Go to condici",
+    "Go to      ",
+
+    "Entrada  ",
+    "Salida   "
 };
 
 // Estructura para  operadores aritmeticos
@@ -101,5 +116,10 @@ typedef struct {
     st_arit ari;
     st_bool bool;
 } st_exp;
+
+typedef struct {
+    int idList;
+    int tipo;
+} st_listID;
 
 #endif

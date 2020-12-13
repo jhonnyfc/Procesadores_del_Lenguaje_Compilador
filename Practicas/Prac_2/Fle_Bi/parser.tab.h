@@ -128,7 +128,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 122 "parser.y"
+#line 126 "parser.y"
 
     double      ty_num_real;
     long int    ty_num_entero;
@@ -143,7 +143,9 @@ union YYSTYPE
 
     st_exp      ty_st_exp;
 
-#line 147 "parser.tab.h"
+    st_listID   ty_listaID;
+
+#line 149 "parser.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

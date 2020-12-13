@@ -2,6 +2,7 @@
 %{
     #include <stdio.h>
     #include <stdarg.h>
+    #include <string.h>
     #include "utiles.h"
     #include "tab_sim.h"
     #include "tab_cua.h"
@@ -15,6 +16,8 @@
 
     int yylex (void);
     void yyerror (char const *, ...);
+
+    int temp_id;
 %}
 
 %token TK_PR_CONTINUAR		// CONTINUAR
@@ -106,7 +109,8 @@
 
 // Tipos
 %type <ty_tipo> d_tipo
-%type <ty_tipo> lista_id
+%type <ty_tipo> lista_d_var
+%type <ty_listaID> lista_id
 
 %type <ty_st_exp> expresion
 
@@ -132,6 +136,8 @@
     st_bool     ty_st_bool;
 
     st_exp      ty_st_exp;
+
+    st_listID   ty_listaID;
 };
 
 %% /* Grammar rules and actions follow.  */
@@ -238,7 +244,7 @@ declaracion_tipo:
 ;
 
 declaracion_cte:
-	TK_PR_CONST lista_d_cte TK_PR_FCONST TK_PR_SECUEN{
+	TK_PR_CONST lista_d_cte TK_PR_FCONST TK_PR_SECUEN {
 		#ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de declaracion_cte encontrada.\n"); 
         #endif
@@ -246,7 +252,7 @@ declaracion_cte:
 ;
 
 declaracion_var:
-	TK_PR_VAR lista_d_var TK_PR_FVAR TK_PR_SECUEN{
+	TK_PR_VAR lista_d_var TK_PR_FVAR TK_PR_SECUEN {
 		#ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de declaracion_var encontrada.\n"); 
         #endif
@@ -280,6 +286,12 @@ d_tipo:
         $$ = T_DESC;
 	}
 	| TK_ID_ARI {
+		#ifdef DEBUG_MOD
+            printf("#_ Parser: Estructura d_tipo encontrada 3.\n"); 
+        #endif
+        $$ = T_DESC;
+	}
+    | TK_ID_BOL {
 		#ifdef DEBUG_MOD
             printf("#_ Parser: Estructura d_tipo encontrada 3.\n"); 
         #endif
@@ -404,11 +416,13 @@ literal:
 /* pag 7 */
 
 lista_d_var:
-    lista_id TK_PR_SECUEN lista_d_var{
+    lista_id TK_PR_SECUEN lista_d_var {
         /*Hemos bajado 'TK_PR_DEFVAL d_tipo' a lista_id */
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de lista_d_var detectada 1.\n"); 
         #endif
+        $$ = $1.idList;
+        inc_idLista();
     }
     | %empty{ 
         #ifdef DEBUG_MOD
@@ -419,37 +433,41 @@ lista_d_var:
 
 lista_id:
     TK_ID_ARI TK_PR_DEFVAL d_tipo {
-        /*Control de errores ?*/
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de lista_id detectada 1 -> %s.\n",$1); 
         #endif
-        if (newTemp(&miSimTab,$1,$3) == ERR_YA_EXISTE_VAR)
+        if (inserHead_tsym(&miSimTab,$1,$3,get_idList()) == ERR_YA_EXISTE_VAR)
             yyerror("!! Variable (%s) ya definida.",$1);
-
-        $$ = $3;
+        
+        $$.idList = get_idList();
+        $$.tipo = $3;
     }
     | TK_ID_BOL TK_PR_DEFVAL d_tipo {
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de lista_id detectada 3.\n"); 
         #endif
-        if (newTemp(&miSimTab,$1,$3) == ERR_YA_EXISTE_VAR)
+        if (inserHead_tsym(&miSimTab,$1,$3,get_idList()) == ERR_YA_EXISTE_VAR)
             yyerror("!! Variable (%s) ya definida.",$1);
-        $$ = $3;
+
+        $$.idList = get_idList();
+        $$.tipo = $3;
     }
-    | TK_ID_ARI TK_PR_COMA lista_id{
+    | TK_ID_ARI TK_PR_COMA lista_id {
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de lista_id detectada 5.\n"); 
         #endif
-        if (newTemp(&miSimTab,$1,$3) == ERR_YA_EXISTE_VAR)
+        if (inserHead_tsym(&miSimTab,$1,$3.tipo,get_idList()) == ERR_YA_EXISTE_VAR)
             yyerror("!! Variable (%s) ya definida.",$1);
+        
         $$ = $3;
     }
-    | TK_ID_BOL TK_PR_COMA lista_id{
+    | TK_ID_BOL TK_PR_COMA lista_id {
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de lista_id detectada 6.\n"); 
         #endif
-        if (newTemp(&miSimTab,$1,$3) == ERR_YA_EXISTE_VAR)
+        if (inserHead_tsym(&miSimTab,$1,$3.tipo,get_idList()) == ERR_YA_EXISTE_VAR)
             yyerror("!! Variable (%s) ya definida.",$1);
+        
         $$ = $3;
     }
 ;
@@ -460,7 +478,7 @@ decl_ent_sal:
             printf("#_ Parser: Estructura de decl_ent_sal detectada 1.\n"); 
         #endif
     }
-    | decl_ent decl_sal{
+    | decl_ent decl_sal {
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de decl_ent_sal detectada 2.\n"); 
         #endif
@@ -473,10 +491,12 @@ decl_ent_sal:
 ;
 
 decl_ent:
-    TK_PR_ENT lista_d_var{
+    TK_PR_ENT lista_d_var {
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de decl_ent detectada.\n"); 
         #endif
+        printf("%d\n",$2);
+        set_ioType(&miSimTab,$2,DF_IN);
     }
 ;
 
@@ -485,6 +505,8 @@ decl_sal:
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de decl_sal detectada.\n"); 
         #endif
+        printf("%d\n",$2);
+        set_ioType(&miSimTab,$2,DF_OUT);
     }
 ;
 
@@ -519,31 +541,48 @@ exp_a:
             printf("#_ Parser: Estructura de exp_a detectada 1.\n"); 
         #endif
         if ($1.tipo == T_ENTERO && $3.tipo == T_ENTERO){
-            int id_res = newTemp(&miSimTab,"",T_ENTERO);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+
+            int id_res = newTemp(&miSimTab,idTemp,T_ENTERO);
             gen(&miQuadTab,OP_SUMA_INT,$1.id,$3.id,id_res);
 
             $$.id = id_res;
             $$.tipo = T_ENTERO;
         } else if ($1.tipo == T_REAL && $3.tipo == T_REAL) {
-            int id_res = newTemp(&miSimTab,"",T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_SUMA_REAL,$1.id,$3.id,id_res);
             
             $$.id = id_res;
             $$.tipo = T_REAL;
         } else if ($1.tipo == T_REAL && $3.tipo == T_ENTERO) {
-            int op1 = newTemp(&miSimTab,"",T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int op1 = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_INT_TO_REAL,$3.id,OPERNDO_NULL,op1);
 
-            int id_res = newTemp(&miSimTab,"",T_REAL);
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_SUMA_REAL,$1.id,op1,id_res);
 
             $$.id = id_res;
             $$.tipo = T_REAL;
         } else if ($1.tipo == T_ENTERO && $3.tipo == T_REAL) {
-            int op1 = newTemp(&miSimTab,"",T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int op1 = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_INT_TO_REAL,$1.id,OPERNDO_NULL,op1);
 
-            int id_res = newTemp(&miSimTab,"",T_REAL);
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_SUMA_REAL,$3.id,op1,id_res);
 
             $$.id = id_res;
@@ -557,31 +596,47 @@ exp_a:
             printf("#_ Parser: Estructura de exp_a detectada 2.\n"); 
         #endif
         if ($1.tipo == T_ENTERO && $3.tipo == T_ENTERO){
-            int id_res = newTemp(&miSimTab,"",T_ENTERO);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_ENTERO);
             gen(&miQuadTab,OP_RESTA_INT,$1.id,$3.id,id_res);
 
             $$.id = id_res;
             $$.tipo = T_ENTERO;
         } else if ($1.tipo == T_REAL && $3.tipo == T_REAL) {
-            int id_res = newTemp(&miSimTab,"",T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_RESTA_REAL,$1.id,$3.id,id_res);
             
             $$.id = id_res;
             $$.tipo = T_REAL;
         } else if ($1.tipo == T_REAL && $3.tipo == T_ENTERO) {
-            int op1 = newTemp(&miSimTab,"",T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int op1 = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_INT_TO_REAL,$3.id,OPERNDO_NULL,op1);
 
-            int id_res = newTemp(&miSimTab,"",T_REAL);
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_RESTA_REAL,$1.id,op1,id_res);
 
             $$.id = id_res;
             $$.tipo = T_REAL;
         } else if ($1.tipo == T_ENTERO && $3.tipo == T_REAL) {
-            int op1 = newTemp(&miSimTab,"",T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int op1 = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_INT_TO_REAL,$1.id,OPERNDO_NULL,op1);
 
-            int id_res = newTemp(&miSimTab,"",T_REAL);
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_RESTA_REAL,$3.id,op1,id_res);
 
             $$.id = id_res;
@@ -595,31 +650,47 @@ exp_a:
             printf("#_ Parser: Estructura de exp_a detectada 3.\n"); 
         #endif
         if ($1.tipo == T_ENTERO && $3.tipo == T_ENTERO){
-            int id_res = newTemp(&miSimTab,"",T_ENTERO);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_ENTERO);
             gen(&miQuadTab,OP_MULT_INT,$1.id,$3.id,id_res);
 
             $$.id = id_res;
             $$.tipo = T_ENTERO;
         } else if ($1.tipo == T_REAL && $3.tipo == T_REAL) {
-            int id_res = newTemp(&miSimTab,"",T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_MULT_REAL,$1.id,$3.id,id_res);
             
             $$.id = id_res;
             $$.tipo = T_REAL;
         } else if ($1.tipo == T_REAL && $3.tipo == T_ENTERO) {
-            int op1 = newTemp(&miSimTab,"",T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int op1 = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_INT_TO_REAL,$3.id,OPERNDO_NULL,op1);
 
-            int id_res = newTemp(&miSimTab,"",T_REAL);
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_MULT_REAL,$1.id,op1,id_res);
 
             $$.id = id_res;
             $$.tipo = T_REAL;
         } else if ($1.tipo == T_ENTERO && $3.tipo == T_REAL) {
-            int op1 = newTemp(&miSimTab,"",T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int op1 = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_INT_TO_REAL,$1.id,OPERNDO_NULL,op1);
 
-            int id_res = newTemp(&miSimTab,"",T_REAL);
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_MULT_REAL,$3.id,op1,id_res);
 
             $$.id = id_res;
@@ -633,37 +704,57 @@ exp_a:
             printf("#_ Parser: Estructura de exp_a detectada 4.\n"); 
         #endif
         if ($1.tipo == T_ENTERO && $3.tipo == T_ENTERO){
-            int op1 = newTemp(&miSimTab,"",T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int op1 = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_INT_TO_REAL,$1.id,OPERNDO_NULL,op1);
-
-            int op2 = newTemp(&miSimTab,"",T_REAL);
+            
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int op2 = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_INT_TO_REAL,$3.id,OPERNDO_NULL,op2);
 
-            int id_res = newTemp(&miSimTab,"",T_REAL);
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_MULT_INT,op1,op2,id_res);
 
             $$.id = id_res;
             $$.tipo = T_REAL;
         } else if ($1.tipo == T_REAL && $3.tipo == T_REAL) {
-            int id_res = newTemp(&miSimTab,"",T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_DIV_REAL,$1.id,$3.id,id_res);
             
             $$.id = id_res;
             $$.tipo = T_REAL;
         } else if ($1.tipo == T_REAL && $3.tipo == T_ENTERO) {
-            int op1 = newTemp(&miSimTab,"",T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int op1 = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_INT_TO_REAL,$3.id,OPERNDO_NULL,op1);
 
-            int id_res = newTemp(&miSimTab,"",T_REAL);
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_DIV_REAL,$1.id,op1,id_res);
 
             $$.id = id_res;
             $$.tipo = T_REAL;
         } else if ($1.tipo == T_ENTERO && $3.tipo == T_REAL) {
-            int op1 = newTemp(&miSimTab,"",T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int op1 = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_INT_TO_REAL,$1.id,OPERNDO_NULL,op1);
 
-            int id_res = newTemp(&miSimTab,"",T_REAL);
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_REAL);
             gen(&miQuadTab,OP_DIV_REAL,$3.id,op1,id_res);
 
             $$.id = id_res;
@@ -678,7 +769,10 @@ exp_a:
         #endif
         /*solo con entero*/
         if ($1.tipo == T_ENTERO && $3.tipo == T_ENTERO){
-            int id_res = newTemp(&miSimTab,"",T_ENTERO);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_ENTERO);
             gen(&miQuadTab,OP_MOD,$1.id,$3.id,id_res);
 
             $$.id = id_res;
@@ -693,7 +787,10 @@ exp_a:
         #endif
         /*solo con enteros*/
         if ($1.tipo == T_ENTERO && $3.tipo == T_ENTERO){
-            int id_res = newTemp(&miSimTab,"",T_ENTERO);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab,idTemp,T_ENTERO);
             gen(&miQuadTab,OP_DIV_INT,$1.id,$3.id,id_res);
 
             $$.id = id_res;
@@ -718,14 +815,20 @@ exp_a:
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de exp_a detectada 9.\n"); 
         #endif
-        $$.id = newTemp(&miSimTab,"",T_ENTERO);
+        char idTemp[10];
+        sprintf(idTemp, "temp%d", temp_id);
+        temp_id++;
+        $$.id = newTemp(&miSimTab,idTemp,T_ENTERO);
         $$.tipo = T_ENTERO;
     }
     | TK_PR_REAL{
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de exp_a detectada 10.\n"); 
         #endif
-        $$.id = newTemp(&miSimTab,"",T_REAL);
+        char idTemp[10];
+        sprintf(idTemp, "temp%d", temp_id);
+        temp_id++;
+        $$.id = newTemp(&miSimTab,idTemp,T_REAL);
         $$.tipo = T_REAL;
     }
     | TK_PR_RESTA exp_a{ 
@@ -733,13 +836,19 @@ exp_a:
             printf("#_ Parser: Estructura de exp_a detectada 11.\n"); 
         #endif
         if ($2.tipo == T_ENTERO) {
-            int id_res = newTemp(&miSimTab, "", T_ENTERO);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab, idTemp, T_ENTERO);
             gen(&miQuadTab, OP_TO_NEG_INT, $2.id, OPERNDO_NULL, id_res);
 
             $$.id = id_res;
             $$.tipo = T_ENTERO;
         } else if ($2.tipo == T_REAL) {
-            int id_res = newTemp(&miSimTab, "", T_REAL);
+            char idTemp[10];
+            sprintf(idTemp, "temp%d", temp_id);
+            temp_id++;
+            int id_res = newTemp(&miSimTab, idTemp, T_REAL);
             gen(&miQuadTab, OP_TO_NEG_REAL, $2.id, OPERNDO_NULL, id_res);
 
             $$.id = id_res;
@@ -802,7 +911,7 @@ exp_b:
     }
     | TK_PR_ABRIRPAR exp_b TK_PR_CERRARPAR{ 
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de exp_b detectada 13.\n"); 
+            printf("#_ Parser: Estructura de exp_b detectada 8.\n"); 
         #endif
     }
 ;
@@ -810,37 +919,37 @@ exp_b:
 compop:
     TK_PR_MAYOR { 
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de exp_b detectada 7.\n"); 
+            printf("#_ Parser: Estructura de compop detectada 1.\n"); 
         #endif
         $$ = OP_MAYOR;
     }
     | TK_PR_MENOR { 
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de exp_b detectada 8.\n"); 
+            printf("#_ Parser: Estructura de compop detectada 2.\n"); 
         #endif
         $$ = OP_MENOR;
     }
     | TK_PR_MAYIGU { 
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de exp_b detectada 9.\n"); 
+            printf("#_ Parser: Estructura de compop detectada 3.\n"); 
         #endif
         $$ = OP_MAYOR_IGUAL;
     }
     | TK_PR_MENIGU {
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de exp_b detectada 10.\n"); 
+            printf("#_ Parser: Estructura de compop detectada 4.\n"); 
         #endif
         $$ = OP_MENOR_IGUAL;
     }
     |TK_PR_IGUAL { 
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de exp_b detectada 11.\n"); 
+            printf("#_ Parser: Estructura de compop detectada 5.\n"); 
         #endif
         $$ = OP_DISTINTO;
     }
     | TK_PR_DIST { 
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de exp_b detectada 12.\n"); 
+            printf("#_ Parser: Estructura de compop detectada 6.\n"); 
         #endif
         $$ = OP_IGUAL;
     }
@@ -953,7 +1062,7 @@ asignacion:
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de asignacion detectada.\n"); 
         #endif
-        if ($1.tipo == EXP_ARI && $1.tipo == $3.ari.tipo){
+        if ($3.tipo == EXP_ARI && $1.tipo == $3.ari.tipo){
 
             gen(&miQuadTab,OP_ASIGNA,$3.ari.id,OPERNDO_NULL,$1.id);
         } else {
@@ -1070,7 +1179,7 @@ d_par_form:
 ;
 
 d_p_form:
-	TK_PR_ENTERO lista_id TK_PR_DEFVAL d_tipo {
+	TK_PR_ENT lista_id TK_PR_DEFVAL d_tipo {
 		#ifdef DEBUG_MOD
             printf("#_ Parser: Estructura d_p_form econtrada 1.\n"); 
         #endif
@@ -1133,6 +1242,8 @@ int main (int argc, char **argv){
     printf("\nCRERADORES 04-09-2020\n");
 	printf("\t @Daniel del Barrio\n");
 	printf("\t @Jhonny F. Chicaiza\n");
+
+    temp_id = 0;
 
 	if ( argc > 0 ){
 		printf("\n");

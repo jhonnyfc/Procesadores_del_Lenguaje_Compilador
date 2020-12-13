@@ -3,13 +3,16 @@
 #include <string.h>
 #include "tab_sim.h"
 
+int idLista;
+
 void ini_tsym(symTab *tabla){
+    idLista = 1;
     tabla->size = 0;
     tabla->first = NULL;
     tabla->last = NULL;
 }
 
-int newTemp(symTab *tabla, char *nombre, int tipo){
+int newTemp(symTab *tabla, char *nombre, int tipo) {
      if (strcmp("", nombre) != 0 && find_tsym(tabla, nombre) != NULL) {
         return ERR_YA_EXISTE_VAR;
     }
@@ -21,6 +24,26 @@ int newTemp(symTab *tabla, char *nombre, int tipo){
     newNodo->name = (char *) malloc(sizeof(char) * strlen(nombre));
     strcpy(newNodo->name, nombre);
     newNodo->type = tipo;
+    newNodo->idList = 0;
+    newNodo->next = NULL;
+
+    // y lo metemos en la cola
+    return insert_tsym(tabla,newNodo);
+}
+
+int inserHead_tsym(symTab *tabla, char *nombre, int tipo, int listId) {
+     if (strcmp("", nombre) != 0 && find_tsym(tabla, nombre) != NULL) {
+        return ERR_YA_EXISTE_VAR;
+    }
+
+    nodeTab *newNodo;
+    newNodo = (nodeTab *)malloc(sizeof(nodeTab));
+
+    newNodo->id = tabla->size;
+    newNodo->name = (char *) malloc(sizeof(char) * strlen(nombre));
+    strcpy(newNodo->name, nombre);
+    newNodo->type = tipo;
+    newNodo->idList = listId;
     newNodo->next = NULL;
 
     // y lo metemos en la cola
@@ -43,10 +66,10 @@ int insert_tsym(symTab *tabla, nodeTab *nodo){
 void print_tsym(symTab *tabla){
     nodeTab *temp = tabla->first;
 
-    printf("\nTAbla de simbolos\n");
-    printf("\tid \t\tname \t\ttype\n");
+    printf("\nTAbla de simbolos %s\n",DF_NAMES[29]);
+    printf("\tid \t\tname \t\ttype    \t?e/s\n");
     while (temp != NULL){
-        printf("\t%d \t\t%s \t\t%d\n",temp->id,temp->name,temp->type);
+        printf("\t%d \t\t%s \t\t%s \t%s\n",temp->id,temp->name,DF_NAMES[temp->type],DF_NAMES[temp->ioType]);
         temp = temp->next;
     }
 }
@@ -61,4 +84,23 @@ nodeTab *find_tsym(symTab *tabla, char *nombre){
     }
 
     return NULL;
+}
+
+void set_ioType(symTab *tabla, int listId, int ioType){
+    nodeTab *aux = tabla->first;
+
+    while (aux != NULL) {
+        if(aux->idList == listId){
+            aux->ioType = ioType;
+        }
+        aux = aux->next;
+    }
+}
+
+int inc_idLista(){
+    return idLista++;
+}
+
+int get_idList(){
+    return idLista;
 }

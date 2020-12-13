@@ -484,12 +484,6 @@ ER_CARAC_DESCO		.
 	#endif
 	return TK_PR_MENIGU;
 }
-{ER_LIT_BOOL}		{
-	#ifdef DEBUG_MOD
-		printf("$: Boleano: %s \n", yytext);
-	#endif
-	return TK_ID_BOL;
-}
 {ER_ID_ARI}			{
 	#ifdef DEBUG_MOD
 		printf("$: Id ari: %s \n", yytext );
@@ -502,6 +496,8 @@ ER_CARAC_DESCO		.
 	#ifdef DEBUG_MOD
 		printf("$: Id bool: %s \n", yytext );
 	#endif
+	yylval.ty_string = (char *)malloc(sizeof(char)*strlen(yytext));
+	strcpy(yylval.ty_string, yytext);
 	return TK_LIT_BOOL;
 }
 {ER_LIT_ENTERO}		{
@@ -538,6 +534,17 @@ ER_CARAC_DESCO		.
 		printf("$: Literal comentario: %s \n", yytext );
 	#endif
 	return TK_LIT_COMENTARIO;
+}
+{ER_LIT_BOOL}		{
+	#ifdef DEBUG_MOD
+		printf("$: Boleano: %s \n", yytext);
+	#endif
+	int val = 0;
+	if (strcmp(yytext,"VERDADERO") || strcmp(yytext,"verdadero")){
+		val = 1;
+	}
+	yylval.ty_boolean = val;
+	return TK_ID_BOL;
 }
 
 {ER_DELIM}			{}

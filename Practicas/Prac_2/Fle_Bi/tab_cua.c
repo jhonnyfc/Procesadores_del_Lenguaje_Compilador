@@ -10,11 +10,11 @@ void ini_tqua(quadTab *qTabla) {
 void print_tqua(quadTab *qTabla) {
     int i;
     printf("\nTAbla de Cuadruplas\n");
-    printf("\tpos \t opera \t idOp1 \t idOp2 \t idResu \n");
+    printf("\tpos \tOperacio \t\tid_Op1 \tid_Op2 \tidResu \n");
     for (i = 0; i < qTabla->nextQua; i++) {
-        printf("\t%d \t %d \t %d \t %d \t %d\n", 
+        printf("\t%d \t%s \t\t%d \t%d \t%d\n", 
         	i+1,
-            qTabla->table[i][OPERACION],
+            DF_NAMES[qTabla->table[i][OPERACION]],
             qTabla->table[i][OP1_ID],
             qTabla->table[i][OP2_ID],
             qTabla->table[i][RESUL_ID]);
