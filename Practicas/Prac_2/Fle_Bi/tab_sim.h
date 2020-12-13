@@ -28,7 +28,9 @@ int insert_tsym(symTab *tabla, nodeTab *nodo);
 
 void print_tsym(symTab *tabla);
 
-nodeTab *find_tsym(symTab *tabla, char *nombre);
+nodeTab *find_tsym_by_name(symTab *tabla, char *nombre);
+
+nodeTab *find_tsym_by_id(symTab *tabla, int id);
 
 int inserHead_tsym(symTab *tabla, char *nombre, int tipo, int listId);
 
@@ -37,6 +39,8 @@ void set_ioType(symTab *tabla, int listId, int io_type);
 int inc_idLista();
 
 int get_idList();
+
+int print_var_io(symTab *tabla, int ioType);
 
 #endif
 

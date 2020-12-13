@@ -13,7 +13,7 @@ void ini_tsym(symTab *tabla){
 }
 
 int newTemp(symTab *tabla, char *nombre, int tipo) {
-     if (strcmp("", nombre) != 0 && find_tsym(tabla, nombre) != NULL) {
+     if (strcmp("", nombre) != 0 && find_tsym_by_name(tabla, nombre) != NULL) {
         return ERR_YA_EXISTE_VAR;
     }
 
@@ -25,6 +25,7 @@ int newTemp(symTab *tabla, char *nombre, int tipo) {
     strcpy(newNodo->name, nombre);
     newNodo->type = tipo;
     newNodo->idList = 0;
+    newNodo->ioType = DF_INTER;
     newNodo->next = NULL;
 
     // y lo metemos en la cola
@@ -32,7 +33,14 @@ int newTemp(symTab *tabla, char *nombre, int tipo) {
 }
 
 int inserHead_tsym(symTab *tabla, char *nombre, int tipo, int listId) {
-     if (strcmp("", nombre) != 0 && find_tsym(tabla, nombre) != NULL) {
+     if (strcmp("", nombre) != 0 && find_tsym_by_name(tabla, nombre) != NULL) {
+        nodeTab *auxNo;
+        auxNo = find_tsym_by_name(tabla, nombre);
+        if (auxNo->ioType == DF_IN || DF_OUT == auxNo->ioType){
+            if (auxNo->ioType == DF_IN)
+                auxNo->ioType = DF_IO;
+            return 0;
+        }
         return ERR_YA_EXISTE_VAR;
     }
 
@@ -44,6 +52,7 @@ int inserHead_tsym(symTab *tabla, char *nombre, int tipo, int listId) {
     strcpy(newNodo->name, nombre);
     newNodo->type = tipo;
     newNodo->idList = listId;
+    newNodo->ioType = DF_INTER;
     newNodo->next = NULL;
 
     // y lo metemos en la cola
@@ -74,11 +83,23 @@ void print_tsym(symTab *tabla){
     }
 }
 
-nodeTab *find_tsym(symTab *tabla, char *nombre){
+nodeTab *find_tsym_by_name(symTab *tabla, char *nombre){
     nodeTab *temp = tabla->first;
 
     while (temp != NULL){
         if ( strcmp(temp->name,nombre) == 0)
+            return temp;
+        temp = temp->next;
+    }
+
+    return NULL;
+}
+
+nodeTab *find_tsym_by_id(symTab *tabla, int id){
+    nodeTab *temp = tabla->first;
+
+    while (temp != NULL){
+        if ( temp->id == id)
             return temp;
         temp = temp->next;
     }
@@ -103,4 +124,21 @@ int inc_idLista(){
 
 int get_idList(){
     return idLista;
+}
+
+int print_var_io(symTab *tabla, int ioType){
+    nodeTab *aux = tabla->first;
+
+    while (aux != NULL) {
+        if(aux->ioType == DF_IO && ioType == DF_IN){
+            printf("\t Input %s\n",aux->name);
+        } else if (aux->ioType == DF_IO && ioType == DF_OUT){
+            printf("\t Output %s\n",aux->name);
+        } else if (aux->ioType == ioType && ioType == DF_IN) {
+            printf("\t Input %s\n",aux->name);
+        } else if (aux->ioType == ioType && ioType == DF_OUT){
+            printf("\t Output %s\n",aux->name);
+        }
+        aux = aux->next;
+    }
 }

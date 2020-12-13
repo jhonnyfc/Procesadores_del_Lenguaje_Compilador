@@ -1,4 +1,7 @@
 # Procesadores_del_Lenguaje
 
-https://github.com/search?l=Lex&p=2&q=scanner&type=Repositories
-https://github.com/Kai-Wen-Chen/C99_Scanner/blob/master/scanner.l
+Se ha creado uno compilador del lenguaje propuesto en el docuemnto.
+
+Para ejecutar se necestisa tener instaldo:
+    - Bison v 3.0.4+
+    - Fleax v 2.6.4+

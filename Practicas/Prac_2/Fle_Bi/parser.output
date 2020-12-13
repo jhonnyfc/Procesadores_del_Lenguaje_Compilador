@@ -1,4 +1,4 @@
-Estado 91 conflictos: 2 desplazamiento/reducción
+Estado 92 conflictos: 2 desplazamiento/reducción
 Estado 144 conflictos: 2 desplazamiento/reducción, 6 reducción/reducción
 Estado 177 conflictos: 3 desplazamiento/reducción
 Estado 180 conflictos: 3 desplazamiento/reducción
@@ -98,7 +98,7 @@ Gramática
    63      | TK_PR_ABRIRPAR exp_a TK_PR_CERRARPAR
    64      | operando_ari
    65      | TK_LIT_ENTERO
-   66      | TK_PR_REAL
+   66      | TK_LIT_REAL
    67      | TK_PR_RESTA exp_a
 
    68 exp_b: exp_b TK_PR_Y aux_b exp_b
@@ -209,7 +209,7 @@ Terminales con las reglas donde aparecen
     TK_PR_FTUPLA (284) 20
     TK_PR_VAR (285) 17
     TK_PR_FVAR (286) 17
-    TK_PR_REAL (287) 29 66
+    TK_PR_REAL (287) 29
     TK_PR_ENTERO (288) 26
     TK_PR_BOOL (289) 27
     TK_PR_CADENA (290) 30
@@ -250,7 +250,7 @@ Terminales con las reglas donde aparecen
     TK_LIT_CADE <ty_string> (325) 38
     TK_LIT_COMENTARIO <ty_string> (326) 2 3 40
     TK_LIT_ENTERO <ty_num_entero> (327) 41 65
-    TK_LIT_REAL <ty_num_real> (328) 42
+    TK_LIT_REAL <ty_num_real> (328) 42 66
     TK_LIT_BOOL <ty_boolean> (329) 37
 
 
@@ -748,43 +748,44 @@ Estado 30
     TK_ID_BOL        desplazar e ir al estado 84
     TK_LIT_CARAC     desplazar e ir al estado 85
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
-    d_tipo         ir al estado 87
-    expresion_t    ir al estado 88
-    expresion      ir al estado 89
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    d_tipo         ir al estado 88
+    expresion_t    ir al estado 89
+    expresion      ir al estado 90
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 31
 
    15 declaracion_tipo: TK_PR_TIPO lista_d_tipo TK_PR_FTIPO . TK_PR_SECUEN
 
-    TK_PR_SECUEN  desplazar e ir al estado 95
+    TK_PR_SECUEN  desplazar e ir al estado 96
 
 
 Estado 32
 
    35 lista_d_cte: TK_ID_ARI TK_PR_IGUAL . literal TK_PR_SECUEN lista_d_cte
 
-    TK_LIT_CARAC       desplazar e ir al estado 96
-    TK_LIT_CADE        desplazar e ir al estado 97
-    TK_LIT_COMENTARIO  desplazar e ir al estado 98
-    TK_LIT_ENTERO      desplazar e ir al estado 99
-    TK_LIT_REAL        desplazar e ir al estado 100
-    TK_LIT_BOOL        desplazar e ir al estado 101
+    TK_LIT_CARAC       desplazar e ir al estado 97
+    TK_LIT_CADE        desplazar e ir al estado 98
+    TK_LIT_COMENTARIO  desplazar e ir al estado 99
+    TK_LIT_ENTERO      desplazar e ir al estado 100
+    TK_LIT_REAL        desplazar e ir al estado 101
+    TK_LIT_BOOL        desplazar e ir al estado 102
 
-    literal  ir al estado 102
+    literal  ir al estado 103
 
 
 Estado 33
 
    16 declaracion_cte: TK_PR_CONST lista_d_cte TK_PR_FCONST . TK_PR_SECUEN
 
-    TK_PR_SECUEN  desplazar e ir al estado 103
+    TK_PR_SECUEN  desplazar e ir al estado 104
 
 
 Estado 34
@@ -792,8 +793,8 @@ Estado 34
    45 lista_id: TK_ID_ARI . TK_PR_DEFVAL d_tipo
    47         | TK_ID_ARI . TK_PR_COMA lista_id
 
-    TK_PR_COMA    desplazar e ir al estado 104
-    TK_PR_DEFVAL  desplazar e ir al estado 105
+    TK_PR_COMA    desplazar e ir al estado 105
+    TK_PR_DEFVAL  desplazar e ir al estado 106
 
 
 Estado 35
@@ -801,29 +802,29 @@ Estado 35
    46 lista_id: TK_ID_BOL . TK_PR_DEFVAL d_tipo
    48         | TK_ID_BOL . TK_PR_COMA lista_id
 
-    TK_PR_COMA    desplazar e ir al estado 106
-    TK_PR_DEFVAL  desplazar e ir al estado 107
+    TK_PR_COMA    desplazar e ir al estado 107
+    TK_PR_DEFVAL  desplazar e ir al estado 108
 
 
 Estado 36
 
    17 declaracion_var: TK_PR_VAR lista_d_var . TK_PR_FVAR TK_PR_SECUEN
 
-    TK_PR_FVAR  desplazar e ir al estado 108
+    TK_PR_FVAR  desplazar e ir al estado 109
 
 
 Estado 37
 
    43 lista_d_var: lista_id . TK_PR_SECUEN lista_d_var
 
-    TK_PR_SECUEN  desplazar e ir al estado 109
+    TK_PR_SECUEN  desplazar e ir al estado 110
 
 
 Estado 38
 
     1 desc_algoritmo: TK_PR_ALGORIT TK_ID_ARI TK_PR_SECUEN cabecera_alg bloque_alg TK_PR_FALGORI . TK_PR_PUNTO
 
-    TK_PR_PUNTO  desplazar e ir al estado 110
+    TK_PR_PUNTO  desplazar e ir al estado 111
 
 
 Estado 39
@@ -846,20 +847,20 @@ Estado 41
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 113
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 42
@@ -875,20 +876,20 @@ Estado 43
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 115
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 44
@@ -1149,15 +1150,16 @@ Estado 70
     TK_ID_BOL        desplazar e ir al estado 84
     TK_LIT_CARAC     desplazar e ir al estado 85
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     d_tipo         ir al estado 134
-    expresion_t    ir al estado 88
-    expresion      ir al estado 89
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    expresion_t    ir al estado 89
+    expresion      ir al estado 90
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 71
@@ -1188,11 +1190,8 @@ Estado 73
 Estado 74
 
    29 d_tipo: TK_PR_REAL .
-   66 exp_a: TK_PR_REAL .
 
-    TK_PR_SECUEN  reduce usando la regla 29 (d_tipo)
-    TK_PR_DEFVAL  reduce usando la regla 29 (d_tipo)
-    $default      reduce usando la regla 66 (exp_a)
+    $default  reduce usando la regla 29 (d_tipo)
 
 
 Estado 75
@@ -1237,34 +1236,34 @@ Estado 80
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 138
     exp_a          ir al estado 139
     exp_b          ir al estado 140
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 81
 
    67 exp_a: TK_PR_RESTA . exp_a
 
-    TK_PR_REAL      desplazar e ir al estado 111
     TK_PR_ABRIRPAR  desplazar e ir al estado 141
     TK_PR_RESTA     desplazar e ir al estado 81
     TK_ID_ARI       desplazar e ir al estado 142
     TK_LIT_ENTERO   desplazar e ir al estado 86
+    TK_LIT_REAL     desplazar e ir al estado 87
 
     exp_a         ir al estado 143
-    operando_ari  ir al estado 92
+    operando_ari  ir al estado 93
 
 
 Estado 82
@@ -1273,20 +1272,20 @@ Estado 82
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 138
-    exp_a          ir al estado 90
+    exp_a          ir al estado 91
     exp_b          ir al estado 144
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 83
@@ -1328,19 +1327,26 @@ Estado 86
 
 Estado 87
 
+   66 exp_a: TK_LIT_REAL .
+
+    $default  reduce usando la regla 66 (exp_a)
+
+
+Estado 88
+
    18 lista_d_tipo: TK_ID_ARI TK_PR_IGUAL d_tipo . TK_PR_SECUEN lista_d_tipo
 
     TK_PR_SECUEN  desplazar e ir al estado 146
 
 
-Estado 88
+Estado 89
 
    24 d_tipo: expresion_t . TK_PR_SUBRANGO expresion_t
 
     TK_PR_SUBRANGO  desplazar e ir al estado 147
 
 
-Estado 89
+Estado 90
 
    31 expresion_t: expresion .
    74 exp_b: expresion . compop expresion
@@ -1357,7 +1363,7 @@ Estado 89
     compop  ir al estado 154
 
 
-Estado 90
+Estado 91
 
    54 expresion: exp_a .
    57 exp_a: exp_a . TK_PR_SUMA exp_a
@@ -1377,7 +1383,7 @@ Estado 90
     $default  reduce usando la regla 54 (expresion)
 
 
-Estado 91
+Estado 92
 
    55 expresion: exp_b .
    68 exp_b: exp_b . TK_PR_Y aux_b exp_b
@@ -1391,7 +1397,7 @@ Estado 91
     $default  reduce usando la regla 55 (expresion)
 
 
-Estado 92
+Estado 93
 
    64 exp_a: operando_ari .
    84 operando_ari: operando_ari . TK_PR_PUNTO operando_ari
@@ -1405,7 +1411,7 @@ Estado 92
     $default  reduce usando la regla 64 (exp_a)
 
 
-Estado 93
+Estado 94
 
    71 exp_b: operando_bool .
    88 operando_bool: operando_bool . TK_PR_PUNTO operando_bool
@@ -1419,77 +1425,77 @@ Estado 93
     $default  reduce usando la regla 71 (exp_b)
 
 
-Estado 94
+Estado 95
 
    56 expresion: funcion_ll .
 
     $default  reduce usando la regla 56 (expresion)
 
 
-Estado 95
+Estado 96
 
    15 declaracion_tipo: TK_PR_TIPO lista_d_tipo TK_PR_FTIPO TK_PR_SECUEN .
 
     $default  reduce usando la regla 15 (declaracion_tipo)
 
 
-Estado 96
+Estado 97
 
    39 literal: TK_LIT_CARAC .
 
     $default  reduce usando la regla 39 (literal)
 
 
-Estado 97
+Estado 98
 
    38 literal: TK_LIT_CADE .
 
     $default  reduce usando la regla 38 (literal)
 
 
-Estado 98
+Estado 99
 
    40 literal: TK_LIT_COMENTARIO .
 
     $default  reduce usando la regla 40 (literal)
 
 
-Estado 99
+Estado 100
 
    41 literal: TK_LIT_ENTERO .
 
     $default  reduce usando la regla 41 (literal)
 
 
-Estado 100
+Estado 101
 
    42 literal: TK_LIT_REAL .
 
     $default  reduce usando la regla 42 (literal)
 
 
-Estado 101
+Estado 102
 
    37 literal: TK_LIT_BOOL .
 
     $default  reduce usando la regla 37 (literal)
 
 
-Estado 102
+Estado 103
 
    35 lista_d_cte: TK_ID_ARI TK_PR_IGUAL literal . TK_PR_SECUEN lista_d_cte
 
     TK_PR_SECUEN  desplazar e ir al estado 163
 
 
-Estado 103
+Estado 104
 
    16 declaracion_cte: TK_PR_CONST lista_d_cte TK_PR_FCONST TK_PR_SECUEN .
 
     $default  reduce usando la regla 16 (declaracion_cte)
 
 
-Estado 104
+Estado 105
 
    47 lista_id: TK_ID_ARI TK_PR_COMA . lista_id
 
@@ -1499,7 +1505,7 @@ Estado 104
     lista_id  ir al estado 164
 
 
-Estado 105
+Estado 106
 
    45 lista_id: TK_ID_ARI TK_PR_DEFVAL . d_tipo
 
@@ -1520,18 +1526,19 @@ Estado 105
     TK_ID_BOL        desplazar e ir al estado 84
     TK_LIT_CARAC     desplazar e ir al estado 85
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     d_tipo         ir al estado 165
-    expresion_t    ir al estado 88
-    expresion      ir al estado 89
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    expresion_t    ir al estado 89
+    expresion      ir al estado 90
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
-Estado 106
+Estado 107
 
    48 lista_id: TK_ID_BOL TK_PR_COMA . lista_id
 
@@ -1541,7 +1548,7 @@ Estado 106
     lista_id  ir al estado 166
 
 
-Estado 107
+Estado 108
 
    46 lista_id: TK_ID_BOL TK_PR_DEFVAL . d_tipo
 
@@ -1562,25 +1569,26 @@ Estado 107
     TK_ID_BOL        desplazar e ir al estado 84
     TK_LIT_CARAC     desplazar e ir al estado 85
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     d_tipo         ir al estado 167
-    expresion_t    ir al estado 88
-    expresion      ir al estado 89
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    expresion_t    ir al estado 89
+    expresion      ir al estado 90
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
-Estado 108
+Estado 109
 
    17 declaracion_var: TK_PR_VAR lista_d_var TK_PR_FVAR . TK_PR_SECUEN
 
     TK_PR_SECUEN  desplazar e ir al estado 168
 
 
-Estado 109
+Estado 110
 
    43 lista_d_var: lista_id TK_PR_SECUEN . lista_d_var
 
@@ -1593,18 +1601,11 @@ Estado 109
     lista_id     ir al estado 37
 
 
-Estado 110
+Estado 111
 
     1 desc_algoritmo: TK_PR_ALGORIT TK_ID_ARI TK_PR_SECUEN cabecera_alg bloque_alg TK_PR_FALGORI TK_PR_PUNTO .
 
     $default  reduce usando la regla 1 (desc_algoritmo)
-
-
-Estado 111
-
-   66 exp_a: TK_PR_REAL .
-
-    $default  reduce usando la regla 66 (exp_a)
 
 
 Estado 112
@@ -1662,20 +1663,20 @@ Estado 116
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 173
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
     l_ll           ir al estado 174
 
 
@@ -1692,20 +1693,20 @@ Estado 118
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 175
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 119
@@ -1714,20 +1715,20 @@ Estado 119
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 176
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 120
@@ -1752,20 +1753,20 @@ Estado 122
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 178
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 123
@@ -1774,20 +1775,20 @@ Estado 123
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 179
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 124
@@ -1918,7 +1919,6 @@ Estado 137
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
@@ -1926,14 +1926,15 @@ Estado 137
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_CARAC     desplazar e ir al estado 85
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion_t    ir al estado 192
-    expresion      ir al estado 89
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    expresion      ir al estado 90
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 138
@@ -1990,14 +1991,14 @@ Estado 141
 
    63 exp_a: TK_PR_ABRIRPAR . exp_a TK_PR_CERRARPAR
 
-    TK_PR_REAL      desplazar e ir al estado 111
     TK_PR_ABRIRPAR  desplazar e ir al estado 141
     TK_PR_RESTA     desplazar e ir al estado 81
     TK_ID_ARI       desplazar e ir al estado 142
     TK_LIT_ENTERO   desplazar e ir al estado 86
+    TK_LIT_REAL     desplazar e ir al estado 87
 
     exp_a         ir al estado 195
-    operando_ari  ir al estado 92
+    operando_ari  ir al estado 93
 
 
 Estado 142
@@ -2057,20 +2058,20 @@ Estado 145
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 173
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
     l_ll           ir al estado 196
 
 
@@ -2091,7 +2092,6 @@ Estado 147
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
@@ -2099,14 +2099,15 @@ Estado 147
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_CARAC     desplazar e ir al estado 85
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion_t    ir al estado 198
-    expresion      ir al estado 89
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    expresion      ir al estado 90
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 148
@@ -2157,104 +2158,104 @@ Estado 154
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 199
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 155
 
    57 exp_a: exp_a TK_PR_SUMA . exp_a
 
-    TK_PR_REAL      desplazar e ir al estado 111
     TK_PR_ABRIRPAR  desplazar e ir al estado 141
     TK_PR_RESTA     desplazar e ir al estado 81
     TK_ID_ARI       desplazar e ir al estado 142
     TK_LIT_ENTERO   desplazar e ir al estado 86
+    TK_LIT_REAL     desplazar e ir al estado 87
 
     exp_a         ir al estado 200
-    operando_ari  ir al estado 92
+    operando_ari  ir al estado 93
 
 
 Estado 156
 
    59 exp_a: exp_a TK_PR_MULT . exp_a
 
-    TK_PR_REAL      desplazar e ir al estado 111
     TK_PR_ABRIRPAR  desplazar e ir al estado 141
     TK_PR_RESTA     desplazar e ir al estado 81
     TK_ID_ARI       desplazar e ir al estado 142
     TK_LIT_ENTERO   desplazar e ir al estado 86
+    TK_LIT_REAL     desplazar e ir al estado 87
 
     exp_a         ir al estado 201
-    operando_ari  ir al estado 92
+    operando_ari  ir al estado 93
 
 
 Estado 157
 
    58 exp_a: exp_a TK_PR_RESTA . exp_a
 
-    TK_PR_REAL      desplazar e ir al estado 111
     TK_PR_ABRIRPAR  desplazar e ir al estado 141
     TK_PR_RESTA     desplazar e ir al estado 81
     TK_ID_ARI       desplazar e ir al estado 142
     TK_LIT_ENTERO   desplazar e ir al estado 86
+    TK_LIT_REAL     desplazar e ir al estado 87
 
     exp_a         ir al estado 202
-    operando_ari  ir al estado 92
+    operando_ari  ir al estado 93
 
 
 Estado 158
 
    60 exp_a: exp_a TK_PR_BARRA . exp_a
 
-    TK_PR_REAL      desplazar e ir al estado 111
     TK_PR_ABRIRPAR  desplazar e ir al estado 141
     TK_PR_RESTA     desplazar e ir al estado 81
     TK_ID_ARI       desplazar e ir al estado 142
     TK_LIT_ENTERO   desplazar e ir al estado 86
+    TK_LIT_REAL     desplazar e ir al estado 87
 
     exp_a         ir al estado 203
-    operando_ari  ir al estado 92
+    operando_ari  ir al estado 93
 
 
 Estado 159
 
    62 exp_a: exp_a TK_PR_DIV . exp_a
 
-    TK_PR_REAL      desplazar e ir al estado 111
     TK_PR_ABRIRPAR  desplazar e ir al estado 141
     TK_PR_RESTA     desplazar e ir al estado 81
     TK_ID_ARI       desplazar e ir al estado 142
     TK_LIT_ENTERO   desplazar e ir al estado 86
+    TK_LIT_REAL     desplazar e ir al estado 87
 
     exp_a         ir al estado 204
-    operando_ari  ir al estado 92
+    operando_ari  ir al estado 93
 
 
 Estado 160
 
    61 exp_a: exp_a TK_PR_MOD . exp_a
 
-    TK_PR_REAL      desplazar e ir al estado 111
     TK_PR_ABRIRPAR  desplazar e ir al estado 141
     TK_PR_RESTA     desplazar e ir al estado 81
     TK_ID_ARI       desplazar e ir al estado 142
     TK_LIT_ENTERO   desplazar e ir al estado 86
+    TK_LIT_REAL     desplazar e ir al estado 87
 
     exp_a         ir al estado 205
-    operando_ari  ir al estado 92
+    operando_ari  ir al estado 93
 
 
 Estado 161
@@ -2357,20 +2358,20 @@ Estado 171
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 210
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 172
@@ -2542,20 +2543,20 @@ Estado 183
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 217
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 184
@@ -2630,15 +2631,16 @@ Estado 190
     TK_ID_BOL        desplazar e ir al estado 84
     TK_LIT_CARAC     desplazar e ir al estado 85
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     d_tipo         ir al estado 223
-    expresion_t    ir al estado 88
-    expresion      ir al estado 89
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    expresion_t    ir al estado 89
+    expresion      ir al estado 90
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 191
@@ -2836,20 +2838,20 @@ Estado 206
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 138
-    exp_a          ir al estado 90
+    exp_a          ir al estado 91
     exp_b          ir al estado 226
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 207
@@ -2858,20 +2860,20 @@ Estado 207
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 138
-    exp_a          ir al estado 90
+    exp_a          ir al estado 91
     exp_b          ir al estado 227
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 208
@@ -2921,20 +2923,20 @@ Estado 212
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 173
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
     l_ll           ir al estado 232
 
 
@@ -3037,7 +3039,6 @@ Estado 224
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
@@ -3045,14 +3046,15 @@ Estado 224
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_CARAC     desplazar e ir al estado 85
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion_t    ir al estado 241
-    expresion      ir al estado 89
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    expresion      ir al estado 90
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 225
@@ -3121,20 +3123,20 @@ Estado 229
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 242
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 230
@@ -3143,20 +3145,20 @@ Estado 230
 
     TK_PR_VERDADERO  desplazar e ir al estado 71
     TK_PR_FALSO      desplazar e ir al estado 72
-    TK_PR_REAL       desplazar e ir al estado 111
     TK_PR_ABRIRPAR   desplazar e ir al estado 80
     TK_PR_RESTA      desplazar e ir al estado 81
     TK_PR_NO         desplazar e ir al estado 82
     TK_ID_ARI        desplazar e ir al estado 112
     TK_ID_BOL        desplazar e ir al estado 45
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     expresion      ir al estado 243
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 231
@@ -3194,15 +3196,16 @@ Estado 233
     TK_ID_BOL        desplazar e ir al estado 84
     TK_LIT_CARAC     desplazar e ir al estado 85
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     d_tipo         ir al estado 245
-    expresion_t    ir al estado 88
-    expresion      ir al estado 89
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    expresion_t    ir al estado 89
+    expresion      ir al estado 90
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 234
@@ -3233,15 +3236,16 @@ Estado 235
     TK_ID_BOL        desplazar e ir al estado 84
     TK_LIT_CARAC     desplazar e ir al estado 85
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     d_tipo         ir al estado 246
-    expresion_t    ir al estado 88
-    expresion      ir al estado 89
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    expresion_t    ir al estado 89
+    expresion      ir al estado 90
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 236
@@ -3265,15 +3269,16 @@ Estado 236
     TK_ID_BOL        desplazar e ir al estado 84
     TK_LIT_CARAC     desplazar e ir al estado 85
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     d_tipo         ir al estado 247
-    expresion_t    ir al estado 88
-    expresion      ir al estado 89
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    expresion_t    ir al estado 89
+    expresion      ir al estado 90
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 237
@@ -3297,15 +3302,16 @@ Estado 237
     TK_ID_BOL        desplazar e ir al estado 84
     TK_LIT_CARAC     desplazar e ir al estado 85
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     d_tipo         ir al estado 248
-    expresion_t    ir al estado 88
-    expresion      ir al estado 89
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    expresion_t    ir al estado 89
+    expresion      ir al estado 90
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 238
@@ -3495,15 +3501,16 @@ Estado 254
     TK_ID_BOL        desplazar e ir al estado 84
     TK_LIT_CARAC     desplazar e ir al estado 85
     TK_LIT_ENTERO    desplazar e ir al estado 86
+    TK_LIT_REAL      desplazar e ir al estado 87
 
     d_tipo         ir al estado 257
-    expresion_t    ir al estado 88
-    expresion      ir al estado 89
-    exp_a          ir al estado 90
-    exp_b          ir al estado 91
-    operando_ari   ir al estado 92
-    operando_bool  ir al estado 93
-    funcion_ll     ir al estado 94
+    expresion_t    ir al estado 89
+    expresion      ir al estado 90
+    exp_a          ir al estado 91
+    exp_b          ir al estado 92
+    operando_ari   ir al estado 93
+    operando_bool  ir al estado 94
+    funcion_ll     ir al estado 95
 
 
 Estado 255

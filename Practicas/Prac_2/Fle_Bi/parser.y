@@ -124,7 +124,7 @@
 %type <ty_tipo> compop
 
 %union {
-    double      ty_num_real;
+    float      ty_num_real;
     long int    ty_num_entero;
     char        *ty_string;
     char        ty_caracter;
@@ -419,7 +419,7 @@ lista_d_var:
     lista_id TK_PR_SECUEN lista_d_var {
         /*Hemos bajado 'TK_PR_DEFVAL d_tipo' a lista_id */
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de lista_d_var detectada 1.\n"); 
+            printf("#_ Parser: Estructura de lista_d_var detectada 1.\n");
         #endif
         $$ = $1.idList;
         inc_idLista();
@@ -495,7 +495,6 @@ decl_ent:
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de decl_ent detectada.\n"); 
         #endif
-        printf("%d\n",$2);
         set_ioType(&miSimTab,$2,DF_IN);
     }
 ;
@@ -505,7 +504,6 @@ decl_sal:
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de decl_sal detectada.\n"); 
         #endif
-        printf("%d\n",$2);
         set_ioType(&miSimTab,$2,DF_OUT);
     }
 ;
@@ -811,7 +809,7 @@ exp_a:
         #endif
         $$ = $1;
     }
-    | TK_LIT_ENTERO{
+    | TK_LIT_ENTERO {
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de exp_a detectada 9.\n"); 
         #endif
@@ -821,7 +819,7 @@ exp_a:
         $$.id = newTemp(&miSimTab,idTemp,T_ENTERO);
         $$.tipo = T_ENTERO;
     }
-    | TK_PR_REAL{
+    | TK_LIT_REAL {
         #ifdef DEBUG_MOD
             printf("#_ Parser: Estructura de exp_a detectada 10.\n"); 
         #endif
@@ -964,25 +962,25 @@ aux_b:
 operando_ari:
     TK_ID_ARI {
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de operando detectada 1.\n"); 
+            printf("#_ Parser: Estructura de operando_ari detectada 1.\n"); 
         #endif
-        nodeTab *nodo = find_tsym(&miSimTab,$1);
+        nodeTab *nodo = find_tsym_by_name(&miSimTab,$1);
         $$.id = nodo->id;
         $$.tipo = nodo->type;
     }
     | operando_ari TK_PR_PUNTO operando_ari {
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de operando detectada 2.\n"); 
+            printf("#_ Parser: Estructura de operando_ari detectada 2.\n"); 
         #endif
     }
     | operando_ari TK_PR_INIARRA expresion TK_PR_FINARRA {
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de operando detectada 3.\n"); 
+            printf("#_ Parser: Estructura de operando_ari detectada 3.\n"); 
         #endif
     }   
     | operando_ari TK_PR_REF{
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de operando detectada 4.\n"); 
+            printf("#_ Parser: Estructura de operando_ari detectada 4.\n"); 
         #endif
     }
 ;
@@ -990,28 +988,28 @@ operando_ari:
 operando_bool:
     TK_ID_BOL {
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de operando detectada 1.\n"); 
+            printf("#_ Parser: Estructura de operando_bool detectada 1.\n"); 
         #endif
         $$.trues = makelist(miQuadTab.nextQua);
         $$.falses = makelist(miQuadTab.nextQua+1);
 
-        nodeTab *nodo = find_tsym(&miSimTab,$1);
+        nodeTab *nodo = find_tsym_by_name(&miSimTab,$1);
         gen(&miQuadTab,OP_GOTO_CONDI,nodo->id,OPERNDO_NULL,OPERNDO_NULL);
         gen(&miQuadTab,OP_GOTO,OPERNDO_NULL,OPERNDO_NULL,OPERNDO_NULL);
     }
     | operando_bool TK_PR_PUNTO operando_bool {
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de operando detectada 2.\n"); 
+            printf("#_ Parser: Estructura de operando_bool detectada 2.\n"); 
         #endif
     }
     | operando_bool TK_PR_INIARRA expresion TK_PR_FINARRA {
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de operando detectada 3.\n"); 
+            printf("#_ Parser: Estructura de operando_bool detectada 3.\n"); 
         #endif
     }   
     | operando_bool TK_PR_REF{
         #ifdef DEBUG_MOD
-            printf("#_ Parser: Estructura de operando detectada 4.\n"); 
+            printf("#_ Parser: Estructura de operando_bool detectada 4.\n"); 
         #endif
     }
 ;
@@ -1229,7 +1227,7 @@ l_ll:
 
 void yyerror (char const *s, ...){
     va_list args;
-    fprintf(stderr, "!! Error en la linea %d: \n", yylineno);
+    fprintf(stderr, "\n!! Error en la linea %d: \n", yylineno);
     va_start(args, s);
     vfprintf(stderr, s, args);
     va_end(args);
@@ -1262,5 +1260,7 @@ int main (int argc, char **argv){
 
     print_tsym(&miSimTab);
     print_tqua(&miQuadTab);
+
+    print_3dir_tqua(&miQuadTab,&miSimTab);
 	return 0;
 }

@@ -51,6 +51,8 @@
 
 #define DF_IN 30
 #define DF_OUT 31
+#define DF_INTER 32
+#define DF_IO 33
 
 const static char* DF_NAMES[] = {
     "Desconocido",
@@ -90,7 +92,34 @@ const static char* DF_NAMES[] = {
     "Go to      ",
 
     "Entrada  ",
-    "Salida   "
+    "Salida   ",
+    "Interno  ",
+    "Ent/Sal  "
+};
+
+const static char* DF_SIMBOLS[] = {
+    "+",
+    "+",
+    "-",
+    "-",
+    "*",
+    "*",
+    "div",
+    "/",
+    "mod",
+    "-",
+    "-",
+    ":= (real)",
+    ":=",
+    ">",
+    "<",
+    ">=",
+    "<=",
+    "<>",
+    "==",
+    "Sin Operando",
+    "Go to Condi",
+    "Go to"
 };
 
 // Estructura para  operadores aritmeticos

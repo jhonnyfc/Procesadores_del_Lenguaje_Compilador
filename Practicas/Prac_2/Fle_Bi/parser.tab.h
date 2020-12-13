@@ -130,7 +130,7 @@ union YYSTYPE
 {
 #line 126 "parser.y"
 
-    double      ty_num_real;
+    float      ty_num_real;
     long int    ty_num_entero;
     char        *ty_string;
     char        ty_caracter;

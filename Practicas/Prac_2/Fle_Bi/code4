@@ -1,0 +1,11 @@
+algoritmo a_operaReal;
+    ent a_A , a_B : entero; 
+    sal a_C : real;
+{Coment1}
+        a_C := 5 + 5.5;
+        a_C := a_A + a_C;
+        a_C := a_C - a_A;
+        a_C := a_C * a_B;
+        a_C := a_B mod a_A + a_C *0.5
+{Coment2}
+falgoritmo .
