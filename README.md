@@ -22,7 +22,6 @@ Para probar:
 <br><br>
 Autores:
 
-    - Jhonny Fabricio, Chicaiza Palomo. 61% 
-        https://github.com/jhonnyfc
-    - Daniel, del bariio Garcia. 39%
-        https://github.com/danieldbg1
+[Jhonny Fabricio, Chicaiza Palomo.](https://github.com/jhonnyfc) 61%
+
+[ Daniel, del barrio Garcia.](https://github.com/danieldbg1) 39%
