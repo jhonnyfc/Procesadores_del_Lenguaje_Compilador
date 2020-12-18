@@ -59,15 +59,15 @@ cl: parser.output
 	rm *.o
 	rm a.out
 
-p1:
+p1: a.out
 	./a.out code4
 
 p2: a.out
 	./a.out code
 
-p3:
+p3: a.out
 	./a.out code2
 
-p4:
+p4: a.out
 	./a.out code3
 
